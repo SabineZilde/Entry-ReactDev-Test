@@ -49,9 +49,9 @@ class Header extends React.Component {
             {this.state.isActive && (
               <DropdownContainer>
                 <DropdownContent>
-                  <a href="#">$ USD</a>
-                  <a href="#">€ EUR</a>
-                  <a href="#">¥ JPY</a>
+                  <button>$ USD</button>
+                  <button>€ EUR</button>
+                  <button>¥ JPY</button>
                 </DropdownContent>
               </DropdownContainer>
             )}

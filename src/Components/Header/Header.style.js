@@ -64,6 +64,11 @@ export const DropdownContent = styled.div`
     display: flex;
     flex-direction: column;
     min-height: 169px;
-    padding-left: 20px;
     justify-content: space-evenly;
+
+    &:hover {
+        & button {
+            cursor: pointer;
+        }
+    }
 `
