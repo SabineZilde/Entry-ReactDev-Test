@@ -49,11 +49,9 @@ export const CartButton = styled.button`
 `
 
 export const DropdownContainer = styled.div`
-    // display: none;
     position: absolute;
     background-color: #ffffff;
     min-width: 114px;
-    /* overflow: auto; */
     box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.1);
     z-index: 1;
     margin-top: 10px;
