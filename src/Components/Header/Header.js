@@ -14,7 +14,6 @@ import cart from "../../Assets/Cart.svg";
 class Header extends React.Component {
   state = {
     currency: "$",
-    currencyMenuArrow: "+",
     isActive: false,
   };
 
@@ -43,9 +42,9 @@ class Header extends React.Component {
           {this.state.currency}
           <div>
             {this.state.isActive ? (
-              <CurrencyButton onClick={this.hideCurrencyMenu}>-</CurrencyButton>
+              <CurrencyButton onClick={this.hideCurrencyMenu}>▲</CurrencyButton>
             ) : (
-              <CurrencyButton onClick={this.showCurrencyMenu}>+</CurrencyButton>
+              <CurrencyButton onClick={this.showCurrencyMenu}>▼</CurrencyButton>
             )}
             {this.state.isActive && (
               <DropdownContainer>

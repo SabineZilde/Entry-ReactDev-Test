@@ -40,6 +40,7 @@ export const CurrencyButton = styled.button`
     border: none;
     padding: 0 25px 0 10px;
     cursor: pointer;
+    font-size: 10px;
 `
 
 export const CartButton = styled.button`
