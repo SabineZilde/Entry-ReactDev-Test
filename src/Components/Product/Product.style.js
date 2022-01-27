@@ -28,3 +28,9 @@ export const ProductPrice = styled.div`
     font-size: 18px;
     font-weight: 500;
 `
+
+export const CartButton = styled.button`
+    position: absolute;
+    margin: -100px 0 0 300px;
+    background-color: transparent;
+`

@@ -4,6 +4,7 @@ import {
   ProductImage,
   ProductName,
   ProductPrice,
+  CartButton
 } from "./Product.style";
 import product from "../../Assets/Product.png";
 import circleIcon from "../../Assets/CircleIcon.svg";
@@ -34,9 +35,9 @@ class Product extends React.Component {
         <ProductName>Apollo Running Short</ProductName>
         <ProductPrice>$50.00</ProductPrice>
         {this.state.isActive && (
-          <button>
+          <CartButton>
             <img src={circleIcon} alt="Circle Icon" />
-          </button>
+          </CartButton>
         )}
       </ActiveProductContainer>
     );
