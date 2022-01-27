@@ -12,4 +12,10 @@ export const GlobalStyles = createGlobalStyle`
         vertical-align: baseline;
         background: transparent;
   }
+
+  button {
+        border: none;
+        background-color: white;
+        cursor: pointer;
+  }
 `

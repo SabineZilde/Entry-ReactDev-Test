@@ -8,13 +8,9 @@ export const HeaderContainer = styled.div`
 `
 
 export const HeaderButton = styled.button`
-    border: none;
-    background-color: white;
     padding: 28px 16px 32px;
-    font-family: 'Raleway';
     font-size: 16px;
     font-weight: 400;
-    cursor: pointer;
 
     &:hover {
         color: #5ECE7B;
@@ -36,17 +32,12 @@ export const CurrencyStyle = styled.div`
 `
 
 export const CurrencyButton = styled.button`
-    background-color: white;
-    border: none;
     padding: 0 25px 0 10px;
-    cursor: pointer;
     font-size: 10px;
 `
 
 export const CartButton = styled.button`
-    background-color: white;
-    border: none;
-    cursor: pointer;
+    display: flex;
 `
 
 export const DropdownContainer = styled.div`
@@ -65,10 +56,4 @@ export const DropdownContent = styled.div`
     flex-direction: column;
     min-height: 169px;
     justify-content: space-evenly;
-
-    &:hover {
-        & button {
-            cursor: pointer;
-        }
-    }
 `
