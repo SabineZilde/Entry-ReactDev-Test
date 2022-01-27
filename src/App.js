@@ -1,13 +1,18 @@
-import Header from './Components/Header/Header';
+import React from "react";
 import { GlobalStyles } from './GlobalStyles.style';
+import Header from './Components/Header/Header';
+import CategoryPage from "./Views/CategoryPage/CategoryPage";
 
-function App() {
-  return (
-    <div>
-      <GlobalStyles/>
-      <Header />
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <GlobalStyles />
+        <Header />
+        <CategoryPage />
+      </div>
+    );
+  }
 }
 
 export default App;
