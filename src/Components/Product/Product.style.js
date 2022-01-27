@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ActiveProductContainer = styled.div`
     height: 444px;
@@ -9,7 +9,7 @@ export const ActiveProductContainer = styled.div`
     }
 `
 
-export const Image = styled.div`
+export const ProductImage = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;

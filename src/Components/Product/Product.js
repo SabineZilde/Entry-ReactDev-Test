@@ -1,25 +1,44 @@
 import React from "react";
 import {
   ActiveProductContainer,
-  Image,
+  ProductImage,
   ProductName,
   ProductPrice,
 } from "./Product.style";
 import product from "../../Assets/Product.png";
-import circleIcon from '../../Assets/CircleIcon.svg'
+import circleIcon from "../../Assets/CircleIcon.svg";
 
 class Product extends React.Component {
+  state = {
+    isActive: false,
+  };
+
+  showCart = () => {
+    this.setState({
+      isActive: true,
+    });
+  };
+
+  hideCart = () => {
+    this.setState({
+      isActive: false,
+    });
+  };
+
   render() {
     return (
-      <ActiveProductContainer>
-        <Image>
+      <ActiveProductContainer onMouseEnter={this.showCart} onMouseLeave={this.hideCart}>
+        <ProductImage>
           <img src={product} alt="product" />
-        </Image>
+        </ProductImage>
         <ProductName>Apollo Running Short</ProductName>
         <ProductPrice>$50.00</ProductPrice>
-        {/* <img src={circleIcon} alt="Circle Icon" /> */}
+        {this.state.isActive && (
+          <button>
+            <img src={circleIcon} alt="Circle Icon" />
+          </button>
+        )}
       </ActiveProductContainer>
-      
     );
   }
 }
