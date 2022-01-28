@@ -29,7 +29,7 @@ class Buttons extends React.Component {
         </div>
         <div>
           <AttributeButton color='red'></AttributeButton>
-          <AttributeButton color='green'></AttributeButton>
+          <AttributeButton color=''></AttributeButton>
           <AttributeButton color='blue' mini></AttributeButton>
           <AttributeButton color='grey' mini></AttributeButton>
           <AttributeButton color='pink' mini></AttributeButton>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ActiveProductContainer = styled.div`
     height: 444px;
     width: 386px;
+    padding: 16px;
 
     &:hover {
         box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
@@ -10,21 +11,24 @@ export const ActiveProductContainer = styled.div`
 `
 
 export const ProductImage = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 18px 0 24px;
-
+    height: 338px;
+    width: 354px;
+    margin-bottom: 24px;
+    background-image: ${(props) =>
+        `url(${props.backgroundImage})`
+        };
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
 `
 
 export const ProductName = styled.div`
-    padding: 0 16px 5px;
+    padding-bottom: 5px;
     font-size: 18px;
     font-weight: 300;
 `
 
 export const ProductPrice = styled.div`
-    padding: 0 16px;
     font-size: 18px;
     font-weight: 500;
 `
