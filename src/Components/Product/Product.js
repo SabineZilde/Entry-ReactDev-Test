@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   ActiveProductContainer,
   ProductImage,
@@ -28,21 +29,23 @@ class Product extends React.Component {
 
   render() {
     return (
-      <ActiveProductContainer
-        onMouseEnter={this.showCart}
-        onMouseLeave={this.hideCart}
-      >
-        <ProductImage>
-          <img src={product} alt="product" />
-        </ProductImage>
-        <ProductName>Apollo Running Short</ProductName>
-        <ProductPrice>$50.00</ProductPrice>
-        {this.state.isActive && (
-          <CartButton>
-            <img src={circleIcon} alt="Circle Icon" />
-          </CartButton>
-        )}
-      </ActiveProductContainer>
+      <Link to="product">
+        <ActiveProductContainer
+          onMouseEnter={this.showCart}
+          onMouseLeave={this.hideCart}
+        >
+          <ProductImage>
+            <img src={product} alt="product" />
+          </ProductImage>
+          <ProductName>Apollo Running Short</ProductName>
+          <ProductPrice>$50.00</ProductPrice>
+          {this.state.isActive && (
+            <CartButton>
+              <img src={circleIcon} alt="Circle Icon" />
+            </CartButton>
+          )}
+        </ActiveProductContainer>
+      </Link>
     );
   }
 }
