@@ -5,6 +5,8 @@ export const Button = styled.button`
   color: ${props => props.primary ? "#FFFFFF" : "#1D1F22"};
   border: ${props => props.primary ? "1px solid #5ECE7B" : "1px solid #1D1F22"};
 
+  margin: ${props => props.margin};
+
   font-size: 14px;
   font-weight: 600;
   height: 43px;
@@ -17,7 +19,6 @@ export const Button = styled.button`
   &:focus {
     outline: 3px solid rgba(225,225,225,0.5);
   }
-    margin: 5px;
 `;
 
 export const ButtonLarge = styled(Button)`
@@ -40,7 +41,6 @@ export const QuantityButton = styled.button`
     &:active {
         background: #77787A;
   }
-    margin: 5px;
 `
 
 export const AttributeButton = styled.button`
@@ -52,6 +52,8 @@ export const AttributeButton = styled.button`
     width: ${props => props.mini ? '24px' : '63px'};
     font-size: ${props => props.mini ? '14px' : '16px'};
 
+    margin: ${props => props.margin};
+
     &:hover {
         background: ${props => props.color ? '' : '#A6A6A6'};
     }
@@ -61,6 +63,4 @@ export const AttributeButton = styled.button`
         outline: ${props => props.color ? '3px solid #A6A6A6' : ''};
         color: #FFFFFF;
     }
-
-    margin: 5px;
 `
