@@ -9,59 +9,88 @@ import {
   DropdownContainer,
   DropdownContent,
 } from "./Header.style";
+import MiniCart from "../MiniCart/MiniCart";
 import logo from "../../Assets/Logo.svg";
 import cart from "../../Assets/Cart.svg";
 
 class Header extends React.Component {
   state = {
     currency: "$",
-    isActive: false,
+    CurrencyButtonIsPressed: false,
+    CartIconIsPressed: false,
   };
 
   showCurrencyMenu = () => {
     this.setState({
-      isActive: true,
+      CurrencyButtonIsPressed: true,
     });
   };
 
   hideCurrencyMenu = () => {
     this.setState({
-      isActive: false,
+      CurrencyButtonIsPressed: false,
+    });
+  };
+
+  showMiniCart = () => {
+    this.setState({
+      CartIconIsPressed: true,
+    });
+  };
+
+  hideMiniCart = () => {
+    this.setState({
+      CartIconIsPressed: false,
     });
   };
 
   render() {
     return (
-      <HeaderContainer>
-        <div>
-          <HeaderButton>WOMEN</HeaderButton>
-          <HeaderButton>MEN</HeaderButton>
-          <HeaderButton>KIDS</HeaderButton>
-        </div>
-        <Link to='/'><img src={logo} alt="logo" /></Link>
-        <CurrencyStyle>
-          {this.state.currency}
+      <div>
+        <HeaderContainer>
           <div>
-            {this.state.isActive ? (
-              <CurrencyButton onClick={this.hideCurrencyMenu}>▲</CurrencyButton>
-            ) : (
-              <CurrencyButton onClick={this.showCurrencyMenu}>▼</CurrencyButton>
-            )}
-            {this.state.isActive && (
-              <DropdownContainer>
-                <DropdownContent>
-                  <button>$ USD</button>
-                  <button>€ EUR</button>
-                  <button>¥ JPY</button>
-                </DropdownContent>
-              </DropdownContainer>
-            )}
+            <HeaderButton>WOMEN</HeaderButton>
+            <HeaderButton>MEN</HeaderButton>
+            <HeaderButton>KIDS</HeaderButton>
           </div>
-          <CartButton>
-            <img src={cart} alt="logo" />
-          </CartButton>
-        </CurrencyStyle>
-      </HeaderContainer>
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
+          <CurrencyStyle>
+            {this.state.currency}
+            <div>
+              {!this.state.CurrencyButtonIsPressed ? (
+                <CurrencyButton onClick={this.showCurrencyMenu}>
+                  ▲
+                </CurrencyButton>
+              ) : (
+                <CurrencyButton onClick={this.hideCurrencyMenu}>
+                  ▼
+                </CurrencyButton>
+              )}
+              {this.state.CurrencyButtonIsPressed && (
+                <DropdownContainer>
+                  <DropdownContent>
+                    <button>$ USD</button>
+                    <button>€ EUR</button>
+                    <button>¥ JPY</button>
+                  </DropdownContent>
+                </DropdownContainer>
+              )}
+            </div>
+            {!this.state.CartIconIsPressed ? (
+              <CartButton onClick={this.showMiniCart}>
+                <img src={cart} alt="logo" />
+              </CartButton>
+            ) : (
+              <CartButton onClick={this.hideMiniCart}>
+                <img src={cart} alt="logo" />
+              </CartButton>
+            )}
+          </CurrencyStyle>
+        </HeaderContainer>
+        {this.state.CartIconIsPressed && <MiniCart />}
+      </div>
     );
   }
 }
