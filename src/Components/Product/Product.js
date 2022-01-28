@@ -4,7 +4,7 @@ import {
   ProductImage,
   ProductName,
   ProductPrice,
-  CartButton
+  CartButton,
 } from "./Product.style";
 import product from "../../Assets/Product.png";
 import circleIcon from "../../Assets/CircleIcon.svg";
@@ -28,7 +28,10 @@ class Product extends React.Component {
 
   render() {
     return (
-      <ActiveProductContainer onMouseEnter={this.showCart} onMouseLeave={this.hideCart}>
+      <ActiveProductContainer
+        onMouseEnter={this.showCart}
+        onMouseLeave={this.hideCart}
+      >
         <ProductImage>
           <img src={product} alt="product" />
         </ProductImage>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
-    padding: 0 100px;
+    padding: 0 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -11,6 +11,7 @@ export const HeaderButton = styled.button`
     padding: 28px 16px 32px;
     font-size: 16px;
     font-weight: 400;
+    border-bottom: solid 2px #FFFFFF;
 
     &:hover {
         color: #5ECE7B;

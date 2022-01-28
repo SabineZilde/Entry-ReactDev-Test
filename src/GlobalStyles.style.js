@@ -13,6 +13,10 @@ export const GlobalStyles = createGlobalStyle`
         background: transparent;
   }
 
+  body {
+      margin: 0 100px;
+  }
+
   button {
         border: none;
         background-color: white;
