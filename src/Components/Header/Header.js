@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   HeaderContainer,
   HeaderButton,
@@ -37,7 +38,7 @@ class Header extends React.Component {
           <HeaderButton>MEN</HeaderButton>
           <HeaderButton>KIDS</HeaderButton>
         </div>
-        <img src={logo} alt="logo" />
+        <Link to='/'><img src={logo} alt="logo" /></Link>
         <CurrencyStyle>
           {this.state.currency}
           <div>
