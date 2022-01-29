@@ -4,7 +4,7 @@ export const GlobalStyles = createGlobalStyle`
    * {
         font-family: 'Raleway', sans-serif;
         font-size: 100%;
-        color: black;
+        color: #1D1F22;
         text-decoration: none;
         box-sizing: border-box;
         margin: 0;

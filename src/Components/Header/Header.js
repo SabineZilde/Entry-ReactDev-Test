@@ -49,9 +49,9 @@ class Header extends React.Component {
       <div>
         <HeaderContainer>
           <div>
-            <HeaderButton>WOMEN</HeaderButton>
-            <HeaderButton>MEN</HeaderButton>
-            <HeaderButton>KIDS</HeaderButton>
+            <HeaderButton>CLOTHES</HeaderButton>
+            <HeaderButton>TECH</HeaderButton>
+            <HeaderButton>ALL</HeaderButton>
           </div>
           <Link to="/">
             <img src={logo} alt="logo" />
