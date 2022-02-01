@@ -14,6 +14,12 @@ import logo from "../../Assets/Logo.svg";
 import cart from "../../Assets/Cart.svg";
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.hideMiniCart = this.hideMiniCart.bind(this)
+  }
+
   state = {
     currency: "$",
     CurrencyButtonIsPressed: false,
@@ -89,7 +95,7 @@ class Header extends React.Component {
             )}
           </CurrencyStyle>
         </HeaderContainer>
-        {this.state.CartIconIsPressed && <MiniCart />}
+        {this.state.CartIconIsPressed && <MiniCart hideMiniCart={this.hideMiniCart} />}
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   MiniCartContainer,
   MiniCartBackground,
@@ -18,9 +19,8 @@ import product from "../../Assets/Product.png";
 class MiniCart extends React.Component {
   state = {
     itemCount: 2,
-    totalAmount: '$100.00'
+    totalAmount: "$100.00",
   };
-
   render() {
     return (
       <MiniCartBackground>
@@ -58,9 +58,9 @@ class MiniCart extends React.Component {
               <ProductDescription>Nike Air Huarache Le</ProductDescription>
               <ProductPrice>$50.00</ProductPrice>
               <div>
-                <AttributeButton mini margin="27px 8px 0 0" color='pink'/>
-                <AttributeButton mini margin="27px 8px 0 0" color='cyan'/>
-                <AttributeButton mini margin="27px 8px 0 0" color='crimson' />
+                <AttributeButton mini margin="27px 8px 0 0" color="pink" />
+                <AttributeButton mini margin="27px 8px 0 0" color="cyan" />
+                <AttributeButton mini margin="27px 8px 0 0" color="crimson" />
               </div>
             </Column>
             <Column middle>
@@ -73,14 +73,12 @@ class MiniCart extends React.Component {
             </Column>
           </Row>
           <Row total>
-              <div>
-                  Total
-              </div>
-              <div>
-                  {this.state.totalAmount}
-              </div>
+            <div>Total</div>
+            <div>{this.state.totalAmount}</div>
           </Row>
-          <Button margin="0 12px 0 0">VIEW BAG</Button>
+          <Link to="/cart">
+            <Button margin="0 12px 0 0" onClick={this.props.hideMiniCart}>VIEW BAG</Button>
+          </Link>
           <Button primary>CHECK OUT</Button>
         </MiniCartContainer>
       </MiniCartBackground>
