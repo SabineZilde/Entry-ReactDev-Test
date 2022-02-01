@@ -39,7 +39,7 @@ class MiniCart extends React.Component {
             </Column>
             <Column middle>
               <QuantityButton mini>+</QuantityButton>
-              <div>1</div>
+              <FontRaleway fontWeight='500'>1</FontRaleway>
               <QuantityButton mini>-</QuantityButton>
             </Column>
             <Column colWidth="105px">

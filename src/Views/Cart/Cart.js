@@ -40,7 +40,7 @@ class Cart extends React.Component {
           <CountAndImg>
             <Column>
               <QuantityButton>+</QuantityButton>
-              <div>1</div>
+              <FontRaleway fontSize='24px' fontWeight='500'>1</FontRaleway>
               <QuantityButton>-</QuantityButton>
             </Column>
             <ProductImage backgroundImage={product} />
