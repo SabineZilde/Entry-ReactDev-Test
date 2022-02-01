@@ -9,8 +9,6 @@ export const HeaderContainer = styled.div`
 
 export const HeaderButton = styled.button`
     padding: 28px 16px 32px;
-    font-size: 16px;
-    font-weight: 400;
     border-bottom: solid 2px #FFFFFF;
 
     &:hover {

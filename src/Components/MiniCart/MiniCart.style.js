@@ -37,15 +37,6 @@ export const Column = styled.div`
     width: ${props => props.colWidth};
 `
 
-export const ProductDescription = styled.div`
-    font-weight: 300;
-    line-height: 25.6px;
-`
-
-export const ProductPrice = styled.div`
-    font-weight: 500;
-`
-
 export const ProductImage = styled.div`
     height: 137px;
     width: 105px;

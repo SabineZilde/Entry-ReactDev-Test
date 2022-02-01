@@ -7,6 +7,7 @@ import {
   ProductPrice,
   CartButton,
 } from "./Product.style";
+import { FontRaleway } from "../../Components/Fonts/Fonts.style";
 import product from "../../Assets/Product2.png";
 import circleIcon from "../../Assets/CircleIcon.svg";
 
@@ -35,8 +36,8 @@ class Product extends React.Component {
           onMouseLeave={this.hideCart}
         >
           <ProductImage backgroundImage={product} />
-          <ProductName>Apollo Running Short</ProductName>
-          <ProductPrice>$50.00</ProductPrice>
+          <FontRaleway fontSize='18px' fontWeight='300' margin='0 0 5px 0'>Apollo Running Short</FontRaleway>
+          <FontRaleway fontSize='18px' fontWeight='500'>$50.00</FontRaleway>
           {this.state.isActive && (
             <CartButton>
               <img src={circleIcon} alt="Circle Icon" />

@@ -22,17 +22,6 @@ export const ProductImage = styled.div`
     background-size: cover;
 `
 
-export const ProductName = styled.div`
-    padding-bottom: 5px;
-    font-size: 18px;
-    font-weight: 300;
-`
-
-export const ProductPrice = styled.div`
-    font-size: 18px;
-    font-weight: 500;
-`
-
 export const CartButton = styled.button`
     position: absolute;
     margin: -100px 0 0 300px;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, ProductContainer } from "./CategoryPage.style";
+import { FontRaleway } from "../../Components/Fonts/Fonts.style";
 import Product from "../../Components/Product/Product";
 
 class CategoryPage extends React.Component {
@@ -7,7 +8,7 @@ class CategoryPage extends React.Component {
     return (
       <Container>
         <div>
-          <h2>Category name</h2>
+          <FontRaleway fontSize='42px'>Category name</FontRaleway>
         </div>
         <ProductContainer>
           <Product />

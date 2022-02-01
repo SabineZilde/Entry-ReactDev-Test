@@ -5,8 +5,6 @@ import {
   MiniCartBackground,
   Column,
   Row,
-  ProductDescription,
-  ProductPrice,
   ProductImage,
 } from "./MiniCart.style.js";
 import {
@@ -14,6 +12,7 @@ import {
   AttributeButton,
   QuantityButton,
 } from "../Buttons/Buttons.style";
+import { FontRaleway } from "../../Components/Fonts/Fonts.style";
 import product from "../../Assets/Product.png";
 
 class MiniCart extends React.Component {
@@ -30,33 +29,8 @@ class MiniCart extends React.Component {
           </div>
           <Row>
             <Column colWidth="136px">
-              <ProductDescription>Appollo Running Short</ProductDescription>
-              <ProductPrice>$50.00</ProductPrice>
-              <div>
-                <AttributeButton mini margin="27px 8px 0 0">
-                  XS
-                </AttributeButton>
-                <AttributeButton mini margin="27px 8px 0 0">
-                  S
-                </AttributeButton>
-                <AttributeButton mini margin="27px 8px 0 0">
-                  M
-                </AttributeButton>
-              </div>
-            </Column>
-            <Column middle>
-              <QuantityButton mini>+</QuantityButton>
-              <div>1</div>
-              <QuantityButton mini>-</QuantityButton>
-            </Column>
-            <Column colWidth="105px">
-              <ProductImage backgroundImage={product} />
-            </Column>
-          </Row>
-          <Row>
-            <Column colWidth="136px">
-              <ProductDescription>Nike Air Huarache Le</ProductDescription>
-              <ProductPrice>$50.00</ProductPrice>
+            <FontRaleway fontWeight='300'>Nike Air Huarache Le</FontRaleway>
+              <FontRaleway fontWeight='500'>$50.00</FontRaleway>
               <div>
                 <AttributeButton mini margin="27px 8px 0 0" color="pink" />
                 <AttributeButton mini margin="27px 8px 0 0" color="cyan" />
