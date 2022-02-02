@@ -49,7 +49,6 @@ class Header extends React.Component {
       CartIconIsPressed: false,
     });
   };
-
   render() {
     return (
       <div>

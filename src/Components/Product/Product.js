@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import {
   ActiveProductContainer,
   ProductImage,
-  ProductName,
-  ProductPrice,
   CartButton,
 } from "./Product.style";
 import { FontRaleway } from "../../Components/Fonts/Fonts.style";
