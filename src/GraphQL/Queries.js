@@ -10,8 +10,11 @@ query LoadCategories {
 
 export const LOAD_CURRENCIES = gql`
 query LoadCurrencies {
-        currencies
+    currencies {
+        symbol
+        label
     }
+  }
 `
 
 export const LOAD_PRODUCTS = gql`

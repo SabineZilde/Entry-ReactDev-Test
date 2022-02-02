@@ -13,7 +13,7 @@ import MiniCart from "../MiniCart/MiniCart";
 import logo from "../../Assets/Logo.svg";
 import cart from "../../Assets/Cart.svg";
 import { Query } from "@apollo/client/react/components";
-import { LOAD_CATEGORIES } from "../../GraphQL/Queries";
+import { LOAD_CATEGORIES, LOAD_CURRENCIES } from "../../GraphQL/Queries";
 
 class Header extends React.Component {
   constructor(props) {
@@ -60,8 +60,8 @@ class Header extends React.Component {
               {({ loading, data }) => {
                 if (loading) return "Loading...";
                 const { categories } = data;
-                return categories.map((categories, id) => (
-                  <HeaderButton key={id}>{categories.name}</HeaderButton>
+                return categories.map((category, id) => (
+                  <HeaderButton key={id}>{category.name}</HeaderButton>
                 ));
               }}
             </Query>
@@ -84,9 +84,17 @@ class Header extends React.Component {
               {this.state.CurrencyButtonIsPressed && (
                 <DropdownContainer>
                   <DropdownContent>
-                    <button>$ USD</button>
-                    <button>€ EUR</button>
-                    <button>¥ JPY</button>
+                    <Query query={LOAD_CURRENCIES}>
+                      {({ loading, data }) => {
+                        if (loading) return "Loading...";
+                        const { currencies } = data;
+                        return currencies.map((currency, id) => (
+                          <button key={id}>
+                            {currency.symbol} {currency.label}
+                          </button>
+                        ));
+                      }}
+                    </Query>
                   </DropdownContent>
                 </DropdownContainer>
               )}
