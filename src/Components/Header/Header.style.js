@@ -54,6 +54,11 @@ export const DropdownContent = styled.div`
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    min-height: 169px;
+    min-height: 230px;
     justify-content: space-evenly;
+    
+    & button:hover {
+        background-color: rgba(0,0,0,0.1);
+        border-radius: 50px;
+    }
 `
