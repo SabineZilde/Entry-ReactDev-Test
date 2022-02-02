@@ -12,12 +12,14 @@ import {
 import MiniCart from "../MiniCart/MiniCart";
 import logo from "../../Assets/Logo.svg";
 import cart from "../../Assets/Cart.svg";
+import { Query } from "@apollo/client/react/components";
+import { LOAD_CATEGORIES } from "../../GraphQL/Queries";
 
 class Header extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.hideMiniCart = this.hideMiniCart.bind(this)
+    this.hideMiniCart = this.hideMiniCart.bind(this);
   }
 
   state = {
@@ -54,9 +56,15 @@ class Header extends React.Component {
       <div>
         <HeaderContainer>
           <div>
-            <HeaderButton>CLOTHES</HeaderButton>
-            <HeaderButton>TECH</HeaderButton>
-            <HeaderButton>ALL</HeaderButton>
+            <Query query={LOAD_CATEGORIES}>
+              {({ loading, data }) => {
+                if (loading) return "Loading...";
+                const { categories } = data;
+                return categories.map((categories, id) => (
+                  <HeaderButton key={id}>{categories.name}</HeaderButton>
+                ));
+              }}
+            </Query>
           </div>
           <Link to="/">
             <img src={logo} alt="logo" />
@@ -94,7 +102,9 @@ class Header extends React.Component {
             )}
           </CurrencyStyle>
         </HeaderContainer>
-        {this.state.CartIconIsPressed && <MiniCart hideMiniCart={this.hideMiniCart} />}
+        {this.state.CartIconIsPressed && (
+          <MiniCart hideMiniCart={this.hideMiniCart} />
+        )}
       </div>
     );
   }

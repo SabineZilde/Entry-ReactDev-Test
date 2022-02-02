@@ -9,7 +9,6 @@ export const Row = styled.div`
 export const ThumbnailColumn = styled.div`
     display: flex;
     flex-direction: column;
-    border: 1px solid red;
 
     & img {
         width: 80px;
@@ -18,7 +17,6 @@ export const ThumbnailColumn = styled.div`
 `
 
 export const LargeImgColumn = styled.div`
-    border: 1px solid red;
     height: 510px;
     width: 610px;
     display: flex;
@@ -30,8 +28,6 @@ export const LargeImgColumn = styled.div`
 `
 
 export const ProductDetailColumn = styled.div`
-    border: 1px solid red;
-
     margin-left: 100px;
     width: 410px;
     display: flex;
