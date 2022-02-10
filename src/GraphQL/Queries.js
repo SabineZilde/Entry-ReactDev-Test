@@ -19,7 +19,7 @@ query LoadCurrencies {
 
 export const LOAD_PRODUCTS = gql`
 query LoadProducts($title: String!) {
-    category(input: { title: $title }) {
+    category(input: { title: "all" }) {
         products {
             name
             brand
@@ -38,7 +38,10 @@ query LoadProducts($title: String!) {
                 }
             id
             prices {
-                currency
+                currency {
+                    label
+                    symbol
+                  }
                 amount
                 }
             }
@@ -66,7 +69,10 @@ query LoadProduct($id: String!) {
                 }
             }
         prices {
-            currency
+            currency {
+                label
+                symbol
+              }
             amount
             }
         }
