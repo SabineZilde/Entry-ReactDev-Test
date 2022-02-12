@@ -13,9 +13,9 @@ class App extends React.Component {
         <GlobalStyles />
         <Header />
         <Switch>
-          <Route exact path='/:category' component={CategoryPage}/>
-          <Route path='/product' component={ProductPage}/>
-          <Route path='/cart' component={Cart}/>
+          <Route path='/category/:category' component={CategoryPage} />
+          <Route path='/product' component={ProductPage} />
+          <Route path='/cart' component={Cart} />
         </Switch>
       </BrowserRouter>
     );
