@@ -6,10 +6,9 @@ import {
   CartButton,
 } from "./Product.style";
 import { FontRaleway } from "../../Components/Fonts/Fonts.style";
-import productImg from "../../Assets/Product2.png";
 import circleIcon from "../../Assets/CircleIcon.svg";
-// import { Query } from "@apollo/client/react/components";
-// import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
+import { Query } from "@apollo/client/react/components";
+import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 
 class Product extends React.Component {
   state = {
@@ -30,18 +29,18 @@ class Product extends React.Component {
 
   render() {
     return (
-      // <Query query={LOAD_PRODUCTS}>
-      //   {({ loading, data }) => {
-      //     if (loading) return "Loading...";
-      //     const { products } = data;
-      //     return products.map((product) => (
-            <Link to="/product">
+      <Query query={LOAD_PRODUCTS} variables={{ title: "tech" }}>
+        {({ loading, data }) => {
+          if (loading) return "Loading...";
+          console.log(data);
+          return data.category.products.map((product) => (
+            <Link to="/product" key={product.id}>
               <ActiveProductContainer
                 onMouseEnter={this.showCart}
                 onMouseLeave={this.hideCart}
               >
-                <ProductImage backgroundImage={productImg} />
-                <FontRaleway fontSize='18px' fontWeight='300' margin='0 0 5px 0'>Apollo Running Short</FontRaleway>
+                <ProductImage backgroundImage={product.gallery} />
+                <FontRaleway fontSize='18px' fontWeight='300' margin='0 0 5px 0'>{product.brand} {product.name}</FontRaleway>
                 <FontRaleway fontSize='18px' fontWeight='500'>$50.00</FontRaleway>
                 {this.state.isActive && (
                   <CartButton>
@@ -50,9 +49,9 @@ class Product extends React.Component {
                 )}
               </ActiveProductContainer>
             </Link>
-      //     ));
-      //   }}
-      // </Query>
+          ));
+        }}
+      </Query>
     );
   }
 }
