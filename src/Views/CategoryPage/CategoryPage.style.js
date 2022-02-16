@@ -6,6 +6,9 @@ export const Container = styled.div`
 
 export const ProductContainer = styled.div`
     margin-top: 103px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 `
 
 export const ActiveProductContainer = styled.div`
