@@ -29,17 +29,16 @@ class Product extends React.Component {
 
   render() {
     return (
-      <Query query={LOAD_PRODUCTS} variables={{ title: "tech" }}>
+      <Query query={LOAD_PRODUCTS} variables={{ title: this.props.category }}>
         {({ loading, data }) => {
           if (loading) return "Loading...";
-          console.log(data);
           return data.category.products.map((product) => (
             <Link to="/product" key={product.id}>
               <ActiveProductContainer
                 onMouseEnter={this.showCart}
                 onMouseLeave={this.hideCart}
               >
-                <ProductImage backgroundImage={product.gallery} />
+                <ProductImage backgroundImage={product.gallery[0]} />
                 <FontRaleway fontSize='18px' fontWeight='300' margin='0 0 5px 0'>{product.brand} {product.name}</FontRaleway>
                 <FontRaleway fontSize='18px' fontWeight='500'>$50.00</FontRaleway>
                 {this.state.isActive && (

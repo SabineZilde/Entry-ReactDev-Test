@@ -22,7 +22,7 @@ class CategoryPage extends React.Component {
           <FontRaleway fontSize='42px' capitalize>{this.state.category}</FontRaleway>
         </div>
         <ProductContainer>
-          <Product />
+          <Product category={this.state.category}/>
         </ProductContainer>
       </Container>
     );
