@@ -1,6 +1,4 @@
 import React from "react";
-import product from "../../Assets/Product.png";
-import product2 from "../../Assets/Product2.png";
 import {
   ButtonLarge,
   AttributeButton,
@@ -13,54 +11,77 @@ import {
   DescriptionRow,
 } from "./ProductPage.style";
 import { FontRaleway, FontRoboto } from "../../Components/Fonts/Fonts.style";
+import { Query } from "@apollo/client/react/components";
+import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 
 class ProductPage extends React.Component {
+  state = {
+    id: null
+  }
+
+  componentDidMount() {
+    let id = this.props.match.params.id;
+    this.setState({
+      id: id
+    });
+  };
+
   render() {
     return (
-      <Row>
-        <ThumbnailColumn>
-          <img src={product} alt="" />
-          <img src={product2} alt="" />
-          <img src={product} alt="" />
-          <img src={product2} alt="" />
-        </ThumbnailColumn>
-        <LargeImgColumn>
-          <img src={product2} alt="" />
-        </LargeImgColumn>
-        <ProductDetailColumn>
-          <div>
-            <FontRaleway fontSize="30px" fontWeight="600">
-              Apollo
-            </FontRaleway>
-            <FontRaleway fontSize="30px">Running Short</FontRaleway>
-          </div>
-          <div>
-            <FontRoboto condensed fontSize="18px" fontWeight="700">
-              SIZE:
-            </FontRoboto>
-            <AttributeButton margin="0 10px 0 0">XS</AttributeButton>
-            <AttributeButton margin="0 10px 0 0">S</AttributeButton>
-            <AttributeButton margin="0 10px 0 0">M</AttributeButton>
-            <AttributeButton margin="0 10px 0 0">L</AttributeButton>
-          </div>
-          <div>
-            <FontRoboto condensed fontSize="18px" fontWeight="700">
-              PRICE:
-            </FontRoboto>
-            <FontRaleway fontSize="24px" fontWeight="700">
-              $50.00
-            </FontRaleway>
-          </div>
-          <ButtonLarge primary>ADD TO CART</ButtonLarge>
-          <DescriptionRow>
-            <FontRoboto>
-              Find stunning women's cocktail dresses and party dresses. Stand
-              out in lace and metallic cocktail dresses and party dresses from
-              all your favorite brands.
-            </FontRoboto>
-          </DescriptionRow>
-        </ProductDetailColumn>
-      </Row>
+      <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
+        {({ loading, data }) => {
+          if (loading) return "Loading...";
+          console.log(data.product.attributes);
+
+          return (
+            <Row>
+              <ThumbnailColumn>
+                {data.product.gallery.map((image, id) => (
+                  <img key={id} src={image} alt="Product" />
+                ))}
+              </ThumbnailColumn>
+              <LargeImgColumn>
+                <img src={data.product.gallery[0]} alt="Product large" />
+              </LargeImgColumn>
+              <ProductDetailColumn>
+                <div>
+                  <FontRaleway fontSize="30px" fontWeight="600">
+                    {/* {this.state.id} */}
+                    {data.product.brand}
+                  </FontRaleway>
+                  <FontRaleway fontSize="30px">{data.product.name}</FontRaleway>
+                </div>
+                <div>
+                  {data.product.attributes.map((attribute, id) => (
+                    <>
+                      <FontRoboto key={id} condensed fontSize="18px" fontWeight="700">
+                        {attribute.name}
+                      </FontRoboto>
+                      {attribute.items.map((item, id) => (
+                        <AttributeButton key={id} margin="0 10px 0 0">{item.value}</AttributeButton>
+                      ))}
+                    </>
+                  ))}
+                </div>
+                <div>
+                  <FontRoboto condensed fontSize="18px" fontWeight="700">
+                    PRICE:
+                  </FontRoboto>
+                  <FontRaleway fontSize="24px" fontWeight="700">
+                    $50.00
+                  </FontRaleway>
+                </div>
+                <ButtonLarge primary>ADD TO CART</ButtonLarge>
+                <DescriptionRow>
+                  <FontRoboto>
+                    {data.product.description}
+                  </FontRoboto>
+                </DescriptionRow>
+              </ProductDetailColumn>
+            </Row>
+          )
+        }}
+      </Query>
     );
   }
 }

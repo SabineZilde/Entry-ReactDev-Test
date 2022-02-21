@@ -60,7 +60,6 @@ class Header extends React.Component {
               {({ loading, data }) => {
                 if (loading) return "Loading...";
                 const { categories } = data;
-                console.log(data)
                 return categories.map((category, id) => (
                   <a href={'/category/' + category.name} key={id}>
                     <HeaderButton>{category.name}</HeaderButton>

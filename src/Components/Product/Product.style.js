@@ -20,7 +20,7 @@ export const ProductImage = styled.div`
     background-position: center center;
     background-repeat: no-repeat;
     /* background-size: cover; */
-    background-size: 90% auto;
+    background-size: 100% auto;
     /* box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.1); */
 `
 
