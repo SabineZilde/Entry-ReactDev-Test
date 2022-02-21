@@ -32,7 +32,6 @@ export const ProductDetailColumn = styled.div`
     width: 410px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 `
 
 export const DescriptionRow = styled.div`

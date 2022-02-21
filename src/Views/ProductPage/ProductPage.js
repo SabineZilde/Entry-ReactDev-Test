@@ -16,29 +16,29 @@ import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 
 class ProductPage extends React.Component {
   state = {
-    id: null
-  }
+    id: null,
+  };
 
   componentDidMount() {
     let id = this.props.match.params.id;
     this.setState({
-      id: id
+      id: id,
     });
-  };
+  }
 
   render() {
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
           if (loading) return "Loading...";
-          console.log(data.product.attributes);
-
           return (
             <Row>
               <ThumbnailColumn>
-                {data.product.gallery.map((image, id) => (
-                  <img key={id} src={image} alt="Product" />
-                ))}
+                <button>
+                  {data.product.gallery.map((image, id) => (
+                    <img key={id} src={image} alt="Product" />
+                  ))}
+                </button>
               </ThumbnailColumn>
               <LargeImgColumn>
                 <img src={data.product.gallery[0]} alt="Product large" />
@@ -46,37 +46,44 @@ class ProductPage extends React.Component {
               <ProductDetailColumn>
                 <div>
                   <FontRaleway fontSize="30px" fontWeight="600">
-                    {/* {this.state.id} */}
                     {data.product.brand}
                   </FontRaleway>
-                  <FontRaleway fontSize="30px">{data.product.name}</FontRaleway>
+                  <FontRaleway fontSize="30px" margin="5px 0 20px">{data.product.name}</FontRaleway>
                 </div>
                 <div>
                   {data.product.attributes.map((attribute, id) => (
-                    <>
-                      <FontRoboto key={id} condensed fontSize="18px" fontWeight="700">
+                    <div>
+                      <FontRoboto
+                        key={id}
+                        condensed
+                        fontSize="18px"
+                        fontWeight="700"
+                        margin="10px 0"
+                      >
                         {attribute.name}
                       </FontRoboto>
                       {attribute.items.map((item, id) => {
-                        if (attribute.name === 'Color') {
+                        if (attribute.name === "Color") {
                           return (
-                            <AttributeButton key={id} margin="0 10px 0 0" color={item.displayValue}>
-                            </AttributeButton>
-                          )
+                            <AttributeButton
+                              key={id}
+                              margin="0 10px 10px 0"
+                              color={item.displayValue}
+                            ></AttributeButton>
+                          );
                         } else {
                           return (
-                            <AttributeButton key={id} margin="0 10px 0 0">
+                            <AttributeButton key={id} margin="0 10px 10px 0">
                               {item.value}
                             </AttributeButton>
-                          )
+                          );
                         }
-                      }
-                      )}
-                    </>
+                      })}
+                    </div>
                   ))}
                 </div>
                 <div>
-                  <FontRoboto condensed fontSize="18px" fontWeight="700">
+                  <FontRoboto condensed fontSize="18px" fontWeight="700" margin="20px 0 0">
                     PRICE:
                   </FontRoboto>
                   <FontRaleway fontSize="24px" fontWeight="700">
@@ -85,16 +92,13 @@ class ProductPage extends React.Component {
                 </div>
                 <ButtonLarge primary>ADD TO CART</ButtonLarge>
                 <DescriptionRow>
-                  <FontRoboto>
-                    {data.product.description}
-                  </FontRoboto>
+                  <FontRoboto>{data.product.description}</FontRoboto>
                 </DescriptionRow>
               </ProductDetailColumn>
             </Row>
-          )
-        }
-        }
-      </Query >
+          );
+        }}
+      </Query>
     );
   }
 }

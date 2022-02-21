@@ -25,6 +25,7 @@ export const ButtonLarge = styled(Button)`
     font-size: 16px;
     height: 52px;
     width: 292px;
+    margin: 30px 0;
 `
 
 export const QuantityButton = styled.button`
@@ -44,7 +45,7 @@ export const QuantityButton = styled.button`
 `
 
 export const AttributeButton = styled.button`
-    border: ${props => props.color ? '1px solid props.color': '1px solid #1D1F22'};
+    border: 1px solid #1D1F22;
     color: #292929;
     background: ${props => props.color ? props.color : 'none'};
     
