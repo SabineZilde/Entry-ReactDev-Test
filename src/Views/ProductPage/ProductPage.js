@@ -57,9 +57,21 @@ class ProductPage extends React.Component {
                       <FontRoboto key={id} condensed fontSize="18px" fontWeight="700">
                         {attribute.name}
                       </FontRoboto>
-                      {attribute.items.map((item, id) => (
-                        <AttributeButton key={id} margin="0 10px 0 0">{item.value}</AttributeButton>
-                      ))}
+                      {attribute.items.map((item, id) => {
+                        if (attribute.name === 'Color') {
+                          return (
+                            <AttributeButton key={id} margin="0 10px 0 0" color={item.displayValue}>
+                            </AttributeButton>
+                          )
+                        } else {
+                          return (
+                            <AttributeButton key={id} margin="0 10px 0 0">
+                              {item.value}
+                            </AttributeButton>
+                          )
+                        }
+                      }
+                      )}
                     </>
                   ))}
                 </div>
@@ -80,8 +92,9 @@ class ProductPage extends React.Component {
               </ProductDetailColumn>
             </Row>
           )
-        }}
-      </Query>
+        }
+        }
+      </Query >
     );
   }
 }
