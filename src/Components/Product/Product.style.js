@@ -5,8 +5,18 @@ export const ActiveProductContainer = styled.div`
     width: 386px;
     padding: 16px;
 
+    & button {
+        display: none;
+    }
+
     &:hover {
         box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+        button {
+            position: absolute;
+            margin: -100px 0 0 300px;
+            background-color: transparent;
+            display: block;
+        }
     }
 `
 
@@ -22,10 +32,4 @@ export const ProductImage = styled.div`
     /* background-size: cover; */
     background-size: 100% auto;
     /* box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.1); */
-`
-
-export const CartButton = styled.button`
-    position: absolute;
-    margin: -100px 0 0 300px;
-    background-color: transparent;
 `

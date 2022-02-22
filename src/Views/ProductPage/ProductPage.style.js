@@ -14,6 +14,11 @@ export const ThumbnailColumn = styled.div`
         width: 80px;
         margin: 0 30px 30px 0;
     }
+
+    & button {
+        display: flex;
+        flex-direction: column;
+    }
 `
 
 export const LargeImgColumn = styled.div`
