@@ -13,6 +13,7 @@ import {
 import { FontRaleway, FontRoboto } from "../../Components/Fonts/Fonts.style";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
+import parse from 'html-react-parser'
 
 class ProductPage extends React.Component {
   state = {
@@ -92,7 +93,8 @@ class ProductPage extends React.Component {
                 </div>
                 <ButtonLarge primary>ADD TO CART</ButtonLarge>
                 <DescriptionRow>
-                  <FontRoboto>{data.product.description}</FontRoboto>
+                  <FontRoboto>{parse(data.product.description)}</FontRoboto>
+                  {console.log(parse(data.product.description))}
                 </DescriptionRow>
               </ProductDetailColumn>
             </Row>
