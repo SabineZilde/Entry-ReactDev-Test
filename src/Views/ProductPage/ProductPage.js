@@ -13,7 +13,7 @@ import {
 import { FontRaleway, FontRoboto } from "../../Components/Fonts/Fonts.style";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
-import parse from 'html-react-parser'
+import parse from "html-react-parser";
 
 class ProductPage extends React.Component {
   state = {
@@ -49,7 +49,9 @@ class ProductPage extends React.Component {
                   <FontRaleway fontSize="30px" fontWeight="600">
                     {data.product.brand}
                   </FontRaleway>
-                  <FontRaleway fontSize="30px" margin="5px 0 20px">{data.product.name}</FontRaleway>
+                  <FontRaleway fontSize="30px" margin="5px 0 20px">
+                    {data.product.name}
+                  </FontRaleway>
                 </div>
                 <div>
                   {data.product.attributes.map((attribute, id) => (
@@ -84,7 +86,12 @@ class ProductPage extends React.Component {
                   ))}
                 </div>
                 <div>
-                  <FontRoboto condensed fontSize="18px" fontWeight="700" margin="20px 0 0">
+                  <FontRoboto
+                    condensed
+                    fontSize="18px"
+                    fontWeight="700"
+                    margin="20px 0 0"
+                  >
                     PRICE:
                   </FontRoboto>
                   <FontRaleway fontSize="24px" fontWeight="700">
@@ -94,7 +101,6 @@ class ProductPage extends React.Component {
                 <ButtonLarge primary>ADD TO CART</ButtonLarge>
                 <DescriptionRow>
                   <FontRoboto>{parse(data.product.description)}</FontRoboto>
-                  {console.log(parse(data.product.description))}
                 </DescriptionRow>
               </ProductDetailColumn>
             </Row>

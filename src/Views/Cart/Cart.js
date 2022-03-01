@@ -13,9 +13,11 @@ import {
   QuantityButton,
 } from "../../Components/Buttons/Buttons.style";
 import product from "../../Assets/Product.png";
+import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {
   render() {
+    const { testState, upateCart, clearCart } = this.context;
     return (
       <CartContainer>
         <FontRaleway fontSize="32px" fontWeight="700" margin="0 0 59px 0">
@@ -24,7 +26,7 @@ class Cart extends React.Component {
         <ProductContainer>
           <ProductDescription>
             <FontRaleway fontSize="30px" fontWeight="600">
-              Apollo
+              {testState}
             </FontRaleway>
             <FontRaleway fontSize="30px">Running Short</FontRaleway>
             <FontRaleway fontSize="24px" fontWeight="700">
@@ -50,5 +52,7 @@ class Cart extends React.Component {
     );
   }
 }
+
+Cart.contextType = MainContext;
 
 export default Cart;
