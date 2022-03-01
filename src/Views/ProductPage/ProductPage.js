@@ -98,15 +98,16 @@ class ProductPage extends React.Component {
                     $50.00
                   </FontRaleway>
                 </div>
-                {data.product.attributes.map((attribute, id) => (
-                  <ButtonLarge
-                    primary
-                    key={id}
-                    onClick={() => alert(`Please choose the ${attribute.name}`)}
-                  >
-                    ADD TO CART
-                  </ButtonLarge>
-                ))}
+                <ButtonLarge
+                  primary
+                  onClick={() => {
+                    data.product.attributes.map((attribute) => {
+                      alert(`Please choose ${attribute.name}.`);
+                    });
+                  }}
+                >
+                  ADD TO CART
+                </ButtonLarge>
                 <DescriptionRow>
                   <FontRoboto>{parse(data.product.description)}</FontRoboto>
                 </DescriptionRow>
