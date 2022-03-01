@@ -17,7 +17,7 @@ import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {
   render() {
-    const { testState, upateCart, clearCart } = this.context;
+    const { testState, updateCart, clearCart } = this.context;
     return (
       <CartContainer>
         <FontRaleway fontSize="32px" fontWeight="700" margin="0 0 59px 0">

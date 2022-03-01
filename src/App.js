@@ -5,7 +5,7 @@ import Header from './Components/Header/Header';
 import CategoryPage from "./Views/CategoryPage/CategoryPage";
 import ProductPage from './Views/ProductPage/ProductPage';
 import Cart from "./Views/Cart/Cart";
-import MainContext, { MainProvider } from "./Context/MainContext";
+import { MainProvider } from "./Context/MainContext";
 
 class App extends React.Component {
   render() {
