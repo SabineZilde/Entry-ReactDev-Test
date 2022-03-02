@@ -52,6 +52,7 @@ class Header extends React.Component {
       CartIconIsPressed: false,
     });
   };
+
   render() {
     const { contextCurrency, updateCurrency } = this.context;
     return (
@@ -74,7 +75,7 @@ class Header extends React.Component {
             <img src={logo} alt="logo" />
           </Link>
           <CurrencyStyle>
-            {contextCurrency}
+            {this.state.currency}
             <div>
               {!this.state.CurrencyButtonIsPressed ? (
                 <CurrencyButton onClick={this.showCurrencyMenu}>
@@ -93,7 +94,7 @@ class Header extends React.Component {
                         if (loading) return "Loading...";
                         const { currencies } = data;
                         return currencies.map((currency, id) => (
-                          <button key={id} onClick={updateCurrency}>
+                          <button key={id} onClick={() => this.setState({ currency: currency.symbol, CurrencyButtonIsPressed: false, })}>
                             {currency.symbol} {currency.label}
                           </button>
                         ));

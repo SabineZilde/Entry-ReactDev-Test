@@ -13,7 +13,7 @@ export class MainProvider extends Component{
     }
 
     updateCurrency = () => {
-        this.setState({contextCurrency : "¥"});
+        this.setState({contextCurrency : ''});
     }
 
     render(){
