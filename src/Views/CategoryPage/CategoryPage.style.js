@@ -7,8 +7,9 @@ export const Container = styled.div`
 export const ProductContainer = styled.div`
     margin-top: 103px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
+    gap: 2rem;
 `
 
 export const ActiveProductContainer = styled.div`
