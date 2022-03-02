@@ -32,32 +32,32 @@ class ProductPage extends React.Component {
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
           if (loading) return "Loading...";
+          const { product } = data;
           return (
             <Row>
               <ThumbnailColumn>
                 <button>
-                  {data.product.gallery.map((image, id) => (
+                  {product.gallery.map((image, id) => (
                     <img key={id} src={image} alt="Product" />
                   ))}
                 </button>
               </ThumbnailColumn>
               <LargeImgColumn>
-                <img src={data.product.gallery[0]} alt="Product large" />
+                <img src={product.gallery[0]} alt="Product large" />
               </LargeImgColumn>
               <ProductDetailColumn>
                 <div>
                   <FontRaleway fontSize="30px" fontWeight="600">
-                    {data.product.brand}
+                    {product.brand}
                   </FontRaleway>
                   <FontRaleway fontSize="30px" margin="5px 0 20px">
-                    {data.product.name}
+                    {product.name}
                   </FontRaleway>
                 </div>
                 <div>
-                  {data.product.attributes.map((attribute, id) => (
-                    <div>
+                  {product.attributes.map((attribute, id) => (
+                    <div key={id}>
                       <FontRoboto
-                        key={id}
                         condensed
                         fontSize="18px"
                         fontWeight="700"
@@ -101,15 +101,15 @@ class ProductPage extends React.Component {
                 <ButtonLarge
                   primary
                   onClick={() => {
-                    data.product.attributes.map((attribute) => {
-                      alert(`Please choose ${attribute.name}.`);
-                    });
+                     for (let i = 0; i < product.attributes.length; i++) {
+                      alert(`Please choose ${product.attributes[i].name}`)
+                     }
                   }}
                 >
                   ADD TO CART
                 </ButtonLarge>
                 <DescriptionRow>
-                  <FontRoboto>{parse(data.product.description)}</FontRoboto>
+                  <FontRoboto>{parse(product.description)}</FontRoboto>
                 </DescriptionRow>
               </ProductDetailColumn>
             </Row>

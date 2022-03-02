@@ -4,25 +4,27 @@ const MainContext = React.createContext();
 
 export class MainProvider extends Component{
     state = {
-        testState : "testState preview"
+        testState : "testState preview",
+        contextCurrency : "$"
     }
 
     updateCart = () => {
         this.setState({testState : "updated testState preview"});
     }
 
-    clearCart = () => {
-        this.setState({testState : ""});
+    updateCurrency = () => {
+        this.setState({contextCurrency : "¥"});
     }
 
     render(){
-        const {testState} = this.state;
-        const {updateCart, clearCart} = this;
+        const {testState, contextCurrency} = this.state;
+        const {updateCart, updateCurrency} = this;
         return(
             <MainContext.Provider value={{
                 testState,
+                contextCurrency,
                 updateCart,
-                clearCart,
+                updateCurrency,
             }}>
                 {this.props.children}
             </MainContext.Provider>

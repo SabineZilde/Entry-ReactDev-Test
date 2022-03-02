@@ -14,6 +14,7 @@ import logo from "../../Assets/Logo.svg";
 import cart from "../../Assets/Cart.svg";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_CATEGORIES, LOAD_CURRENCIES } from "../../GraphQL/Queries";
+import MainContext from "../../Context/MainContext";
 
 class Header extends React.Component {
   constructor(props) {
@@ -52,6 +53,7 @@ class Header extends React.Component {
     });
   };
   render() {
+    const { contextCurrency, updateCurrency } = this.context;
     return (
       <div>
         <HeaderContainer>
@@ -72,7 +74,7 @@ class Header extends React.Component {
             <img src={logo} alt="logo" />
           </Link>
           <CurrencyStyle>
-            {this.state.currency}
+            {contextCurrency}
             <div>
               {!this.state.CurrencyButtonIsPressed ? (
                 <CurrencyButton onClick={this.showCurrencyMenu}>
@@ -91,7 +93,7 @@ class Header extends React.Component {
                         if (loading) return "Loading...";
                         const { currencies } = data;
                         return currencies.map((currency, id) => (
-                          <button key={id}>
+                          <button key={id} onClick={updateCurrency}>
                             {currency.symbol} {currency.label}
                           </button>
                         ));
@@ -119,5 +121,7 @@ class Header extends React.Component {
     );
   }
 }
+
+Header.contextType = MainContext;
 
 export default Header;
