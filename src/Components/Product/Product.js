@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   ActiveProductContainer,
   ProductImage,
@@ -18,7 +19,7 @@ class Product extends React.Component {
           if (loading) return "Loading...";
           const { category } = data;
           return category.products.map((product) => (
-            <a href={"/product/" + product.id} key={product.id}>
+            <Link to={"/product/" + product.id} key={product.id}>
               <ActiveProductContainer
                 onMouseEnter={this.showCart}
                 onMouseLeave={this.hideCart}
@@ -38,7 +39,7 @@ class Product extends React.Component {
                   <img src={circleIcon} alt="Circle Icon" />
                 </button>
               </ActiveProductContainer>
-            </a>
+            </Link>
           ));
         }}
       </Query>
