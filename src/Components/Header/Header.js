@@ -9,6 +9,7 @@ import {
   DropdownContainer,
   DropdownContent,
 } from "./Header.style";
+import { FontRoboto } from "../Fonts/Fonts.style";
 import MiniCart from "../MiniCart/MiniCart";
 import logo from "../../Assets/Logo.svg";
 import cart from "../../Assets/Cart.svg";
@@ -64,7 +65,7 @@ class Header extends React.Component {
                 if (loading) return "Loading...";
                 const { categories } = data;
                 return categories.map((category, id) => (
-                  <a href={'/category/' + category.name} key={id}>
+                  <a href={"/category/" + category.name} key={id}>
                     <HeaderButton>{category.name}</HeaderButton>
                   </a>
                 ));
@@ -94,7 +95,15 @@ class Header extends React.Component {
                         if (loading) return "Loading...";
                         const { currencies } = data;
                         return currencies.map((currency, id) => (
-                          <button key={id} onClick={() => this.setState({ currency: currency.symbol, CurrencyButtonIsPressed: false, })}>
+                          <button
+                            key={id}
+                            onClick={() =>
+                              this.setState({
+                                currency: currency.symbol,
+                                CurrencyButtonIsPressed: false,
+                              })
+                            }
+                          >
                             {currency.symbol} {currency.label}
                           </button>
                         ));
@@ -106,6 +115,11 @@ class Header extends React.Component {
             </div>
             {!this.state.CartIconIsPressed ? (
               <CartButton onClick={this.showMiniCart}>
+                <span>
+                  <FontRoboto color="white" fontWeight="700" fontSize="14px">
+                    2
+                  </FontRoboto>
+                </span>
                 <img src={cart} alt="logo" />
               </CartButton>
             ) : (

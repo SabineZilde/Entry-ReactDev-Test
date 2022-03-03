@@ -38,6 +38,24 @@ export const CurrencyButton = styled.button`
 
 export const CartButton = styled.button`
     display: flex;
+    position: relative;
+
+    & span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: -9px;
+        right: -12px;
+        background-color: #1D1F22;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+    }
+`
+
+export const ItemCount = styled.div`
+    color: #FFFFFF;
 `
 
 export const DropdownContainer = styled.div`
