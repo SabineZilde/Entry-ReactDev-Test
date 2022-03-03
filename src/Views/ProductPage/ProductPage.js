@@ -96,9 +96,9 @@ class ProductPage extends React.Component {
                   >
                     PRICE:
                   </FontRoboto>
-                  {product.prices.map((price) => {
+                  {product.prices.map((price, id) => {
                     return price.currency.symbol === contextCurrency ? (
-                      <FontRaleway fontSize="24px" fontWeight="700">
+                      <FontRaleway fontSize="24px" fontWeight="700" key={id}>
                         {price.currency.symbol}
                         {price.amount.toFixed(2)}
                       </FontRaleway>

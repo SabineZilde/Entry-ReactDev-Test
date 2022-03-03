@@ -103,7 +103,8 @@ class Header extends React.Component {
                               });
                             }}
                           >
-                            {currency.symbol} {currency.label}
+                            {currency.symbol}
+                            {currency.label}
                           </button>
                         ));
                       }}
@@ -116,7 +117,7 @@ class Header extends React.Component {
               <CartButton onClick={this.showMiniCart}>
                 <span>
                   <FontRoboto color="white" fontWeight="700" fontSize="14px">
-                    2
+                    {productsInCart.length}
                   </FontRoboto>
                 </span>
                 <img src={cart} alt="logo" />
