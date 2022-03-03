@@ -14,6 +14,7 @@ import { FontRaleway, FontRoboto } from "../../Components/Fonts/Fonts.style";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 import parse from "html-react-parser";
+import MainContext from "../../Context/MainContext";
 
 class ProductPage extends React.Component {
   state = {
@@ -28,6 +29,7 @@ class ProductPage extends React.Component {
   }
 
   render() {
+    const { contextCurrency } = this.context;
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
@@ -94,16 +96,23 @@ class ProductPage extends React.Component {
                   >
                     PRICE:
                   </FontRoboto>
-                  <FontRaleway fontSize="24px" fontWeight="700">
-                    $50.00
-                  </FontRaleway>
+                  {product.prices.map((price) => {
+                    return price.currency.symbol === contextCurrency ? (
+                      <FontRaleway fontSize="24px" fontWeight="700">
+                        {price.currency.symbol}
+                        {price.amount.toFixed(2)}
+                      </FontRaleway>
+                    ) : (
+                      ""
+                    );
+                  })}
                 </div>
                 <ButtonLarge
                   primary
                   onClick={() => {
-                     for (let i = 0; i < product.attributes.length; i++) {
-                      alert(`Please choose ${product.attributes[i].name}`)
-                     }
+                    for (let i = 0; i < product.attributes.length; i++) {
+                      alert(`Please choose ${product.attributes[i].name}`);
+                    }
                   }}
                 >
                   ADD TO CART
@@ -119,5 +128,7 @@ class ProductPage extends React.Component {
     );
   }
 }
+
+ProductPage.contextType = MainContext;
 
 export default ProductPage;

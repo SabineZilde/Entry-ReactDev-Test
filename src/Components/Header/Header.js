@@ -25,7 +25,6 @@ class Header extends React.Component {
   }
 
   state = {
-    currency: "$",
     CurrencyButtonIsPressed: false,
     CartIconIsPressed: false,
   };
@@ -97,11 +96,11 @@ class Header extends React.Component {
                         return currencies.map((currency, id) => (
                           <button
                             key={id}
-                            onClick={() =>{
-                              this.context.updateCurrency(currency.symbol);
+                            onClick={() => {
+                              updateCurrency(currency.symbol);
                               this.setState({
                                 CurrencyButtonIsPressed: false,
-                              })
+                              });
                             }}
                           >
                             {currency.symbol} {currency.label}

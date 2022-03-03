@@ -20,12 +20,12 @@ export class MainProvider extends Component{
         ]
     }
 
-    updateCart = () => {
-        this.setState();
-    }
-
     updateCurrency = (symbol) => {
         this.setState({contextCurrency: symbol});
+    }
+
+    updateCart = () => {
+        this.setState();
     }
 
     render(){
