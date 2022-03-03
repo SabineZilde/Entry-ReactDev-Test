@@ -55,7 +55,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { contextCurrency, updateCurrency } = this.context;
+    const { contextCurrency, updateCurrency, productsInCart } = this.context;
     return (
       <div>
         <HeaderContainer>
@@ -76,7 +76,7 @@ class Header extends React.Component {
             <img src={logo} alt="logo" />
           </Link>
           <CurrencyStyle>
-            {this.state.currency}
+            {contextCurrency}
             <div>
               {!this.state.CurrencyButtonIsPressed ? (
                 <CurrencyButton onClick={this.showCurrencyMenu}>
@@ -97,12 +97,12 @@ class Header extends React.Component {
                         return currencies.map((currency, id) => (
                           <button
                             key={id}
-                            onClick={() =>
+                            onClick={() =>{
+                              this.context.updateCurrency(currency.symbol);
                               this.setState({
-                                currency: currency.symbol,
                                 CurrencyButtonIsPressed: false,
                               })
-                            }
+                            }}
                           >
                             {currency.symbol} {currency.label}
                           </button>

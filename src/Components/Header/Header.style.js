@@ -54,10 +54,6 @@ export const CartButton = styled.button`
     }
 `
 
-export const ItemCount = styled.div`
-    color: #FFFFFF;
-`
-
 export const DropdownContainer = styled.div`
     position: absolute;
     background-color: #ffffff;

@@ -2,27 +2,40 @@ import React, {Component} from 'react';
 
 const MainContext = React.createContext();
 
+
 export class MainProvider extends Component{
     state = {
-        testState : "testState preview",
-        contextCurrency : "$"
+        testState: "testState preview",
+        contextCurrency: "$",
+        productsInCart: [
+            {
+                "id": "1",
+                "title": "Nike",
+                "scr": "",
+                "description": "testt",
+                "price": 60,
+                "attributes": ["red", "blue"],
+                "count": 1
+            }
+        ]
     }
 
     updateCart = () => {
-        this.setState({testState : "updated testState preview"});
+        this.setState();
     }
 
-    updateCurrency = () => {
-        this.setState({contextCurrency : ''});
+    updateCurrency = (symbol) => {
+        this.setState({contextCurrency: symbol});
     }
 
     render(){
-        const {testState, contextCurrency} = this.state;
+        const {testState, contextCurrency, productsInCart} = this.state;
         const {updateCart, updateCurrency} = this;
         return(
             <MainContext.Provider value={{
                 testState,
                 contextCurrency,
+                productsInCart,
                 updateCart,
                 updateCurrency,
             }}>
