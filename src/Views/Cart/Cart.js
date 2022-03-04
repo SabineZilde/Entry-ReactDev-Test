@@ -19,7 +19,7 @@ import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {
   render() {
-    const { updateCart, productsInCart } = this.context;
+    const { productsInCart, contextCurrency, updateCart, updateProductCount } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: 'all' }}>
         {({ loading, data }) => {
@@ -40,9 +40,16 @@ class Cart extends React.Component {
                             {product.brand}
                           </FontRaleway>
                           <FontRaleway fontSize="30px">{product.name}</FontRaleway>
-                          <FontRaleway fontSize="24px" fontWeight="700">
-                            $50.00
-                          </FontRaleway>
+                          {product.prices.map((price) => {
+                            return price.currency.symbol === contextCurrency ? (
+                              <FontRaleway fontSize="24px" fontWeight="700">
+                                {price.currency.symbol}
+                                {price.amount.toFixed(2)}
+                              </FontRaleway>
+                            ) : (
+                              ""
+                            );
+                          })}
                           <div>
                             <AttributeButton margin="0 10px 0 0">XS</AttributeButton>
                             <AttributeButton margin="0 10px 0 0">S</AttributeButton>
@@ -52,7 +59,7 @@ class Cart extends React.Component {
                         </ProductDescription>
                         <CountAndImg>
                           <Column>
-                            <QuantityButton>+</QuantityButton>
+                            <QuantityButton onClick={() => updateProductCount(product.id)}>+</QuantityButton>
                             <FontRaleway fontSize='24px' fontWeight='500'>{item.count}</FontRaleway>
                             <QuantityButton>-</QuantityButton>
                           </Column>

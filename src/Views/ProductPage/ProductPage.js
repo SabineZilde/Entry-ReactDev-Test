@@ -131,7 +131,7 @@ class ProductPage extends React.Component {
                       //     alert(`Please choose ${product.attributes[i].name}`);
                       //   }
                       // }}
-                      onClick={() => updateCart(product.id, 2)}
+                      onClick={() => updateCart(product.id)}
                     >
                       ADD TO CART
                     </ButtonLarge>
