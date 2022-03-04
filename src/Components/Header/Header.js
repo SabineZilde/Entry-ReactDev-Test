@@ -71,7 +71,7 @@ class Header extends React.Component {
               }}
             </Query>
           </div>
-          <Link to="/">
+          <Link to="/category/all">
             <img src={logo} alt="logo" />
           </Link>
           <CurrencyStyle>

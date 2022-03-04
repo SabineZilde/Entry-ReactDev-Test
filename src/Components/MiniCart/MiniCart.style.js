@@ -7,6 +7,7 @@ export const MiniCartBackground = styled.div`
     background-color: rgba(57, 55, 72, 0.22);
     height: 900px;
     width: 100%;
+    z-index: 1;
 `
 
 export const MiniCartContainer = styled.div`

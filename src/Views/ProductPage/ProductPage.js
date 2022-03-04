@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   ButtonLarge,
   AttributeButton,
@@ -36,7 +37,7 @@ class ProductPage extends React.Component {
   };
 
   render() {
-    const { contextCurrency } = this.context;
+    const { contextCurrency, updateCart } = this.context;
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
@@ -122,16 +123,19 @@ class ProductPage extends React.Component {
                   })}
                 </div>
                 {product.inStock ? (
-                  <ButtonLarge
-                    primary
-                    onClick={() => {
-                      for (let i = 0; i < product.attributes.length; i++) {
-                        alert(`Please choose ${product.attributes[i].name}`);
-                      }
-                    }}
-                  >
-                    ADD TO CART
-                  </ButtonLarge>
+                  <Link to='/cart'>
+                    <ButtonLarge
+                      primary
+                      // onClick={() => {
+                      //   for (let i = 0; i < product.attributes.length; i++) {
+                      //     alert(`Please choose ${product.attributes[i].name}`);
+                      //   }
+                      // }}
+                      onClick={() => updateCart(product.id, 2)}
+                    >
+                      ADD TO CART
+                    </ButtonLarge>
+                  </Link>
                 ) : (
                   <FontRaleway fontColor="red" fontWeight="700" margin="30px 0">
                     OUT OF STOCK!

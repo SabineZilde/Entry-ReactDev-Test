@@ -29,6 +29,7 @@ export const CurrencyStyle = styled.div`
     align-items: center;
     font-size: 18px;
     font-weight: 500;
+    z-index: 2;
 `
 
 export const CurrencyButton = styled.button`
