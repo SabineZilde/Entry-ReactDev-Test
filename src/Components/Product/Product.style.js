@@ -20,16 +20,36 @@ export const ActiveProductContainer = styled.div`
     }
 `
 
-export const ProductImage = styled.div`
+export const ImageContainer = styled.div`
+    position: relative;
     height: 338px;
     width: 354px;
     margin-bottom: 24px;
+
+`
+
+
+export const ProductImage = styled.div`
+    height: 338px;
+    width: 354px;
     background-image: ${(props) =>
         `url(${props.backgroundImage})`
-        };
+    };
     background-position: center center;
     background-repeat: no-repeat;
-    /* background-size: cover; */
     background-size: 100% auto;
-    /* box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.1); */
+    position: absolute;
+
+`
+
+export const OutOfStockLayer = styled.div`
+    position: absolute;
+    height: 338px;
+    width: 354px;
+    padding-top: 169px;
+    background-color: #FFFFFF;
+    color: #8D8F9A;
+    opacity: 0.5;
+    text-align: center;
+    font-size: 24px;
 `

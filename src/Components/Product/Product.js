@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import {
   ActiveProductContainer,
   ProductImage,
+  ImageContainer,
+  OutOfStockLayer,
 } from "./Product.style";
 import { FontRaleway } from "../../Components/Fonts/Fonts.style";
 import circleIcon from "../../Assets/CircleIcon.svg";
@@ -24,21 +26,44 @@ class Product extends React.Component {
                 onMouseEnter={this.showCart}
                 onMouseLeave={this.hideCart}
               >
-                <ProductImage backgroundImage={product.gallery[0]} />
-                <FontRaleway fontSize='18px' fontWeight='300' margin='0 0 5px 0'>{product.brand} {product.name}</FontRaleway>
+                <ImageContainer>
+                  <ProductImage backgroundImage={product.gallery[0]} />
+                  {!product.inStock ? (
+                    <OutOfStockLayer>OUT OF STOCK</OutOfStockLayer>
+                  ) : (
+                    ""
+                  )}
+                </ImageContainer>
+                <FontRaleway
+                  fontSize="18px"
+                  fontWeight="300"
+                  margin="0 0 5px 0"
+                  fontColor={!product.inStock ? '#8D8F9A' : ''}
+                >
+                  {product.brand} {product.name}
+                </FontRaleway>
                 {product.prices.map((price) => {
-                  console.log(price.amount)
                   return price.currency.symbol === contextCurrency ? (
-                    <FontRaleway fontSize='18px' fontWeight='500' key={price.amount}>
+                    <FontRaleway
+                      fontSize="18px"
+                      fontWeight="500"
+                      fontColor={!product.inStock ? '#8D8F9A' : ''}
+                      key={price.amount}
+                    >
                       {price.currency.symbol}
                       {price.amount.toFixed(2)}
                     </FontRaleway>
-                  ) :
-                    ''
+                  ) : (
+                    ""
+                  );
                 })}
-                <button>
-                  <img src={circleIcon} alt="Circle Icon" />
-                </button>
+                {product.inStock ? (
+                  <button>
+                    <img src={circleIcon} alt="Circle Icon" />
+                  </button>
+                ) : (
+                  ""
+                )}
               </ActiveProductContainer>
             </Link>
           ));

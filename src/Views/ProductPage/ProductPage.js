@@ -32,8 +32,8 @@ class ProductPage extends React.Component {
   changeLargeImg = (img) => {
     this.setState({
       largeImg: img,
-    })
-  }
+    });
+  };
 
   render() {
     const { contextCurrency } = this.context;
@@ -51,15 +51,16 @@ class ProductPage extends React.Component {
                   </button>
                 ))}
               </ThumbnailColumn>
-              {this.state.largeImg === null ? (
-                <LargeImgColumn>
-                  <img src={product.gallery[0]} alt="Product large" />
-                </LargeImgColumn>
-              ) : (
-                <LargeImgColumn>
-                  <img src={this.state.largeImg} alt="Product large" />
-                </LargeImgColumn>
-              )}
+              <LargeImgColumn>
+                <img
+                  src={
+                    this.state.largeImg === null
+                      ? product.gallery[0]
+                      : this.state.largeImg
+                  }
+                  alt="Product large"
+                />
+              </LargeImgColumn>
               <ProductDetailColumn>
                 <div>
                   <FontRaleway fontSize="30px" fontWeight="600">
@@ -120,16 +121,22 @@ class ProductPage extends React.Component {
                     );
                   })}
                 </div>
-                <ButtonLarge
-                  primary
-                  onClick={() => {
-                    for (let i = 0; i < product.attributes.length; i++) {
-                      alert(`Please choose ${product.attributes[i].name}`);
-                    }
-                  }}
-                >
-                  ADD TO CART
-                </ButtonLarge>
+                {product.inStock ? (
+                  <ButtonLarge
+                    primary
+                    onClick={() => {
+                      for (let i = 0; i < product.attributes.length; i++) {
+                        alert(`Please choose ${product.attributes[i].name}`);
+                      }
+                    }}
+                  >
+                    ADD TO CART
+                  </ButtonLarge>
+                ) : (
+                  <FontRaleway fontColor="red" fontWeight="700" margin="30px 0">
+                    OUT OF STOCK!
+                  </FontRaleway>
+                )}
                 <DescriptionRow>
                   <FontRoboto>{parse(product.description)}</FontRoboto>
                 </DescriptionRow>

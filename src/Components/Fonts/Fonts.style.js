@@ -6,6 +6,7 @@ export const FontRaleway = styled.div`
     font-weight: ${props => props.fontWeight ? props.fontWeight : '400'};
     margin: ${props => props.margin};
     text-transform: ${props => props.capitalize ? 'capitalize' : ''};
+    color: ${props => props.fontColor ? props.fontColor : ''}
 `
 
 export const FontRoboto = styled(FontRaleway)`
