@@ -9,8 +9,6 @@ export class MainProvider extends Component {
     productsInCart: [
       {
         id: "",
-        title: "",
-        price: 0,
         count: 1,
       },
     ],

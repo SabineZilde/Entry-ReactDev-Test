@@ -19,6 +19,7 @@ import MainContext from "../../Context/MainContext";
 class ProductPage extends React.Component {
   state = {
     id: null,
+    largeImg: null,
   };
 
   componentDidMount() {
@@ -26,6 +27,12 @@ class ProductPage extends React.Component {
     this.setState({
       id: id,
     });
+  }
+
+  changeLargeImg = (img) => {
+    this.setState({
+      largeImg: img,
+    })
   }
 
   render() {
@@ -38,15 +45,21 @@ class ProductPage extends React.Component {
           return (
             <Row>
               <ThumbnailColumn>
-                <button>
-                  {product.gallery.map((image, id) => (
-                    <img key={id} src={image} alt="Product" />
-                  ))}
-                </button>
+                {product.gallery.map((image, id) => (
+                  <button key={id} onClick={() => this.changeLargeImg(image)}>
+                    <img src={image} alt="Product" />
+                  </button>
+                ))}
               </ThumbnailColumn>
-              <LargeImgColumn>
-                <img src={product.gallery[0]} alt="Product large" />
-              </LargeImgColumn>
+              {this.state.largeImg === null ? (
+                <LargeImgColumn>
+                  <img src={product.gallery[0]} alt="Product large" />
+                </LargeImgColumn>
+              ) : (
+                <LargeImgColumn>
+                  <img src={this.state.largeImg} alt="Product large" />
+                </LargeImgColumn>
+              )}
               <ProductDetailColumn>
                 <div>
                   <FontRaleway fontSize="30px" fontWeight="600">

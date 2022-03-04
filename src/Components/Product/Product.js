@@ -27,8 +27,9 @@ class Product extends React.Component {
                 <ProductImage backgroundImage={product.gallery[0]} />
                 <FontRaleway fontSize='18px' fontWeight='300' margin='0 0 5px 0'>{product.brand} {product.name}</FontRaleway>
                 {product.prices.map((price) => {
+                  console.log(price.amount)
                   return price.currency.symbol === contextCurrency ? (
-                    <FontRaleway fontSize='18px' fontWeight='500'>
+                    <FontRaleway fontSize='18px' fontWeight='500' key={price.amount}>
                       {price.currency.symbol}
                       {price.amount.toFixed(2)}
                     </FontRaleway>
