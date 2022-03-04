@@ -46,5 +46,5 @@ export const ProductImage = styled.div`
         };
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
 `

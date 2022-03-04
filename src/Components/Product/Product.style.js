@@ -37,7 +37,7 @@ export const ProductImage = styled.div`
     };
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 100% auto;
+    background-size: contain;
     position: absolute;
 
 `

@@ -13,51 +13,121 @@ import {
   QuantityButton,
 } from "../Buttons/Buttons.style";
 import { FontRaleway } from "../../Components/Fonts/Fonts.style";
-import product from "../../Assets/Product.png";
+import { Query } from "@apollo/client/react/components";
+import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
+import MainContext from "../../Context/MainContext";
 
 class MiniCart extends React.Component {
   state = {
-    itemCount: 2,
-    totalAmount: "$100.00",
+    totalAmount: 0,
   };
+
+  calcTotal = () => {
+    this.setState({
+      totalAmount: 100,
+    });
+  };
+
   render() {
+    const { productsInCart, contextCurrency, updateProductCount } =
+      this.context;
     return (
-      <MiniCartBackground>
-        <MiniCartContainer>
-          <div>
-            <b>My Bag</b>, {this.state.itemCount} items
-          </div>
-          <Row>
-            <Column colWidth="136px">
-            <FontRaleway fontWeight='300'>Nike Air Huarache Le</FontRaleway>
-              <FontRaleway fontWeight='500'>$50.00</FontRaleway>
-              <div>
-                <AttributeButton mini margin="27px 8px 0 0" color="pink" />
-                <AttributeButton mini margin="27px 8px 0 0" color="cyan" />
-                <AttributeButton mini margin="27px 8px 0 0" color="crimson" />
-              </div>
-            </Column>
-            <Column middle>
-              <QuantityButton mini>+</QuantityButton>
-              <FontRaleway fontWeight='500'>1</FontRaleway>
-              <QuantityButton mini>-</QuantityButton>
-            </Column>
-            <Column colWidth="105px">
-              <ProductImage backgroundImage={product} />
-            </Column>
-          </Row>
-          <Row total>
-            <div>Total</div>
-            <div>{this.state.totalAmount}</div>
-          </Row>
-          <Link to="/cart">
-            <Button margin="0 12px 0 0" onClick={this.props.hideMiniCart}>VIEW BAG</Button>
-          </Link>
-          <Button primary>CHECK OUT</Button>
-        </MiniCartContainer>
-      </MiniCartBackground>
+      <Query query={LOAD_PRODUCTS} variables={{ title: "all" }}>
+        {({ loading, data }) => {
+          if (loading) return "Loading...";
+          const { category } = data;
+          return (
+            <MiniCartBackground>
+              <MiniCartContainer>
+                <div>
+                  <b>My Bag</b>, {productsInCart.length} items
+                </div>
+                {productsInCart.map((item) => {
+                  return category.products.map((product) => {
+                    if (item.id === product.id) {
+                      return (
+                        <Row key={product.id}>
+                          <Column colWidth="136px">
+                            <FontRaleway fontWeight="300">
+                              {product.brand}
+                              {product.name}
+                            </FontRaleway>
+                            {product.prices.map((price) => {
+                              return price.currency.symbol ===
+                                contextCurrency ? (
+                                <FontRaleway
+                                  fontWeight="500"
+                                  onClick={this.calcTotal}
+                                >
+                                  {price.currency.symbol}
+                                  {price.amount.toFixed(2)}
+                                </FontRaleway>
+                              ) : (
+                                ""
+                              );
+                            })}
+                            <div>
+                              <AttributeButton
+                                mini
+                                margin="27px 8px 0 0"
+                                color="pink"
+                              />
+                              <AttributeButton
+                                mini
+                                margin="27px 8px 0 0"
+                                color="cyan"
+                              />
+                              <AttributeButton
+                                mini
+                                margin="27px 8px 0 0"
+                                color="crimson"
+                              />
+                            </div>
+                          </Column>
+                          <Column middle>
+                            <QuantityButton
+                              mini
+                              onClick={() => updateProductCount(product.id)}
+                            >
+                              +
+                            </QuantityButton>
+                            <FontRaleway fontWeight="500">
+                              {item.count}
+                            </FontRaleway>
+                            <QuantityButton mini>-</QuantityButton>
+                          </Column>
+                          <Column colWidth="105px">
+                            <ProductImage
+                              backgroundImage={product.gallery[0]}
+                            />
+                          </Column>
+                        </Row>
+                      );
+                    }
+                  });
+                })}
+                <Row total>
+                  <div>Total</div>
+                  <div>
+                    {contextCurrency}
+                    {this.state.totalAmount}
+                  </div>
+                </Row>
+                <Link to="/cart">
+                  <Button margin="0 12px 0 0" onClick={this.props.hideMiniCart}>
+                    VIEW BAG
+                  </Button>
+                </Link>
+                <Button primary>CHECK OUT</Button>
+              </MiniCartContainer>
+            </MiniCartBackground>
+          );
+        }}
+      </Query>
     );
   }
 }
+
+MiniCart.contextType = MainContext;
 
 export default MiniCart;

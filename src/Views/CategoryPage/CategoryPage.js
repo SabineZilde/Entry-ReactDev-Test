@@ -10,6 +10,7 @@ class CategoryPage extends React.Component {
 
   componentDidMount() {
     let category = this.props.match.params.category;
+    console.log(category)
     this.setState({
       category: category
     })

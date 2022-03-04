@@ -18,7 +18,7 @@ import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {
   render() {
-    const { productsInCart, contextCurrency, updateCart, updateProductCount } = this.context;
+    const { productsInCart, contextCurrency, updateProductCount } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: 'all' }}>
         {({ loading, data }) => {
@@ -33,7 +33,7 @@ class Cart extends React.Component {
                 return category.products.map(product => {
                   if (item.id === product.id) {
                     return (
-                      <ProductContainer>
+                      <ProductContainer key={product.id}>
                         <ProductDescription>
                           <FontRaleway fontSize="30px" fontWeight="600">
                             {product.brand}
