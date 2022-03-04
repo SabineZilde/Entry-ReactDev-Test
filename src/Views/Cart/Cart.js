@@ -12,7 +12,6 @@ import {
   AttributeButton,
   QuantityButton,
 } from "../../Components/Buttons/Buttons.style";
-import product from "../../Assets/Product.png";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
@@ -63,7 +62,7 @@ class Cart extends React.Component {
                             <FontRaleway fontSize='24px' fontWeight='500'>{item.count}</FontRaleway>
                             <QuantityButton>-</QuantityButton>
                           </Column>
-                          <ProductImage backgroundImage={product} />
+                          <ProductImage backgroundImage={product.gallery[0]} />
                         </CountAndImg>
                       </ProductContainer>
                     )
