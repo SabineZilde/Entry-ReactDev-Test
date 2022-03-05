@@ -14,12 +14,9 @@ export class MainProvider extends Component {
 
   updateCart = (id) => {
     const { productsInCart } = this.state;
-
     const check = productsInCart.every((product) => {
       return product.id !== id;
     });
-
-    console.log(check)
     if (!check) {
       alert("This product is already in cart!");
     } else {
@@ -27,7 +24,6 @@ export class MainProvider extends Component {
         productsInCart: [...productsInCart, { id: id, count: 1 }],
       });
       alert("Product is added to cart.");
-
     }
   };
 
@@ -48,21 +44,32 @@ export class MainProvider extends Component {
   };
 
   removeProduct = (id) => {
-    const { productsInCart } = this.state;
-    const prodIndex = productsInCart.findIndex((product) => {
-      return product.id === id;
-    });
-    const newState = [...productsInCart];
-    newState.splice(prodIndex, 1);
-    this.setState({
-      productsInCart: newState,
-    });
+    if (window.confirm("This action will lead to a removal of this product from cart. Are you sure?")) {
+      const { productsInCart } = this.state;
+      const prodIndex = productsInCart.findIndex((product) => {
+        return product.id === id;
+      });
+      const newState = [...productsInCart];
+      newState.splice(prodIndex, 1);
+      this.setState({
+        productsInCart: newState,
+      });
+    }
+  };
+
+  chooseAttributes = (attribute) => {
+    console.log(attribute);
   };
 
   render() {
     const { contextCurrency, productsInCart } = this.state;
-    const { updateCurrency, updateCart, updateProductCount, removeProduct } =
-      this;
+    const {
+      updateCurrency,
+      updateCart,
+      updateProductCount,
+      removeProduct,
+      chooseAttributes,
+    } = this;
     return (
       <MainContext.Provider
         value={{
@@ -72,6 +79,7 @@ export class MainProvider extends Component {
           updateCart,
           updateProductCount,
           removeProduct,
+          chooseAttributes,
         }}
       >
         {this.props.children}

@@ -124,6 +124,11 @@ class Header extends React.Component {
               </CartButton>
             ) : (
               <CartButton onClick={this.hideMiniCart}>
+                <span>
+                  <FontRoboto color="white" fontWeight="700" fontSize="14px">
+                    {productsInCart.length}
+                  </FontRoboto>
+                </span>
                 <img src={cart} alt="logo" />
               </CartButton>
             )}

@@ -29,54 +29,61 @@ class Cart extends React.Component {
               <FontRaleway fontSize="32px" fontWeight="700" margin="0 0 59px 0">
                 CART
               </FontRaleway>
-              {productsInCart.map((item) => {
-                return category.products.map(product => {
-                  if (item.id === product.id) {
-                    return (
-                      <ProductContainer key={product.id}>
-                        <ProductDescription>
-                          <FontRaleway fontSize="30px" fontWeight="600">
-                            {product.brand}
-                          </FontRaleway>
-                          <FontRaleway fontSize="30px">{product.name}</FontRaleway>
-                          {product.prices.map((price) => {
-                            return price.currency.symbol === contextCurrency ? (
-                              <FontRaleway fontSize="24px" fontWeight="700" key={price.amount}>
-                                {price.currency.symbol}
-                                {(price.amount * item.count).toFixed(2)}
-                              </FontRaleway>
-                            ) : (
-                              ""
-                            );
-                          })}
-                          <div>
-                            <AttributeButton margin="0 10px 0 0">XS</AttributeButton>
-                            <AttributeButton margin="0 10px 0 0">S</AttributeButton>
-                            <AttributeButton margin="0 10px 0 0">M</AttributeButton>
-                            <AttributeButton margin="0 10px 0 0">L</AttributeButton>
-                          </div>
-                        </ProductDescription>
-                        <CountAndImg>
-                          <Column>
-                            <QuantityButton onClick={() => updateProductCount(product.id, product.id)}>+</QuantityButton>
-                            <FontRaleway fontSize='24px' fontWeight='500'>{item.count}</FontRaleway>
-                            <QuantityButton onClick={() => {
-                              if (item.count === 1) {
-                                removeProduct(product.id);
-                              } else {
-                                updateProductCount(product.id);
-                              }
-                            }}>-</QuantityButton>
-                          </Column>
-                          <ProductImage backgroundImage={product.gallery[0]} />
-                        </CountAndImg>
-                      </ProductContainer>
+              {productsInCart.length === 0 ? <FontRaleway>Your cart is empty</FontRaleway> : (
+                <>
+                  {
+                    productsInCart.map((item) => {
+                      return category.products.map(product => {
+                        if (item.id === product.id) {
+                          return (
+                            <ProductContainer key={product.id}>
+                              <ProductDescription>
+                                <FontRaleway fontSize="30px" fontWeight="600">
+                                  {product.brand}
+                                </FontRaleway>
+                                <FontRaleway fontSize="30px">{product.name}</FontRaleway>
+                                {product.prices.map((price) => {
+                                  return price.currency.symbol === contextCurrency ? (
+                                    <FontRaleway fontSize="24px" fontWeight="700" key={price.amount}>
+                                      {price.currency.symbol}
+                                      {(price.amount * item.count).toFixed(2)}
+                                    </FontRaleway>
+                                  ) : (
+                                    ""
+                                  );
+                                })}
+                                <div>
+                                  <AttributeButton margin="0 10px 0 0">XS</AttributeButton>
+                                  <AttributeButton margin="0 10px 0 0">S</AttributeButton>
+                                  <AttributeButton margin="0 10px 0 0">M</AttributeButton>
+                                  <AttributeButton margin="0 10px 0 0">L</AttributeButton>
+                                </div>
+                              </ProductDescription>
+                              <CountAndImg>
+                                <Column>
+                                  <QuantityButton onClick={() => updateProductCount(product.id, product.id)}>+</QuantityButton>
+                                  <FontRaleway fontSize='24px' fontWeight='500'>{item.count}</FontRaleway>
+                                  <QuantityButton onClick={() => {
+                                    if (item.count === 1) {
+                                      removeProduct(product.id);
+                                    } else {
+                                      updateProductCount(product.id);
+                                    }
+                                  }}>-</QuantityButton>
+                                </Column>
+                                <ProductImage backgroundImage={product.gallery[0]} />
+                              </CountAndImg>
+                            </ProductContainer>
+                          )
+                        }
+                      }
+                      )
+                    }
                     )
                   }
-                }
-                )
-              }
+                </>
               )}
+
             </CartContainer>
           );
         }}

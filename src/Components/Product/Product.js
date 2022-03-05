@@ -64,7 +64,6 @@ class Product extends React.Component {
                         alert("Please choose attributes!");
                       } else {
                         updateCart(product.id);
-                        alert("Product is added to cart.")
                       }
                     }}
                   >

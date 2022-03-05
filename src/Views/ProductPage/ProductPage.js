@@ -37,7 +37,7 @@ class ProductPage extends React.Component {
   };
 
   render() {
-    const { contextCurrency, updateCart } = this.context;
+    const { contextCurrency, updateCart, chooseAttributes } = this.context;
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
@@ -89,11 +89,16 @@ class ProductPage extends React.Component {
                               key={id}
                               margin="0 10px 10px 0"
                               color={item.displayValue}
+                              onClick={() => chooseAttributes(item.displayValue)}
                             ></AttributeButton>
                           );
                         } else {
                           return (
-                            <AttributeButton key={id} margin="0 10px 10px 0">
+                            <AttributeButton
+                              key={id}
+                              margin="0 10px 10px 0"
+                              onClick={() => chooseAttributes(item.value)}
+                            >
                               {item.value}
                             </AttributeButton>
                           );
