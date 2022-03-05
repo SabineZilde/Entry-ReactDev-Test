@@ -113,25 +113,20 @@ class Header extends React.Component {
                 </DropdownContainer>
               )}
             </div>
-            {!this.state.CartIconIsPressed ? (
-              <CartButton onClick={this.showMiniCart}>
-                <span>
-                  <FontRoboto color="white" fontWeight="700" fontSize="14px">
-                    {productsInCart.length}
-                  </FontRoboto>
-                </span>
-                <img src={cart} alt="logo" />
-              </CartButton>
-            ) : (
-              <CartButton onClick={this.hideMiniCart}>
-                <span>
-                  <FontRoboto color="white" fontWeight="700" fontSize="14px">
-                    {productsInCart.length}
-                  </FontRoboto>
-                </span>
-                <img src={cart} alt="logo" />
-              </CartButton>
-            )}
+            <CartButton
+              onClick={
+                !this.state.CartIconIsPressed
+                  ? this.showMiniCart
+                  : this.hideMiniCart
+              }
+            >
+              <span style={productsInCart.length === 0 ? {display: 'none'} : {display: 'flex'}}>
+                <FontRoboto color="white" fontWeight="700" fontSize="14px">
+                  {productsInCart.length}
+                </FontRoboto>
+              </span>
+              <img src={cart} alt="logo" />
+            </CartButton>
           </CurrencyStyle>
         </HeaderContainer>
         {this.state.CartIconIsPressed && (
