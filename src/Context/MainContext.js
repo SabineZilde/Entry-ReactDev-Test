@@ -63,26 +63,24 @@ export class MainProvider extends Component {
       this.setState({
         productsInCart: newState,
       });
+      this.getTotal();
     }
   };
 
   getTotal = () => {
-    const { contextCurrency, productsInCart, total } = this.state;
+    const { contextCurrency, productsInCart } = this.state;
+    let totalArr = [];
     productsInCart.map((prod) => {
-      prod.prices.map((price) => {
+      return prod.prices.map((price) => {
         if (contextCurrency === price.currency.symbol) {
-          const totalForProd =  (price.amount * prod.count).toFixed(2);
-          // const res = price.reduce((prev, i) => {
-          //   console.log(prev)
-          // })
-          this.setState({ total: totalForProd });
-        }
+          totalArr.push(price.amount * prod.count);
+        } return '';
       });
     });
-    // const res = productsInCart.reduce((prev, prod) => {
-    //   return prev + (prod.price * prod.count)
-    // },0);
-    // this.setState({total: res})
+    const res = totalArr.reduce((prev, curr) => {
+      return prev + curr;
+    });
+    this.setState({ total: res.toFixed(2) });
   };
 
   chooseAttributes = (attribute) => {
