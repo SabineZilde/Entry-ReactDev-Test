@@ -108,8 +108,10 @@ class Cart extends React.Component {
                               <ProductImage
                                 backgroundImage={product.gallery[0]}
                               />
+                              <Close onClick={() => removeProduct(product.id)}>
+                                X
+                              </Close>
                             </CountAndImg>
-                            <Close onClick={() => removeProduct(product.id)}>X</Close>
                           </ProductContainer>
                         );
                       }

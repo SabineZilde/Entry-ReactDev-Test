@@ -44,5 +44,7 @@ export const ProductImage = styled.div`
 
 export const Close = styled.button`
     display: flex;
-    justify-content: flex-end;
+    color: red;
+    font-weight: 700;
+    margin: -10px 5px 0 0;
 `
