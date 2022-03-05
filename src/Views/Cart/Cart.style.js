@@ -41,3 +41,8 @@ export const ProductImage = styled.div`
     background-repeat: no-repeat;
     background-size: contain;
 `
+
+export const Close = styled.button`
+    display: flex;
+    justify-content: flex-end;
+`

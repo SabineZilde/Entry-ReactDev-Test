@@ -49,11 +49,7 @@ export class MainProvider extends Component {
   };
 
   removeProduct = (id) => {
-    if (
-      window.confirm(
-        "This action will lead to a removal of this product from cart. Are you sure?"
-      )
-    ) {
+    if (window.confirm("Are you sure?")) {
       const { productsInCart } = this.state;
       const prodIndex = productsInCart.findIndex((product) => {
         return product.id === id;
