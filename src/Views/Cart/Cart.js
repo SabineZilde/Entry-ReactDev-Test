@@ -76,6 +76,7 @@ class Cart extends React.Component {
                             </ProductContainer>
                           )
                         }
+                        return '';
                       }
                       )
                     }

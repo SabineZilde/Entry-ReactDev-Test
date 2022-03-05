@@ -63,7 +63,7 @@ class Product extends React.Component {
                       if (product.attributes[0]) {
                         alert("Please choose attributes!");
                       } else {
-                        updateCart(product.id);
+                        updateCart(product.id, product.prices);
                       }
                     }}
                   >

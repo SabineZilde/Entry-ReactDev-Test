@@ -132,7 +132,7 @@ class ProductPage extends React.Component {
                     <ButtonLarge
                       primary
                       onClick={() => {
-                        updateCart(product.id);
+                        updateCart(product.id, product.prices);
                       }}
                     >
                       ADD TO CART

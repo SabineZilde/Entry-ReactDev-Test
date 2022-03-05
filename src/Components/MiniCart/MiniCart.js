@@ -22,12 +22,13 @@ class MiniCart extends React.Component {
     totalAmount: 0,
   };
 
-  componentDidMount = (prodAmount) => {
-    console.log(prodAmount);
-    this.setState({
-      totalAmount: this.state.totalAmount + prodAmount,
-    });
-  };
+  // calcTotal = (amount) => {
+  //   console.log(amount);
+  // };
+
+  componentDidMount = () => {
+    this.context.getTotal()
+  }
 
   render() {
     const {
@@ -35,6 +36,7 @@ class MiniCart extends React.Component {
       contextCurrency,
       updateProductCount,
       removeProduct,
+      total
     } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: "all" }}>
@@ -58,24 +60,21 @@ class MiniCart extends React.Component {
                               {product.name}
                             </FontRaleway>
                             {product.prices.map((price) => {
-                              return price.currency.symbol ===
-                                contextCurrency ? (
-                                <FontRaleway
-                                  fontWeight="500"
-                                  onClick={() =>
-                                    this.calcTotal(
+                              if (price.currency.symbol === contextCurrency) {
+                                // console.log((price.amount.toFixed(2) * item.count).toFixed(2))
+                                return (
+                                  <FontRaleway
+                                    fontWeight="500"
+                                    key={price.amount}
+                                  >
+                                    {price.currency.symbol}
+                                    {(
                                       price.amount.toFixed(2) * item.count
-                                    )
-                                  }
-                                >
-                                  {price.currency.symbol}
-                                  {(
-                                    price.amount.toFixed(2) * item.count
-                                  ).toFixed(2)}
-                                </FontRaleway>
-                              ) : (
-                                ""
-                              );
+                                    ).toFixed(2)}
+                                  </FontRaleway>
+                                );
+                              }
+                              return "";
                             })}
                             <div>
                               <AttributeButton
@@ -128,13 +127,14 @@ class MiniCart extends React.Component {
                         </Row>
                       );
                     }
+                    return "";
                   });
                 })}
                 <Row total>
                   <div>Total</div>
                   <div>
                     {contextCurrency}
-                    {this.state.totalAmount}
+                    {total}
                   </div>
                 </Row>
                 <Link to="/cart">

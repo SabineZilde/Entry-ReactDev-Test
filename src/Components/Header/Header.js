@@ -54,7 +54,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { contextCurrency, updateCurrency, productsInCart } = this.context;
+    const { contextCurrency, updateCurrency, productsInCart, getTotal } = this.context;
     return (
       <div>
         <HeaderContainer>
@@ -98,6 +98,7 @@ class Header extends React.Component {
                             key={id}
                             onClick={() => {
                               updateCurrency(currency.symbol);
+                              getTotal();
                               this.setState({
                                 CurrencyButtonIsPressed: false,
                               });
