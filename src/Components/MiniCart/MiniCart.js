@@ -22,15 +22,20 @@ class MiniCart extends React.Component {
     totalAmount: 0,
   };
 
-  calcTotal = () => {
+  componentDidMount = (prodAmount) => {
+    console.log(prodAmount);
     this.setState({
-      totalAmount: 100,
+      totalAmount: this.state.totalAmount + prodAmount,
     });
   };
 
   render() {
-    const { productsInCart, contextCurrency, updateProductCount } =
-      this.context;
+    const {
+      productsInCart,
+      contextCurrency,
+      updateProductCount,
+      removeProduct,
+    } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: "all" }}>
         {({ loading, data }) => {
@@ -57,10 +62,16 @@ class MiniCart extends React.Component {
                                 contextCurrency ? (
                                 <FontRaleway
                                   fontWeight="500"
-                                  onClick={this.calcTotal}
+                                  onClick={() =>
+                                    this.calcTotal(
+                                      price.amount.toFixed(2) * item.count
+                                    )
+                                  }
                                 >
                                   {price.currency.symbol}
-                                  {price.amount.toFixed(2)}
+                                  {(
+                                    price.amount.toFixed(2) * item.count
+                                  ).toFixed(2)}
                                 </FontRaleway>
                               ) : (
                                 ""
@@ -87,14 +98,27 @@ class MiniCart extends React.Component {
                           <Column middle>
                             <QuantityButton
                               mini
-                              onClick={() => updateProductCount(product.id)}
+                              onClick={() =>
+                                updateProductCount(product.id, product.id)
+                              }
                             >
                               +
                             </QuantityButton>
                             <FontRaleway fontWeight="500">
                               {item.count}
                             </FontRaleway>
-                            <QuantityButton mini>-</QuantityButton>
+                            <QuantityButton
+                              mini
+                              onClick={() => {
+                                if (item.count === 1) {
+                                  removeProduct(product.id);
+                                } else {
+                                  updateProductCount(product.id);
+                                }
+                              }}
+                            >
+                              -
+                            </QuantityButton>
                           </Column>
                           <Column colWidth="105px">
                             <ProductImage

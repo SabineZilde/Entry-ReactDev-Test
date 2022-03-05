@@ -14,7 +14,7 @@ import MainContext from "../../Context/MainContext";
 
 class Product extends React.Component {
   render() {
-    const { contextCurrency } = this.context;
+    const { contextCurrency, updateCart } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: this.props.category }}>
         {({ loading, data }) => {
@@ -38,7 +38,7 @@ class Product extends React.Component {
                   fontSize="18px"
                   fontWeight="300"
                   margin="0 0 5px 0"
-                  fontColor={!product.inStock ? '#8D8F9A' : ''}
+                  fontColor={!product.inStock ? "#8D8F9A" : ""}
                 >
                   {product.brand} {product.name}
                 </FontRaleway>
@@ -47,7 +47,7 @@ class Product extends React.Component {
                     <FontRaleway
                       fontSize="18px"
                       fontWeight="500"
-                      fontColor={!product.inStock ? '#8D8F9A' : ''}
+                      fontColor={!product.inStock ? "#8D8F9A" : ""}
                       key={price.amount}
                     >
                       {price.currency.symbol}
@@ -58,7 +58,16 @@ class Product extends React.Component {
                   );
                 })}
                 {product.inStock ? (
-                  <button>
+                  <button
+                    onClick={() => {
+                      if (product.attributes[0]) {
+                        alert("Please choose attributes!");
+                      } else {
+                        updateCart(product.id);
+                        alert("Product is added to cart.")
+                      }
+                    }}
+                  >
                     <img src={circleIcon} alt="Circle Icon" />
                   </button>
                 ) : (

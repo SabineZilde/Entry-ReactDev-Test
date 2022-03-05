@@ -18,7 +18,7 @@ import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {
   render() {
-    const { productsInCart, contextCurrency, updateProductCount } = this.context;
+    const { productsInCart, contextCurrency, updateProductCount, removeProduct } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: 'all' }}>
         {({ loading, data }) => {
@@ -41,9 +41,9 @@ class Cart extends React.Component {
                           <FontRaleway fontSize="30px">{product.name}</FontRaleway>
                           {product.prices.map((price) => {
                             return price.currency.symbol === contextCurrency ? (
-                              <FontRaleway fontSize="24px" fontWeight="700">
+                              <FontRaleway fontSize="24px" fontWeight="700" key={price.amount}>
                                 {price.currency.symbol}
-                                {price.amount.toFixed(2)}
+                                {(price.amount * item.count).toFixed(2)}
                               </FontRaleway>
                             ) : (
                               ""
@@ -58,9 +58,15 @@ class Cart extends React.Component {
                         </ProductDescription>
                         <CountAndImg>
                           <Column>
-                            <QuantityButton onClick={() => updateProductCount(product.id)}>+</QuantityButton>
+                            <QuantityButton onClick={() => updateProductCount(product.id, product.id)}>+</QuantityButton>
                             <FontRaleway fontSize='24px' fontWeight='500'>{item.count}</FontRaleway>
-                            <QuantityButton>-</QuantityButton>
+                            <QuantityButton onClick={() => {
+                              if (item.count === 1) {
+                                removeProduct(product.id);
+                              } else {
+                                updateProductCount(product.id);
+                              }
+                            }}>-</QuantityButton>
                           </Column>
                           <ProductImage backgroundImage={product.gallery[0]} />
                         </CountAndImg>

@@ -126,12 +126,9 @@ class ProductPage extends React.Component {
                   <Link to='/cart'>
                     <ButtonLarge
                       primary
-                      // onClick={() => {
-                      //   for (let i = 0; i < product.attributes.length; i++) {
-                      //     alert(`Please choose ${product.attributes[i].name}`);
-                      //   }
-                      // }}
-                      onClick={() => updateCart(product.id)}
+                      onClick={() => {
+                        updateCart(product.id);
+                      }}
                     >
                       ADD TO CART
                     </ButtonLarge>
@@ -147,8 +144,9 @@ class ProductPage extends React.Component {
               </ProductDetailColumn>
             </Row>
           );
-        }}
-      </Query>
+        }
+        }
+      </Query >
     );
   }
 }
