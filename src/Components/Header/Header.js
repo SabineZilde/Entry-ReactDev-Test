@@ -114,7 +114,7 @@ class Header extends React.Component {
                 </DropdownContainer>
               )}
             </div>
-            <CartButton
+            <CartButton disabled={productsInCart.length === 0 ? 'disabled' : ''}
               onClick={
                 !this.state.CartIconIsPressed
                   ? this.showMiniCart

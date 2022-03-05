@@ -6,7 +6,7 @@ export class MainProvider extends Component {
   state = {
     contextCurrency: "$",
     productsInCart: [],
-    total: [],
+    total: 0,
   };
 
   updateCurrency = (symbol) => {
@@ -74,7 +74,8 @@ export class MainProvider extends Component {
       return prod.prices.map((price) => {
         if (contextCurrency === price.currency.symbol) {
           totalArr.push(price.amount * prod.count);
-        } return '';
+        }
+        return "";
       });
     });
     const res = totalArr.reduce((prev, curr) => {

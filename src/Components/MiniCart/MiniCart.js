@@ -18,26 +18,13 @@ import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
 
 class MiniCart extends React.Component {
-  state = {
-    totalAmount: 0,
+  componentDidMount = () => {
+    this.context.getTotal();
   };
 
-  // calcTotal = (amount) => {
-  //   console.log(amount);
-  // };
-
-  componentDidMount = () => {
-    this.context.getTotal()
-  }
-
   render() {
-    const {
-      productsInCart,
-      contextCurrency,
-      updateProductCount,
-      removeProduct,
-      total
-    } = this.context;
+    const { productsInCart, contextCurrency, updateProductCount, total } =
+      this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: "all" }}>
         {({ loading, data }) => {
@@ -61,7 +48,6 @@ class MiniCart extends React.Component {
                             </FontRaleway>
                             {product.prices.map((price) => {
                               if (price.currency.symbol === contextCurrency) {
-                                // console.log((price.amount.toFixed(2) * item.count).toFixed(2))
                                 return (
                                   <FontRaleway
                                     fontWeight="500"
@@ -109,8 +95,8 @@ class MiniCart extends React.Component {
                             <QuantityButton
                               mini
                               onClick={() => {
-                                if (item.count === 1) {
-                                  removeProduct(product.id);
+                                if (item.count <= 1) {
+                                  return;
                                 } else {
                                   updateProductCount(product.id);
                                 }

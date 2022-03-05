@@ -64,8 +64,8 @@ class Cart extends React.Component {
                                   <QuantityButton onClick={() => updateProductCount(product.id, product.id)}>+</QuantityButton>
                                   <FontRaleway fontSize='24px' fontWeight='500'>{item.count}</FontRaleway>
                                   <QuantityButton onClick={() => {
-                                    if (item.count === 1) {
-                                      removeProduct(product.id);
+                                    if (item.count <= 1) {
+                                      return;
                                     } else {
                                       updateProductCount(product.id);
                                     }
