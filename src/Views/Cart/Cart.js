@@ -7,6 +7,7 @@ import {
   Column,
   ProductImage,
   Close,
+  Total,
 } from "./Cart.style";
 import { FontRaleway } from "../../Components/Fonts/Fonts.style";
 import {
@@ -18,12 +19,26 @@ import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {
+  // componentDidMount = () => {
+  //   this.context.getTotal();
+  // };
+
+  // componentDidUpdate(prevContext) {
+  //   const { contextCurrency } = this.context;
+  //   if (prevContext.contextCurrency !== contextCurrency) {
+  //     console.log("componentDidUpdate method is called");
+  //     this.context.getTotal();
+  //   }
+  // }
+
   render() {
     const {
       productsInCart,
       contextCurrency,
       updateProductCount,
       removeProduct,
+      total,
+      getTotal,
     } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: "all" }}>
@@ -68,16 +83,7 @@ class Cart extends React.Component {
                               })}
                               <div>
                                 <AttributeButton margin="0 10px 0 0">
-                                  XS
-                                </AttributeButton>
-                                <AttributeButton margin="0 10px 0 0">
-                                  S
-                                </AttributeButton>
-                                <AttributeButton margin="0 10px 0 0">
-                                  M
-                                </AttributeButton>
-                                <AttributeButton margin="0 10px 0 0">
-                                  L
+                                  
                                 </AttributeButton>
                               </div>
                             </ProductDescription>
@@ -108,7 +114,12 @@ class Cart extends React.Component {
                               <ProductImage
                                 backgroundImage={product.gallery[0]}
                               />
-                              <Close onClick={() => removeProduct(product.id)}>
+                              <Close
+                                onClick={() => {
+                                  removeProduct(product.id);
+                                  getTotal();
+                                }}
+                              >
                                 X
                               </Close>
                             </CountAndImg>
@@ -119,6 +130,17 @@ class Cart extends React.Component {
                     });
                   })}
                 </>
+              )}
+              {productsInCart.length > 0 ? (
+                <Total>
+                  <FontRaleway fontSize="26px" fontWeight="700">
+                    TOTAL:
+                    {contextCurrency}
+                    {total}
+                  </FontRaleway>
+                </Total>
+              ) : (
+                ""
               )}
             </CartContainer>
           );

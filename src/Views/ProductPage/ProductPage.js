@@ -10,6 +10,7 @@ import {
   LargeImgColumn,
   ProductDetailColumn,
   DescriptionRow,
+  Attributes,
 } from "./ProductPage.style";
 import { FontRaleway, FontRoboto } from "../../Components/Fonts/Fonts.style";
 import { Query } from "@apollo/client/react/components";
@@ -21,6 +22,7 @@ class ProductPage extends React.Component {
   state = {
     id: null,
     largeImg: null,
+    // selectedAttributes: [{}],
   };
 
   componentDidMount() {
@@ -36,8 +38,33 @@ class ProductPage extends React.Component {
     });
   };
 
+  // saveAttributes = (name, value) => {
+  //   const { selectedAttributes } = this.state;
+  //   if (selectedAttributes.length === 0) {
+  //     this.setState({
+  //       selectedAttributes: [
+  //         ...selectedAttributes,
+  //         {
+  //           name: name,
+  //           value: value,
+  //         },
+  //       ],
+  //     });
+  //   }
+  // if (attribute.name !== name) {
+  //   selectedAttributes.map((attribute) => {
+
+  //     (attribute.name !== name) {
+  //       const newState = [...selectedAttributes];
+  //       console.log(newState);
+  //     }
+  //   });
+  // }
+  // };
+
   render() {
-    const { contextCurrency, updateCart, chooseAttributes } = this.context;
+    const { contextCurrency, updateCart, chooseAttributes, getTotal } =
+      this.context;
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
@@ -83,26 +110,47 @@ class ProductPage extends React.Component {
                         {attribute.name}
                       </FontRoboto>
                       {attribute.items.map((item, id) => {
-                        if (attribute.name === "Color") {
-                          return (
-                            <AttributeButton
-                              key={id}
-                              margin="0 10px 10px 0"
-                              color={item.displayValue}
-                              onClick={() => chooseAttributes(item.displayValue)}
-                            ></AttributeButton>
-                          );
-                        } else {
-                          return (
-                            <AttributeButton
-                              key={id}
-                              margin="0 10px 10px 0"
-                              onClick={() => chooseAttributes(item.value)}
+                        return (
+                          <Attributes key={item.id}>
+                            <input
+                              type="radio"
+                              id={item.id}
+                              name={attribute.name}
+                              value={item.value}
+                            />
+                            <label
+                              htmlFor={item.id}
+                              style={{ backgroundColor: item.value }}
+                              
+
                             >
-                              {item.value}
-                            </AttributeButton>
-                          );
-                        }
+                              {attribute.name !== "Color"
+                                ? item.displayValue
+                                : ""}
+                            </label>
+                          </Attributes>
+                        );
+                        // (
+                        //   <AttributeButton
+                        //     key={id}
+                        //     margin="0 10px 10px 0"
+                        //     color={
+                        //       attribute.name === "Color"
+                        //         ? item.displayValue
+                        //         : ""
+                        //     }
+                        //     onClick={() => {
+                        //       this.saveAttributes(
+                        //         attribute.name,
+                        //         item.displayValue
+                        //       );
+                        //     }}
+                        //   >
+                        //     {attribute.name !== "Color"
+                        //       ? item.displayValue
+                        //       : ""}
+                        //   </AttributeButton>
+                        // );
                       })}
                     </div>
                   ))}
@@ -128,11 +176,16 @@ class ProductPage extends React.Component {
                   })}
                 </div>
                 {product.inStock ? (
-                  <Link to='/cart'>
+                  <Link to="/cart">
                     <ButtonLarge
                       primary
                       onClick={() => {
-                        updateCart(product.id, product.prices);
+                        updateCart(
+                          product.id,
+                          product.prices,
+                          this.state.chooseAttributes
+                        );
+                        getTotal();
                       }}
                     >
                       ADD TO CART
@@ -149,9 +202,8 @@ class ProductPage extends React.Component {
               </ProductDetailColumn>
             </Row>
           );
-        }
-        }
-      </Query >
+        }}
+      </Query>
     );
   }
 }

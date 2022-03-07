@@ -36,7 +36,7 @@ export const ProductImage = styled.div`
     width: 141px;
     background-image: ${(props) =>
         `url(${props.backgroundImage})`
-        };
+    };
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -47,4 +47,12 @@ export const Close = styled.button`
     color: red;
     font-weight: 700;
     margin: -10px 5px 0 0;
+`
+
+export const Total = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #E5E5E5;
 `

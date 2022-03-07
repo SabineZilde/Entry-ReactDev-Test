@@ -11,9 +11,11 @@ export class MainProvider extends Component {
 
   updateCurrency = (symbol) => {
     this.setState({ contextCurrency: symbol });
+    this.getTotal();
   };
 
-  updateCart = (id, prices) => {
+  updateCart = (id, prices, attributes) => {
+    console.log(attributes)
     const { productsInCart } = this.state;
     const check = productsInCart.every((product) => {
       return product.id !== id;
@@ -45,6 +47,7 @@ export class MainProvider extends Component {
     this.setState({
       productsInCart: newState,
     });
+
     this.getTotal();
   };
 
@@ -59,7 +62,8 @@ export class MainProvider extends Component {
       this.setState({
         productsInCart: newState,
       });
-      this.getTotal();
+    console.log(productsInCart)
+    this.getTotal();
     }
   };
 
@@ -80,8 +84,8 @@ export class MainProvider extends Component {
     this.setState({ total: res.toFixed(2) });
   };
 
-  chooseAttributes = (attribute) => {
-    console.log(attribute);
+  chooseAttributes = (id, name, value) => {
+    console.log(name, value, id);
   };
 
   render() {

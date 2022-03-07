@@ -29,9 +29,9 @@ export const ButtonLarge = styled(Button)`
 `
 
 export const QuantityButton = styled.button`
-    height: ${props => props.mini ? '24px' : '45px' };
-    width: ${props => props.mini ? '24px' : '45px' };
-    font-size: ${props => props.mini ? '14px' : '24px' };
+    height: ${props => props.mini ? '24px' : '45px'};
+    width: ${props => props.mini ? '24px' : '45px'};
+    font-size: ${props => props.mini ? '14px' : '24px'};
     
     border: 1px solid #1D1F22;
     

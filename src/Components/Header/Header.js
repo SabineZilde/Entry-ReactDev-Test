@@ -64,9 +64,9 @@ class Header extends React.Component {
                 if (loading) return "Loading...";
                 const { categories } = data;
                 return categories.map((category, id) => (
-                  <Link to={"/category/" + category.name} key={id}>
+                  <a href={"/category/" + category.name} key={id}>
                     <HeaderButton>{category.name}</HeaderButton>
-                  </Link>
+                  </a>
                 ));
               }}
             </Query>
@@ -121,7 +121,7 @@ class Header extends React.Component {
                   : this.hideMiniCart
               }
             >
-              <span style={productsInCart.length === 0 ? {display: 'none'} : {display: 'flex'}}>
+              <span style={productsInCart.length === 0 ? { display: 'none' } : { display: 'flex' }}>
                 <FontRoboto color="white" fontWeight="700" fontSize="14px">
                   {productsInCart.length}
                 </FontRoboto>
