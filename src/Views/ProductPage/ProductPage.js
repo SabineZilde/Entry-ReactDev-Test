@@ -22,7 +22,7 @@ class ProductPage extends React.Component {
   state = {
     id: null,
     largeImg: null,
-    // selectedAttributes: [{}],
+    setAttribute: {},
   };
 
   componentDidMount() {
@@ -38,32 +38,14 @@ class ProductPage extends React.Component {
     });
   };
 
-  // saveAttributes = (name, value) => {
-  //   const { selectedAttributes } = this.state;
-  //   if (selectedAttributes.length === 0) {
-  //     this.setState({
-  //       selectedAttributes: [
-  //         ...selectedAttributes,
-  //         {
-  //           name: name,
-  //           value: value,
-  //         },
-  //       ],
-  //     });
-  //   }
-  // if (attribute.name !== name) {
-  //   selectedAttributes.map((attribute) => {
-
-  //     (attribute.name !== name) {
-  //       const newState = [...selectedAttributes];
-  //       console.log(newState);
-  //     }
-  //   });
-  // }
-  // };
+  handleAttributeChange = (name, value) => {
+    this.setState({
+      setAttribute: { name: value },
+    });
+  };
 
   render() {
-    const { contextCurrency, updateCart, chooseAttributes, getTotal } =
+    const { contextCurrency, updateCart, saveProductAttributes, getTotal } =
       this.context;
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
@@ -117,40 +99,24 @@ class ProductPage extends React.Component {
                               id={item.id}
                               name={attribute.name}
                               value={item.value}
+                              onChange={() =>
+                                saveProductAttributes(
+                                  product.id,
+                                  attribute.name,
+                                  item.value
+                                )
+                              }
                             />
                             <label
                               htmlFor={item.id}
                               style={{ backgroundColor: item.value }}
-                              
-
                             >
                               {attribute.name !== "Color"
-                                ? item.displayValue
+                                ? item.value
                                 : ""}
                             </label>
                           </Attributes>
                         );
-                        // (
-                        //   <AttributeButton
-                        //     key={id}
-                        //     margin="0 10px 10px 0"
-                        //     color={
-                        //       attribute.name === "Color"
-                        //         ? item.displayValue
-                        //         : ""
-                        //     }
-                        //     onClick={() => {
-                        //       this.saveAttributes(
-                        //         attribute.name,
-                        //         item.displayValue
-                        //       );
-                        //     }}
-                        //   >
-                        //     {attribute.name !== "Color"
-                        //       ? item.displayValue
-                        //       : ""}
-                        //   </AttributeButton>
-                        // );
                       })}
                     </div>
                   ))}

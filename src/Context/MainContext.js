@@ -6,6 +6,7 @@ export class MainProvider extends Component {
   state = {
     contextCurrency: "$",
     productsInCart: [],
+    attributes: [{ id: 1, name: 2, value: 3 }],
     total: 0,
   };
 
@@ -14,8 +15,7 @@ export class MainProvider extends Component {
     this.getTotal();
   };
 
-  updateCart = (id, prices, attributes) => {
-    console.log(attributes)
+  updateCart = (id, prices) => {
     const { productsInCart } = this.state;
     const check = productsInCart.every((product) => {
       return product.id !== id;
@@ -51,6 +51,28 @@ export class MainProvider extends Component {
     this.getTotal();
   };
 
+  saveProductAttributes = (id, name, value) => {
+    const { attributes } = this.state;
+    const attrIndex = attributes.findIndex((attr) => {
+      return attr.id === id;
+    });
+    attributes.map((attribute) => {
+      if (attribute.id === id && attribute.name === name) {
+        const newState = [...attributes];
+        newState[attrIndex].value = value;
+        return this.setState({
+          attributes: newState,
+        });
+      } else {
+        console.log('id and name is not equal')
+        
+        return this.setState({
+          attributes: [...attributes, { id: id, name: name, value: value }],
+        });
+      }
+    });
+  };
+
   removeProduct = (id) => {
     if (window.confirm("Are you sure?")) {
       const { productsInCart } = this.state;
@@ -62,8 +84,8 @@ export class MainProvider extends Component {
       this.setState({
         productsInCart: newState,
       });
-    console.log(productsInCart)
-    this.getTotal();
+      console.log(productsInCart);
+      this.getTotal();
     }
   };
 
@@ -84,10 +106,6 @@ export class MainProvider extends Component {
     this.setState({ total: res.toFixed(2) });
   };
 
-  chooseAttributes = (id, name, value) => {
-    console.log(name, value, id);
-  };
-
   render() {
     const { contextCurrency, productsInCart, total } = this.state;
     const {
@@ -95,9 +113,11 @@ export class MainProvider extends Component {
       updateCart,
       updateProductCount,
       removeProduct,
-      chooseAttributes,
+      saveProductAttributes,
       getTotal,
     } = this;
+    console.log(this.state.attributes);
+
     return (
       <MainContext.Provider
         value={{
@@ -108,7 +128,7 @@ export class MainProvider extends Component {
           updateCart,
           updateProductCount,
           removeProduct,
-          chooseAttributes,
+          saveProductAttributes,
           getTotal,
         }}
       >
