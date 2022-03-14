@@ -8,6 +8,7 @@ import {
   ProductImage,
   Close,
   Total,
+  Attributes
 } from "./Cart.style";
 import { FontRaleway } from "../../Components/Fonts/Fonts.style";
 import {
@@ -19,18 +20,6 @@ import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {
-  // componentDidMount = () => {
-  //   this.context.getTotal();
-  // };
-
-  // componentDidUpdate(prevContext) {
-  //   const { contextCurrency } = this.context;
-  //   if (prevContext.contextCurrency !== contextCurrency) {
-  //     console.log("componentDidUpdate method is called");
-  //     this.context.getTotal();
-  //   }
-  // }
-
   render() {
     const {
       productsInCart,
@@ -81,11 +70,14 @@ class Cart extends React.Component {
                                   ""
                                 );
                               })}
-                              <div>
-                                <AttributeButton margin="0 10px 0 0">
-                                  
-                                </AttributeButton>
-                              </div>
+                              {item.attributes.map((atr) => (
+                                <div>
+                                  {atr.name}:
+                                  <AttributeButton margin="0 10px 0 0">
+                                    {atr.value}
+                                  </AttributeButton>
+                                </div>
+                              ))}
                             </ProductDescription>
                             <CountAndImg>
                               <Column>

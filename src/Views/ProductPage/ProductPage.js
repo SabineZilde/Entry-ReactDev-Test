@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  ButtonLarge,
-  AttributeButton,
-} from "../../Components/Buttons/Buttons.style";
+import { ButtonLarge } from "../../Components/Buttons/Buttons.style";
 import {
   Row,
   ThumbnailColumn,
@@ -22,7 +19,7 @@ class ProductPage extends React.Component {
   state = {
     id: null,
     largeImg: null,
-    setAttribute: {},
+    chosenAttributes: [],
   };
 
   componentDidMount() {
@@ -38,15 +35,38 @@ class ProductPage extends React.Component {
     });
   };
 
-  handleAttributeChange = (name, value) => {
-    this.setState({
-      setAttribute: { name: value },
-    });
+  saveAttributes = (name, value) => {
+    const { chosenAttributes } = this.state;
+
+    if (chosenAttributes.length === 0) {
+      this.setState({
+        chosenAttributes: [{ name: name, value: value }],
+      });
+    } else {
+      const existingAtr = chosenAttributes.find(findAtr);
+      function findAtr(chosenAtr) {
+        return chosenAtr.name === name;
+      }
+      const attrIndex = chosenAttributes.findIndex((attr) => {
+        return attr.name === name;
+      });
+      if (existingAtr) {
+        const newState = [...chosenAttributes];
+        newState[attrIndex].value = value;
+        return this.setState({
+          chosenAttributes: newState,
+        });
+      } else {
+        this.setState({
+          chosenAttributes: [...chosenAttributes, { name: name, value: value }],
+        });
+      }
+    }
   };
 
   render() {
-    const { contextCurrency, updateCart, saveProductAttributes, getTotal } =
-      this.context;
+    const { contextCurrency, updateCart, getTotal } = this.context;
+    console.log(this.state.chosenAttributes);
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
@@ -91,29 +111,23 @@ class ProductPage extends React.Component {
                       >
                         {attribute.name}
                       </FontRoboto>
-                      {attribute.items.map((item, id) => {
+                      {attribute.items.map((item) => {
                         return (
                           <Attributes key={item.id}>
                             <input
                               type="radio"
-                              id={item.id}
+                              id={`${attribute.name} ${item.id}`}
                               name={attribute.name}
                               value={item.value}
-                              onChange={() =>
-                                saveProductAttributes(
-                                  product.id,
-                                  attribute.name,
-                                  item.value
-                                )
+                              onClick={() =>
+                                this.saveAttributes(attribute.name, item.value)
                               }
                             />
                             <label
-                              htmlFor={item.id}
+                              htmlFor={`${attribute.name} ${item.id}`}
                               style={{ backgroundColor: item.value }}
                             >
-                              {attribute.name !== "Color"
-                                ? item.value
-                                : ""}
+                              {attribute.name !== "Color" ? item.value : ""}
                             </label>
                           </Attributes>
                         );
@@ -149,7 +163,7 @@ class ProductPage extends React.Component {
                         updateCart(
                           product.id,
                           product.prices,
-                          this.state.chooseAttributes
+                          this.state.chosenAttributes
                         );
                         getTotal();
                       }}

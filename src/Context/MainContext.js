@@ -6,7 +6,6 @@ export class MainProvider extends Component {
   state = {
     contextCurrency: "$",
     productsInCart: [],
-    attributes: [{ id: 1, name: 2, value: 3 }],
     total: 0,
   };
 
@@ -15,7 +14,7 @@ export class MainProvider extends Component {
     this.getTotal();
   };
 
-  updateCart = (id, prices) => {
+  updateCart = (id, prices, attributes) => {
     const { productsInCart } = this.state;
     const check = productsInCart.every((product) => {
       return product.id !== id;
@@ -26,7 +25,7 @@ export class MainProvider extends Component {
       this.setState({
         productsInCart: [
           ...productsInCart,
-          { id: id, count: 1, prices: prices },
+          { id: id, count: 1, prices: prices, attributes: attributes },
         ],
       });
       alert("Product is added to cart.");
@@ -49,28 +48,6 @@ export class MainProvider extends Component {
     });
 
     this.getTotal();
-  };
-
-  saveProductAttributes = (id, name, value) => {
-    const { attributes } = this.state;
-    const attrIndex = attributes.findIndex((attr) => {
-      return attr.id === id;
-    });
-    attributes.map((attribute) => {
-      if (attribute.id === id && attribute.name === name) {
-        const newState = [...attributes];
-        newState[attrIndex].value = value;
-        return this.setState({
-          attributes: newState,
-        });
-      } else {
-        console.log('id and name is not equal')
-        
-        return this.setState({
-          attributes: [...attributes, { id: id, name: name, value: value }],
-        });
-      }
-    });
   };
 
   removeProduct = (id) => {
@@ -113,10 +90,9 @@ export class MainProvider extends Component {
       updateCart,
       updateProductCount,
       removeProduct,
-      saveProductAttributes,
       getTotal,
     } = this;
-    console.log(this.state.attributes);
+    console.log(this.state.productsInCart);
 
     return (
       <MainContext.Provider
@@ -128,7 +104,6 @@ export class MainProvider extends Component {
           updateCart,
           updateProductCount,
           removeProduct,
-          saveProductAttributes,
           getTotal,
         }}
       >
