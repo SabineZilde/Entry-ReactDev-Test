@@ -12,10 +12,11 @@ export const ProductContainer = styled.div`
 `
 
 export const ProductDescription = styled.div`
-    height: 215px;
+    min-height: 215px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    gap: 10px;
 `
 
 export const CountAndImg = styled.div`
@@ -58,4 +59,6 @@ export const Total = styled.div`
 `
 
 export const Attributes = styled.div` 
+    display: flex;
+    align-items: center;
 `

@@ -71,12 +71,17 @@ class Cart extends React.Component {
                                 );
                               })}
                               {item.attributes.map((atr) => (
-                                <div>
-                                  {atr.name}:
-                                  <AttributeButton margin="0 10px 0 0">
-                                    {atr.value}
-                                  </AttributeButton>
-                                </div>
+                                <Attributes>
+                                  {atr.name}:&nbsp;
+                                  {atr.name === "Color" ? (
+                                    <AttributeButton
+                                      margin="5px 0 0 5px"
+                                      color={atr.value}
+                                    ></AttributeButton>
+                                  ) : (
+                                    <b>{atr.value}</b>
+                                  )}
+                                </Attributes>
                               ))}
                             </ProductDescription>
                             <CountAndImg>
