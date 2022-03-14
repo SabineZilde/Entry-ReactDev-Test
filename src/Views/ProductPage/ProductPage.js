@@ -108,8 +108,9 @@ class ProductPage extends React.Component {
                         fontSize="18px"
                         fontWeight="700"
                         margin="10px 0"
+                        capitalize
                       >
-                        {attribute.name}
+                        {attribute.name}:
                       </FontRoboto>
                       {attribute.items.map((item) => {
                         return (
@@ -162,6 +163,9 @@ class ProductPage extends React.Component {
                       onClick={() => {
                         updateCart(
                           product.id,
+                          product.brand,
+                          product.name,
+                          product.gallery,
                           product.prices,
                           this.state.chosenAttributes
                         );

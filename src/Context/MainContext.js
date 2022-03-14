@@ -14,7 +14,7 @@ export class MainProvider extends Component {
     this.getTotal();
   };
 
-  updateCart = (id, prices, attributes) => {
+  updateCart = (id, brand, name, gallery, prices, attributes) => {
     const { productsInCart } = this.state;
     const check = productsInCart.every((product) => {
       return product.id !== id;
@@ -25,7 +25,7 @@ export class MainProvider extends Component {
       this.setState({
         productsInCart: [
           ...productsInCart,
-          { id: id, count: 1, prices: prices, attributes: attributes },
+          { id: id, brand: brand, name: name, gallery: gallery, count: 1, prices: prices, attributes: attributes },
         ],
       });
       alert("Product is added to cart.");
