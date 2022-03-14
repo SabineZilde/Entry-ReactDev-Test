@@ -25,7 +25,15 @@ export class MainProvider extends Component {
       this.setState({
         productsInCart: [
           ...productsInCart,
-          { id: id, brand: brand, name: name, gallery: gallery, count: 1, prices: prices, attributes: attributes },
+          {
+            id: id,
+            brand: brand,
+            name: name,
+            gallery: gallery,
+            count: 1,
+            prices: prices,
+            attributes: attributes,
+          },
         ],
       });
       alert("Product is added to cart.");
@@ -92,8 +100,6 @@ export class MainProvider extends Component {
       removeProduct,
       getTotal,
     } = this;
-    console.log(this.state.productsInCart);
-
     return (
       <MainContext.Provider
         value={{

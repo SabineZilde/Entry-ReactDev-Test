@@ -63,7 +63,14 @@ class Product extends React.Component {
                       if (product.attributes[0]) {
                         alert("Please choose attributes!");
                       } else {
-                        updateCart(product.id, product.prices);
+                        updateCart(
+                          product.id,
+                          product.brand,
+                          product.name,
+                          product.gallery,
+                          product.prices,
+                          product.attributes
+                        );
                       }
                     }}
                   >

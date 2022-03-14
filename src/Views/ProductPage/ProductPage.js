@@ -14,6 +14,7 @@ import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 import parse from "html-react-parser";
 import MainContext from "../../Context/MainContext";
+import { eventWrapper } from "@testing-library/user-event/dist/utils";
 
 class ProductPage extends React.Component {
   state = {
@@ -66,7 +67,6 @@ class ProductPage extends React.Component {
 
   render() {
     const { contextCurrency, updateCart, getTotal } = this.context;
-    console.log(this.state.chosenAttributes);
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
@@ -160,16 +160,21 @@ class ProductPage extends React.Component {
                   <Link to="/cart">
                     <ButtonLarge
                       primary
-                      onClick={() => {
-                        updateCart(
-                          product.id,
-                          product.brand,
-                          product.name,
-                          product.gallery,
-                          product.prices,
-                          this.state.chosenAttributes
-                        );
-                        getTotal();
+                      onClick={(e) => {
+                        if (this.state.chosenAttributes.length < product.attributes.length) {
+                          alert('Please choose attributes');
+                          e.preventDefault();
+                        } else {
+                          updateCart(
+                            product.id,
+                            product.brand,
+                            product.name,
+                            product.gallery,
+                            product.prices,
+                            this.state.chosenAttributes
+                          );
+                        }
+                        
                       }}
                     >
                       ADD TO CART

@@ -17,7 +17,6 @@ import {
 import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {
-  
   state = {
     imgNumber: 0,
   };
@@ -107,6 +106,7 @@ class Cart extends React.Component {
                   +
                 </button>
                 <ProductImage
+                  key={item.id+item.gallery[this.state.imgNumber]}
                   backgroundImage={item.gallery[this.state.imgNumber]}
                 />
                 <button
