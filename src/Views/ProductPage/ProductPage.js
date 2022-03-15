@@ -17,17 +17,9 @@ import MainContext from "../../Context/MainContext";
 
 class ProductPage extends React.Component {
   state = {
-    id: null,
     largeImg: null,
     chosenAttributes: [],
   };
-
-  componentDidMount() {
-    let id = this.props.match.params.id;
-    this.setState({
-      id: id,
-    });
-  }
 
   changeLargeImg = (img) => {
     this.setState({
@@ -65,9 +57,9 @@ class ProductPage extends React.Component {
   };
 
   render() {
-    const { contextCurrency, updateCart, getTotal } = this.context;
+    const { contextId, contextCurrency, updateCart} = this.context;
     return (
-      <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
+      <Query query={LOAD_PRODUCT} variables={{ id: contextId }}>
         {({ loading, data }) => {
           if (loading) return "Loading...";
           const { product } = data;

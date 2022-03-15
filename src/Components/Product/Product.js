@@ -14,14 +14,14 @@ import MainContext from "../../Context/MainContext";
 
 class Product extends React.Component {
   render() {
-    const { contextCategory, contextCurrency, updateCart } = this.context;
+    const { contextCategory, getProductId, contextCurrency, updateCart } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: contextCategory }}>
         {({ loading, data }) => {
           if (loading) return "Loading...";
           const { category } = data;
           return category.products.map((product) => (
-            <Link to={"/product/" + product.id} key={product.id}>
+            <Link to={"/product/" + product.id} key={product.id} onClick={() => getProductId(product.id)}>
               <ActiveProductContainer
                 onMouseEnter={this.showCart}
                 onMouseLeave={this.hideCart}
@@ -71,7 +71,7 @@ class Product extends React.Component {
                           product.prices,
                           product.attributes
                         );
-                          e.preventDefault();
+                        e.preventDefault();
                       }
                     }}
                   >
