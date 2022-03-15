@@ -5,7 +5,9 @@ import {
   ProductDescription,
   CountAndImg,
   Column,
+  ImgContainer,
   ProductImage,
+  ArrowButton,
   Close,
   Attributes,
 } from "./CartProduct.style";
@@ -90,40 +92,42 @@ class Cart extends React.Component {
                     -
                   </QuantityButton>
                 </Column>
-                <button
-                  onClick={() => {
-                    if (this.state.imgNumber === 0) {
-                      this.setState({
-                        imgNumber: item.gallery.length - 1,
-                      });
-                    } else {
-                      this.setState({
-                        imgNumber: this.state.imgNumber - 1,
-                      });
-                    }
-                  }}
-                >
-                  +
-                </button>
-                <ProductImage
-                  key={item.id+item.gallery[this.state.imgNumber]}
-                  backgroundImage={item.gallery[this.state.imgNumber]}
-                />
-                <button
-                  onClick={() => {
-                    if (this.state.imgNumber < item.gallery.length - 1) {
-                      this.setState({
-                        imgNumber: this.state.imgNumber + 1,
-                      });
-                    } else {
-                      this.setState({
-                        imgNumber: 0,
-                      });
-                    }
-                  }}
-                >
-                  +
-                </button>
+                <ImgContainer>
+                  <ArrowButton left
+                    onClick={() => {
+                      if (this.state.imgNumber === 0) {
+                        this.setState({
+                          imgNumber: item.gallery.length - 1,
+                        });
+                      } else {
+                        this.setState({
+                          imgNumber: this.state.imgNumber - 1,
+                        });
+                      }
+                    }}
+                  >
+                    &lt;
+                  </ArrowButton>
+                  <ProductImage
+                    key={item.id + item.gallery[this.state.imgNumber]}
+                    backgroundImage={item.gallery[this.state.imgNumber]}
+                  />
+                  <ArrowButton
+                    onClick={() => {
+                      if (this.state.imgNumber < item.gallery.length - 1) {
+                        this.setState({
+                          imgNumber: this.state.imgNumber + 1,
+                        });
+                      } else {
+                        this.setState({
+                          imgNumber: 0,
+                        });
+                      }
+                    }}
+                  >
+                    &gt;
+                  </ArrowButton>
+                </ImgContainer>
                 <Close
                   onClick={() => {
                     removeProduct(item.id);

@@ -59,7 +59,7 @@ class Product extends React.Component {
                 })}
                 {product.inStock ? (
                   <button
-                    onClick={() => {
+                    onClick={(e) => {
                       if (product.attributes[0]) {
                         alert("Please choose attributes!");
                       } else {
@@ -71,6 +71,7 @@ class Product extends React.Component {
                           product.prices,
                           product.attributes
                         );
+                          e.preventDefault();
                       }
                     }}
                   >
