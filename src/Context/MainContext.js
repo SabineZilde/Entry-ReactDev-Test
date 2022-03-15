@@ -5,7 +5,6 @@ const MainContext = React.createContext();
 export class MainProvider extends Component {
   state = {
     contextCategory: 'all',
-    contextId: null,
     contextCurrency: "$",
     productsInCart: [],
     total: 0,
@@ -13,10 +12,6 @@ export class MainProvider extends Component {
 
   getCategory = (category) => {
     this.setState({ contextCategory: category });
-  };
-
-  getProductId = (id) => {
-    this.setState({ contextId: id });
   };
 
   updateCurrency = (symbol) => {
@@ -79,7 +74,6 @@ export class MainProvider extends Component {
       this.setState({
         productsInCart: newState,
       });
-      console.log(productsInCart);
       this.getTotal();
     }
   };
