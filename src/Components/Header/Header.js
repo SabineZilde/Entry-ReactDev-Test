@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   HeaderContainer,
   HeaderButton,
@@ -54,7 +54,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { contextCurrency, updateCurrency, productsInCart, getTotal } = this.context;
+    const { contextCurrency, getCategory, updateCurrency, productsInCart, getTotal } = this.context;
     return (
       <div>
         <HeaderContainer>
@@ -64,9 +64,9 @@ class Header extends React.Component {
                 if (loading) return "Loading...";
                 const { categories } = data;
                 return categories.map((category, id) => (
-                  <Link to={"/category/" + category.name} key={id}>
+                  <NavLink to={"/category/" + category.name} key={id} onClick={() => getCategory(category.name)}>
                     <HeaderButton>{category.name}</HeaderButton>
-                  </Link>
+                  </NavLink>
                 ));
               }}
             </Query>

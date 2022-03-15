@@ -2,32 +2,24 @@ import React from "react";
 import { Container, ProductContainer } from "./CategoryPage.style";
 import { FontRaleway } from "../../Components/Fonts/Fonts.style";
 import Product from "../../Components/Product/Product";
+import MainContext from "../../Context/MainContext";
 
 class CategoryPage extends React.Component {
-  state = {
-    category: null
-  }
-
-  componentDidMount() {
-    let category = this.props.match.params.category;
-    console.log(category)
-    this.setState({
-      category: category
-    })
-  };
-
   render() {
+    const { contextCategory } = this.context;
     return (
       <Container>
         <div>
-          <FontRaleway fontSize='42px' capitalize>{this.state.category}</FontRaleway>
+          <FontRaleway fontSize='42px' capitalize>{contextCategory}</FontRaleway>
         </div>
         <ProductContainer>
-          <Product category={this.state.category}/>
+          <Product/>
         </ProductContainer>
       </Container>
     );
   }
 }
+
+CategoryPage.contextType = MainContext;
 
 export default CategoryPage;

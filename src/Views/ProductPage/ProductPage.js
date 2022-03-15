@@ -14,7 +14,6 @@ import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 import parse from "html-react-parser";
 import MainContext from "../../Context/MainContext";
-import { eventWrapper } from "@testing-library/user-event/dist/utils";
 
 class ProductPage extends React.Component {
   state = {

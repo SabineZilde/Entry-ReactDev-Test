@@ -14,9 +14,9 @@ import MainContext from "../../Context/MainContext";
 
 class Product extends React.Component {
   render() {
-    const { contextCurrency, updateCart } = this.context;
+    const { contextCategory, contextCurrency, updateCart } = this.context;
     return (
-      <Query query={LOAD_PRODUCTS} variables={{ title: this.props.category }}>
+      <Query query={LOAD_PRODUCTS} variables={{ title: contextCategory }}>
         {({ loading, data }) => {
           if (loading) return "Loading...";
           const { category } = data;

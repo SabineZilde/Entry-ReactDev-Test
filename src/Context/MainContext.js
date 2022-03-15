@@ -4,9 +4,14 @@ const MainContext = React.createContext();
 
 export class MainProvider extends Component {
   state = {
+    contextCategory: 'all',
     contextCurrency: "$",
     productsInCart: [],
     total: 0,
+  };
+
+  getCategory = (category) => {
+    this.setState({ contextCategory: category });
   };
 
   updateCurrency = (symbol) => {
@@ -92,8 +97,9 @@ export class MainProvider extends Component {
   };
 
   render() {
-    const { contextCurrency, productsInCart, total } = this.state;
+    const { contextCategory, contextCurrency, productsInCart, total } = this.state;
     const {
+      getCategory,
       updateCurrency,
       updateCart,
       updateProductCount,
@@ -103,9 +109,11 @@ export class MainProvider extends Component {
     return (
       <MainContext.Provider
         value={{
+          contextCategory,
           contextCurrency,
           productsInCart,
           total,
+          getCategory,
           updateCurrency,
           updateCart,
           updateProductCount,
