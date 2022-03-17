@@ -10,7 +10,6 @@ export class MainProvider extends Component {
     total: 0,
     alertIsTriggered: false,
     alertContent: {},
-    productId: ''
   };
 
   getCategory = (category) => {
@@ -24,28 +23,20 @@ export class MainProvider extends Component {
 
   updateCart = (id, brand, name, gallery, prices, attributes) => {
     const { productsInCart } = this.state;
-    const check = productsInCart.every((product) => {
-      return product.id !== id;
+    this.setState({
+      productsInCart: [
+        ...productsInCart,
+        {
+          id: id,
+          brand: brand,
+          name: name,
+          gallery: gallery,
+          count: 1,
+          prices: prices,
+          attributes: attributes,
+        },
+      ],
     });
-    if (!check) {
-      alert("This product is already in cart!");
-    } else {
-      this.setState({
-        productsInCart: [
-          ...productsInCart,
-          {
-            id: id,
-            brand: brand,
-            name: name,
-            gallery: gallery,
-            count: 1,
-            prices: prices,
-            attributes: attributes,
-          },
-        ],
-      });
-      alert("Product is added to cart.");
-    }
   };
 
   updateProductCount = (id, add) => {
@@ -62,23 +53,19 @@ export class MainProvider extends Component {
     this.setState({
       productsInCart: newState,
     });
-
     this.getTotal();
   };
 
   removeProduct = (id) => {
-    if (window.confirm("Are you sure?")) {
-      const { productsInCart } = this.state;
-      const prodIndex = productsInCart.findIndex((product) => {
-        return product.id === id;
-      });
-      const newState = [...productsInCart];
-      newState.splice(prodIndex, 1);
-      this.setState({
-        productsInCart: newState,
-      });
-      this.getTotal();
-    }
+    const { productsInCart } = this.state;
+    const prodIndex = productsInCart.findIndex((product) => {
+      return product.id === id;
+    });
+    const newState = [...productsInCart];
+    newState.splice(prodIndex, 1);
+    this.setState({
+      productsInCart: newState,
+    });
   };
 
   getTotal = () => {
@@ -98,20 +85,20 @@ export class MainProvider extends Component {
     this.setState({ total: res.toFixed(2) });
   };
 
-  showAlert = (id, icon, title, description, primaryButton, secondaryButton) => {
+  showAlert = (id, icon, title, description, primaryButton, secondaryButton, primaryLink, secondaryLink) => {
     this.setState({
       alertIsTriggered: true,
     });
     this.setState({
-      productId: id
-    });
-    this.setState({
       alertContent: {
+        id: id,
         icon: icon,
         title: title,
         description: description,
         primaryButton: primaryButton,
-        secondaryButton: secondaryButton
+        secondaryButton: secondaryButton,
+        primaryLink: primaryLink,
+        secondaryLink: secondaryLink
       }
     })
   };
@@ -123,38 +110,34 @@ export class MainProvider extends Component {
   };
 
   render() {
-    const { contextCategory, contextId, contextCurrency, productsInCart, total, alertIsTriggered, alertContent, productId } = this.state;
+    const { contextCategory, contextCurrency, productsInCart, total, alertIsTriggered, alertContent } = this.state;
     const {
       getCategory,
-      getProductId,
       updateCurrency,
       updateCart,
       updateProductCount,
       removeProduct,
       getTotal,
       showAlert,
-      hideAlert
+      hideAlert,
     } = this;
     return (
       <MainContext.Provider
         value={{
           contextCategory,
-          contextId,
           contextCurrency,
           productsInCart,
           total,
           alertIsTriggered,
           alertContent,
-          productId,
           getCategory,
-          getProductId,
           updateCurrency,
           updateCart,
           updateProductCount,
           removeProduct,
           getTotal,
           showAlert,
-          hideAlert
+          hideAlert,
         }}
       >
         {this.props.children}

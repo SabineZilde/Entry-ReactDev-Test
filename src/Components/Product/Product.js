@@ -12,10 +12,11 @@ import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
 import alert from '../../Assets/Alert.svg'
+import success from '../../Assets/Success.svg'
 
 class Product extends React.Component {
   render() {
-    const { contextCategory, contextCurrency, alertIsTriggered, updateCart, showAlert } = this.context;
+    const { contextCategory, contextCurrency, productsInCart, alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: contextCategory }}>
         {({ loading, data }) => {
@@ -61,14 +62,27 @@ class Product extends React.Component {
                 {product.inStock ? (
                   <button
                     onClick={(e) => {
-                      if (product.attributes[0]) {
-                        e.preventDefault();
+                      e.preventDefault();
+                      const check = productsInCart.every((prod) => {
+                        return prod.id !== product.id;
+                      });
+                      if (!check) {
+                        showAlert(product.id, alert,
+                          'Dublicate!',
+                          `${product.brand} ${product.name} is already in your cart!`,
+                          'CONTINUE BROWSING',
+                          'GO CHECK YOUR CART',
+                          '/category/all',
+                          '/cart')
+                      } else if (product.attributes[0]) {
                         return !alertIsTriggered ?
                           showAlert(product.id, alert,
                             'This product has attributes.',
                             'Please choose attributes before adding this item to cart!',
                             'CHOOSE ATTRIBUTES',
-                            'CONTINUE BROWSING')
+                            'CONTINUE BROWSING',
+                            `/product/${product.id}`,
+                            '/category/all')
                           : ''
                       } else {
                         updateCart(
@@ -79,6 +93,15 @@ class Product extends React.Component {
                           product.prices,
                           product.attributes
                         );
+                        return !alertIsTriggered ?
+                          showAlert(product.id, success,
+                            'Success!',
+                            `The ${product.brand} ${product.name} is successfully added to your cart.`,
+                            'CONTINUE BROWSING',
+                            'GO CHECK YOUR CART',
+                            '/category/all',
+                            '/cart')
+                          : ''
                       }
                     }}
                   >

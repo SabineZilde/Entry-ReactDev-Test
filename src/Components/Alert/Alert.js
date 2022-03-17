@@ -7,7 +7,7 @@ import MainContext from "../../Context/MainContext";
 
 class Alert extends React.Component {
   render() {
-    const { productId, alertContent, hideAlert } = this.context;
+    const { alertContent, hideAlert, getTotal, removeProduct } = this.context;
     return (
       <AlertContainer>
         <AlertBckground>
@@ -21,12 +21,26 @@ class Alert extends React.Component {
             {alertContent.description}
           </FontRaleway>
           <div>
-            <Link to={"/product/" + productId}>
-              <Button primary margin="50px 12px 0 0" onClick={hideAlert}>
+            <Link to={alertContent.primaryLink}>
+              <Button
+                primary
+                margin="50px 12px 0 0"
+                onClick={() => {
+                  hideAlert();
+                  if (alertContent.primaryButton === "YES, DELETE PRODUCT") {
+                    removeProduct(alertContent.id);
+                    getTotal();
+                  }
+                }}
+              >
                 {alertContent.primaryButton}
               </Button>
             </Link>
-            <Button onClick={hideAlert}>{alertContent.secondaryButton}</Button>
+            <Link to={alertContent.secondaryLink}>
+              <Button onClick={hideAlert}>
+                {alertContent.secondaryButton}
+              </Button>
+            </Link>
           </div>
         </AlertBckground>
       </AlertContainer>

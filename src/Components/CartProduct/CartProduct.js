@@ -17,6 +17,7 @@ import {
   CloseButton
 } from "../Buttons/Buttons.style";
 import MainContext from "../../Context/MainContext";
+import alert from '../../Assets/Alert.svg'
 
 class Cart extends React.Component {
   state = {
@@ -28,8 +29,7 @@ class Cart extends React.Component {
       productsInCart,
       contextCurrency,
       updateProductCount,
-      removeProduct,
-      getTotal,
+      showAlert,
     } = this.context;
     return (
       <>
@@ -132,8 +132,13 @@ class Cart extends React.Component {
                 <CloseButton
                   margin='-10px 5px 0 0'
                   onClick={() => {
-                    removeProduct(item.id);
-                    getTotal();
+                    showAlert(item.id, alert,
+                      'Are you sure?',
+                      'This action will remove the product from your cart.',
+                      'YES, DELETE PRODUCT',
+                      'CONTINUE BROWSING',
+                      '/cart',
+                      '/category/all')
                   }}
                 >
                   X

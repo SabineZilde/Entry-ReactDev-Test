@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { ButtonLarge } from "../../Components/Buttons/Buttons.style";
 import {
   Row,
@@ -14,6 +13,8 @@ import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 import parse from "html-react-parser";
 import MainContext from "../../Context/MainContext";
+import alert from '../../Assets/Alert.svg';
+import success from '../../Assets/Success.svg';
 
 class ProductPage extends React.Component {
   state = {
@@ -65,7 +66,7 @@ class ProductPage extends React.Component {
   };
 
   render() {
-    const { contextCurrency, updateCart } = this.context;
+    const { contextCurrency, productsInCart, alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
@@ -156,29 +157,52 @@ class ProductPage extends React.Component {
                   })}
                 </div>
                 {product.inStock ? (
-                  <Link to="/cart">
-                    <ButtonLarge
-                      primary
-                      onClick={(e) => {
-                        if (this.state.chosenAttributes.length < product.attributes.length) {
-                          alert('Please choose attributes');
-                          e.preventDefault();
-                        } else {
-                          updateCart(
-                            product.id,
-                            product.brand,
-                            product.name,
-                            product.gallery,
-                            product.prices,
-                            this.state.chosenAttributes
-                          );
-                        }
+                  <ButtonLarge
+                    primary
+                    onClick={() => {
+                      const check = productsInCart.every((prod) => {
+                        return prod.id !== product.id;
+                      });
+                      if (!check) {
+                        showAlert(product.id, alert,
+                          'Dublicate!',
+                          `${product.brand} ${product.name} is already in your cart!`,
+                          'CONTINUE BROWSING',
+                          'GO CHECK YOUR CART',
+                          '/category/all',
+                          '/cart')
+                      } else if (this.state.chosenAttributes.length < product.attributes.length) {
+                        showAlert(product.id, alert,
+                          'This product has attributes.',
+                          'Please choose attributes before adding this item to cart!',
+                          'CHOOSE ATTRIBUTES',
+                          'CONTINUE BROWSING',
+                          `/product/${product.id}`,
+                          "/category/all")
+                      } else {
+                        updateCart(
+                          product.id,
+                          product.brand,
+                          product.name,
+                          product.gallery,
+                          product.prices,
+                          this.state.chosenAttributes
+                        );
+                        return !alertIsTriggered ?
+                          showAlert(product.id, success,
+                            'Success!',
+                            `The ${product.brand} ${product.name} is successfully added to your cart.`,
+                            'CONTINUE BROWSING',
+                            'GO CHECK YOUR CART',
+                            '/category/all',
+                            '/cart')
+                          : ''
+                      }
 
-                      }}
-                    >
-                      ADD TO CART
-                    </ButtonLarge>
-                  </Link>
+                    }}
+                  >
+                    ADD TO CART
+                  </ButtonLarge>
                 ) : (
                   <FontRaleway fontColor="red" fontWeight="700" margin="30px 0">
                     OUT OF STOCK!
