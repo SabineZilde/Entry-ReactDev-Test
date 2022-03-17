@@ -18,7 +18,22 @@ export class MainProvider extends Component {
 
   updateCurrency = (symbol) => {
     this.setState({ contextCurrency: symbol });
-    this.getTotal();
+    const { productsInCart } = this.state;
+    if (productsInCart.length > 0) {
+      let totalArr = [];
+      productsInCart.map((prod) => {
+        return prod.prices.map((price) => {
+          if (symbol === price.currency.symbol) {
+            totalArr.push(price.amount * prod.count);
+          }
+          return "";
+        });
+      });
+      const res = totalArr.reduce((prev, curr) => {
+        return prev + curr;
+      });
+      this.setState({ total: res.toFixed(2) });
+    }
   };
 
   updateCart = (id, brand, name, gallery, prices, attributes) => {
@@ -82,7 +97,7 @@ export class MainProvider extends Component {
   };
 
   getTotal = () => {
-    const { contextCurrency, productsInCart } = this.state;
+    const { productsInCart, contextCurrency } = this.state;
     let totalArr = [];
     productsInCart.map((prod) => {
       return prod.prices.map((price) => {

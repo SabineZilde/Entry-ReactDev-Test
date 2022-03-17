@@ -98,7 +98,6 @@ class Header extends React.Component {
                             key={id}
                             onClick={() => {
                               updateCurrency(currency.symbol);
-                              getTotal();
                               this.setState({
                                 CurrencyButtonIsPressed: false,
                               });

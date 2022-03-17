@@ -16,10 +16,6 @@ import { FontRaleway } from "../../Components/Fonts/Fonts.style";
 import MainContext from "../../Context/MainContext";
 
 class MiniCart extends React.Component {
-  componentDidMount = () => {
-    this.context.getTotal();
-  };
-
   render() {
     const { productsInCart, contextCurrency, updateProductCount, total } =
       this.context;
