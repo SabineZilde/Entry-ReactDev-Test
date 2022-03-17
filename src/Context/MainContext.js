@@ -81,7 +81,7 @@ export class MainProvider extends Component {
   };
 
   getTotal = (currency) => {
-    const { productsInCart, contextCurrency } = this.state;
+    const { productsInCart } = this.state;
     let totalArr = [];
     productsInCart.map((prod) => {
       return prod.prices.map((price) => {

@@ -57,7 +57,7 @@ class Cart extends React.Component {
                 })}
                 {item.attributes.map((atr) => {
                   return (
-                    <Attributes key={atr.value}>
+                    <Attributes key={atr.value + atr.name}>
                       {atr.name}:&nbsp;
                       {atr.name === "Color" ? (
                         <AttributeButton

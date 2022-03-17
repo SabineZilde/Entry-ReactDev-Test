@@ -48,7 +48,7 @@ class MiniCart extends React.Component {
                     return (
                       <FontRaleway
                         fontSize="12px"
-                        key={atr.value}
+                        key={atr.value + atr.name}
                         style={{ display: "flex", alignItems: "center" }}
                       >
                         {atr.name}:&nbsp;
