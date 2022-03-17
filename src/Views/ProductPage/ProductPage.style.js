@@ -26,10 +26,13 @@ export const LargeImgColumn = styled.div`
     width: 610px;
     display: flex;
     justify-content: center;
-    
-    & img {
-        height: 510px;
-    }
+    overflow: hidden;
+    background-image: ${(props) =>
+        `url(${props.backgroundImg})`
+        };
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
 `
 
 export const ProductDetailColumn = styled.div`

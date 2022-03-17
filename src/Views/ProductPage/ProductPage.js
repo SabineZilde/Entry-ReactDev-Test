@@ -81,15 +81,9 @@ class ProductPage extends React.Component {
                   </button>
                 ))}
               </ThumbnailColumn>
-              <LargeImgColumn>
-                <img
-                  src={
-                    this.state.largeImg === null
-                      ? product.gallery[0]
-                      : this.state.largeImg
-                  }
-                  alt="Product large"
-                />
+              <LargeImgColumn backgroundImg={this.state.largeImg === null
+                ? product.gallery[0]
+                : this.state.largeImg}>
               </LargeImgColumn>
               <ProductDetailColumn>
                 <div>
