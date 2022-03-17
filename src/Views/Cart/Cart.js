@@ -6,7 +6,10 @@ import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {
   componentDidMount = () => {
-    this.context.getTotal();
+    if (this.context.productsInCart.length > 0) {
+      this.context.getTotal(this.context.contextCurrency);
+    }
+    
   };
 
   render() {

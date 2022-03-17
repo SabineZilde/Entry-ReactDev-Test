@@ -18,22 +18,6 @@ export class MainProvider extends Component {
 
   updateCurrency = (symbol) => {
     this.setState({ contextCurrency: symbol });
-    const { productsInCart } = this.state;
-    if (productsInCart.length > 0) {
-      let totalArr = [];
-      productsInCart.map((prod) => {
-        return prod.prices.map((price) => {
-          if (symbol === price.currency.symbol) {
-            totalArr.push(price.amount * prod.count);
-          }
-          return "";
-        });
-      });
-      const res = totalArr.reduce((prev, curr) => {
-        return prev + curr;
-      });
-      this.setState({ total: res.toFixed(2) });
-    }
   };
 
   updateCart = (id, brand, name, gallery, prices, attributes) => {
@@ -55,7 +39,7 @@ export class MainProvider extends Component {
   };
 
   updateProductCount = (id, add) => {
-    const { productsInCart } = this.state;
+    const { productsInCart, contextCurrency } = this.state;
     const prodIndex = productsInCart.findIndex((product) => {
       return product.id === id;
     });
@@ -68,7 +52,7 @@ export class MainProvider extends Component {
     this.setState({
       productsInCart: newState,
     });
-    this.getTotal();
+    this.getTotal(contextCurrency);
   };
 
   removeProduct = (id) => {
@@ -96,12 +80,12 @@ export class MainProvider extends Component {
     this.setState({ total: res.toFixed(2) });
   };
 
-  getTotal = () => {
+  getTotal = (currency) => {
     const { productsInCart, contextCurrency } = this.state;
     let totalArr = [];
     productsInCart.map((prod) => {
       return prod.prices.map((price) => {
-        if (contextCurrency === price.currency.symbol) {
+        if (currency === price.currency.symbol) {
           totalArr.push(price.amount * prod.count);
         }
         return "";
