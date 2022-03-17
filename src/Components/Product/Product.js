@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Alert from "../Alert/Alert";
 import {
   ActiveProductContainer,
   ProductImage,
@@ -14,30 +13,8 @@ import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
 
 class Product extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.hideAlert = this.hideAlert.bind(this);
-  }
-
-  state = {
-    AlertIsTriggered: false,
-  };
-
-  showAlert = () => {
-    this.setState({
-      AlertIsTriggered: true,
-    });
-  };
-
-  hideAlert = () => {
-    this.setState({
-      AlertIsTriggered: false,
-    });
-  };
-
   render() {
-    const { contextCategory, contextCurrency, updateCart } = this.context;
+    const { contextCategory, contextCurrency, alertIsTriggered, updateCart, showAlert, hideAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: contextCategory }}>
         {({ loading, data }) => {
@@ -49,10 +26,6 @@ class Product extends React.Component {
                 onMouseEnter={this.showCart}
                 onMouseLeave={this.hideCart}
               >
-                {this.state.AlertIsTriggered ? (
-                  <Alert hideAlert={this.hideAlert} />
-                ) : ''}
-      {!this.state.AlertIsTriggered ? console.log('false') : console.log('true')}
                 <ImageContainer>
                   <ProductImage backgroundImage={product.gallery[0]} />
                   {!product.inStock ? (
@@ -89,9 +62,9 @@ class Product extends React.Component {
                     onClick={(e) => {
                       if (product.attributes[0]) {
                         e.preventDefault();
-                        return !this.state.AlertIsTriggered
-                          ? this.showAlert
-                          : this.hideAlert
+                        return !alertIsTriggered ?
+                          showAlert(product.id)
+                          : ''
                       } else {
                         updateCart(
                           product.id,

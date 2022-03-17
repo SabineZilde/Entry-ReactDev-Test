@@ -1,15 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FontRaleway } from "../Fonts/Fonts.style";
 import { Button, CloseButton } from "../Buttons/Buttons.style";
 import { AlertContainer, AlertBckground, Icon } from "./Alert.style";
+import MainContext from "../../Context/MainContext";
 import alert from "../../Assets/Alert.svg";
 
 class Alert extends React.Component {
   render() {
+    const { productId, hideAlert } = this.context;
     return (
       <AlertContainer>
         <AlertBckground>
-          <CloseButton>X</CloseButton>
+          <CloseButton onClick={hideAlert}>X</CloseButton>
           <Icon backgroundImg={alert}></Icon>
           <FontRaleway margin="20px" center>
             This product has attributes.
@@ -18,15 +21,19 @@ class Alert extends React.Component {
             Please choose attributes before adding this item to cart!
           </FontRaleway>
           <div>
-            <Button primary margin="50px 12px 0 0">
-              CHOOSE ATTRIBUTES
-            </Button>
-            <Button>CONTINUE BROWSING</Button>
+            <Link to={"/product/" + productId}>
+              <Button primary margin="50px 12px 0 0" onClick={hideAlert}>
+                CHOOSE ATTRIBUTES
+              </Button>
+            </Link>
+            <Button onClick={hideAlert}>CONTINUE BROWSING</Button>
           </div>
         </AlertBckground>
       </AlertContainer>
     );
   }
 }
+
+Alert.contextType = MainContext;
 
 export default Alert;

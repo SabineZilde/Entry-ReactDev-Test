@@ -8,6 +8,8 @@ export class MainProvider extends Component {
     contextCurrency: "$",
     productsInCart: [],
     total: 0,
+    alertIsTriggered: false,
+    productId: ''
   };
 
   getCategory = (category) => {
@@ -95,8 +97,23 @@ export class MainProvider extends Component {
     this.setState({ total: res.toFixed(2) });
   };
 
+  showAlert = (id) => {
+    this.setState({
+      alertIsTriggered: true,
+    });
+    this.setState({
+      productId: id
+    })
+  };
+
+  hideAlert = () => {
+    this.setState({
+      alertIsTriggered: false,
+    });
+  };
+
   render() {
-    const { contextCategory, contextId, contextCurrency, productsInCart, total } = this.state;
+    const { contextCategory, contextId, contextCurrency, productsInCart, total, alertIsTriggered, productId } = this.state;
     const {
       getCategory,
       getProductId,
@@ -105,6 +122,8 @@ export class MainProvider extends Component {
       updateProductCount,
       removeProduct,
       getTotal,
+      showAlert,
+      hideAlert
     } = this;
     return (
       <MainContext.Provider
@@ -114,6 +133,8 @@ export class MainProvider extends Component {
           contextCurrency,
           productsInCart,
           total,
+          alertIsTriggered,
+          productId,
           getCategory,
           getProductId,
           updateCurrency,
@@ -121,6 +142,8 @@ export class MainProvider extends Component {
           updateProductCount,
           removeProduct,
           getTotal,
+          showAlert,
+          hideAlert
         }}
       >
         {this.props.children}

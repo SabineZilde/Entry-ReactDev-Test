@@ -6,25 +6,26 @@ import Header from './Components/Header/Header';
 import CategoryPage from "./Views/CategoryPage/CategoryPage";
 import ProductPage from './Views/ProductPage/ProductPage';
 import Cart from "./Views/Cart/Cart";
-import { MainProvider } from "./Context/MainContext";
+import MainContext from "./Context/MainContext";
 
 class App extends React.Component {
   render() {
+    const { alertIsTriggered } = this.context;
     return (
       <BrowserRouter>
-        <MainProvider>
-          <GlobalStyles />
-          {/* <Alert /> */}
-          <Header />
-          <Switch>
-            <Route path='/category/:category' component={CategoryPage} />
-            <Route path='/product/:id' component={ProductPage} />
-            <Route path='/cart' component={Cart} />
-          </Switch>
-        </MainProvider>
+        <GlobalStyles />
+        {alertIsTriggered && <Alert hideAlert={this.hideAlert} />}
+        <Header />
+        <Switch>
+          <Route path='/category/:category' component={CategoryPage} />
+          <Route path='/product/:id' component={ProductPage} />
+          <Route path='/cart' component={Cart} />
+        </Switch>
       </BrowserRouter>
     );
   }
 }
+
+App.contextType = MainContext;
 
 export default App;
