@@ -7,7 +7,7 @@ import MainContext from "../../Context/MainContext";
 
 class Alert extends React.Component {
   render() {
-    const { alertContent, hideAlert, getTotal, removeProduct } = this.context;
+    const { alertContent, hideAlert, removeProduct } = this.context;
     return (
       <AlertContainer>
         <AlertBckground>
@@ -29,7 +29,6 @@ class Alert extends React.Component {
                   hideAlert();
                   if (alertContent.primaryButton === "YES, DELETE PRODUCT") {
                     removeProduct(alertContent.id);
-                    getTotal();
                   }
                 }}
               >

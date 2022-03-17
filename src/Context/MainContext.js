@@ -57,7 +57,7 @@ export class MainProvider extends Component {
   };
 
   removeProduct = (id) => {
-    const { productsInCart } = this.state;
+    const { productsInCart, contextCurrency } = this.state;
     const prodIndex = productsInCart.findIndex((product) => {
       return product.id === id;
     });
@@ -66,6 +66,19 @@ export class MainProvider extends Component {
     this.setState({
       productsInCart: newState,
     });
+    let totalArr = [];
+    newState.map((prod) => {
+      return prod.prices.map((price) => {
+        if (contextCurrency === price.currency.symbol) {
+          totalArr.push(price.amount * prod.count);
+        }
+        return "";
+      });
+    });
+    const res = totalArr.reduce((prev, curr) => {
+      return prev + curr;
+    });
+    this.setState({ total: res.toFixed(2) });
   };
 
   getTotal = () => {
