@@ -21,6 +21,7 @@ import alert from '../../Assets/Alert.svg'
 
 class Cart extends React.Component {
   state = {
+    itemId: '',
     imgNumber: 0,
   };
 
@@ -97,6 +98,9 @@ class Cart extends React.Component {
                   {item.gallery.length > 1 && (
                     <ArrowButton left
                       onClick={() => {
+                        this.setState({
+                          itemId: item.id
+                        })
                         if (this.state.imgNumber === 0) {
                           this.setState({
                             imgNumber: item.gallery.length - 1,
@@ -113,11 +117,17 @@ class Cart extends React.Component {
                   )}
                   <ProductImage
                     key={item.id + item.gallery[this.state.imgNumber]}
-                    backgroundImage={item.gallery[this.state.imgNumber]}
+                    backgroundImage={this.state.itemId === item.id ?
+                      item.gallery[this.state.imgNumber] :
+                      item.gallery[0]
+                    }
                   />
                   {item.gallery.length > 1 && (
                     <ArrowButton
                       onClick={() => {
+                        this.setState({
+                          itemId: item.id
+                        })
                         if (this.state.imgNumber < item.gallery.length - 1) {
                           this.setState({
                             imgNumber: this.state.imgNumber + 1,

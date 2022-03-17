@@ -165,7 +165,7 @@ class ProductPage extends React.Component {
                       });
                       if (!check) {
                         showAlert(product.id, alert,
-                          'Dublicate!',
+                          'Duplicate!',
                           `${product.brand} ${product.name} is already in your cart!`,
                           'CONTINUE BROWSING',
                           'GO CHECK YOUR CART',

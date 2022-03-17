@@ -7,13 +7,13 @@ export const FontRaleway = styled.div`
     margin: ${props => props.margin};
     text-transform: ${props => props.capitalize ? 'uppercase' : ''};
     text-align: ${props => props.center ? 'center' : ''};
-    color: ${props => props.fontColor ? props.fontColor : ''}
+    color: ${props => props.fontColor}
 `
 
 export const FontRoboto = styled(FontRaleway)`
     font-family: ${props => props.condensed ? 'Roboto Condensed' : 'Roboto'};
     line-height: 25.59px;
-    color: ${props => props.color ? props.color : ''};
-    font-weight: ${props => props.fontWeight ? props.fontWeight : ''};
-    font-size: ${props => props.fontSize ? props.fontSize : ''};
+    color: ${props => props.color};
+    font-weight: ${props => props.fontWeight};
+    font-size: ${props => props.fontSize};
 `
