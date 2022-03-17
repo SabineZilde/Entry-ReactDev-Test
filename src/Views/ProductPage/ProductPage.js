@@ -122,7 +122,8 @@ class ProductPage extends React.Component {
                               htmlFor={`${attribute.name} ${item.id}`}
                               style={{ backgroundColor: item.value }}
                             >
-                              {attribute.name !== "Color" ? item.value : ""}
+                              {attribute.name !== "Color" && item.value}
+
                             </label>
                           </Attributes>
                         );
@@ -140,13 +141,11 @@ class ProductPage extends React.Component {
                     PRICE:
                   </FontRoboto>
                   {product.prices.map((price, id) => {
-                    return price.currency.symbol === contextCurrency ? (
+                    return price.currency.symbol === contextCurrency && (
                       <FontRaleway fontSize="24px" fontWeight="700" key={id}>
                         {price.currency.symbol}
                         {price.amount.toFixed(2)}
                       </FontRaleway>
-                    ) : (
-                      ""
                     );
                   })}
                 </div>
@@ -182,7 +181,7 @@ class ProductPage extends React.Component {
                           product.prices,
                           this.state.chosenAttributes
                         );
-                        return !alertIsTriggered ?
+                        return !alertIsTriggered &&
                           showAlert(product.id, success,
                             'Success!',
                             `The ${product.brand} ${product.name} is successfully added to your cart.`,
@@ -190,9 +189,7 @@ class ProductPage extends React.Component {
                             'GO CHECK YOUR CART',
                             '/category/all',
                             '/cart')
-                          : ''
                       }
-
                     }}
                   >
                     ADD TO CART

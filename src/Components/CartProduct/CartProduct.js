@@ -43,7 +43,7 @@ class Cart extends React.Component {
                 </FontRaleway>
                 <FontRaleway fontSize="30px">{item.name}</FontRaleway>
                 {item.prices.map((price) => {
-                  return price.currency.symbol === contextCurrency ? (
+                  return price.currency.symbol === contextCurrency && (
                     <FontRaleway
                       fontSize="24px"
                       fontWeight="700"
@@ -52,8 +52,6 @@ class Cart extends React.Component {
                       {price.currency.symbol}
                       {(price.amount * item.count).toFixed(2)}
                     </FontRaleway>
-                  ) : (
-                    ""
                   );
                 })}
                 {item.attributes.map((atr) => {

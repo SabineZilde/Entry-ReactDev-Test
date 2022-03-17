@@ -30,36 +30,32 @@ class Product extends React.Component {
               >
                 <ImageContainer>
                   <ProductImage backgroundImage={product.gallery[0]} />
-                  {!product.inStock ? (
+                  {!product.inStock &&
                     <OutOfStockLayer>OUT OF STOCK</OutOfStockLayer>
-                  ) : (
-                    ""
-                  )}
+                  }
                 </ImageContainer>
                 <FontRaleway
                   fontSize="18px"
                   fontWeight="300"
                   margin="0 0 5px 0"
-                  fontColor={!product.inStock ? "#8D8F9A" : ""}
+                  fontColor={!product.inStock && "#8D8F9A"}
                 >
                   {product.brand} {product.name}
                 </FontRaleway>
                 {product.prices.map((price) => {
-                  return price.currency.symbol === contextCurrency ? (
+                  return price.currency.symbol === contextCurrency && (
                     <FontRaleway
                       fontSize="18px"
                       fontWeight="500"
-                      fontColor={!product.inStock ? "#8D8F9A" : ""}
+                      fontColor={!product.inStock && "#8D8F9A"}
                       key={price.amount}
                     >
                       {price.currency.symbol}
                       {price.amount.toFixed(2)}
                     </FontRaleway>
-                  ) : (
-                    ""
                   );
                 })}
-                {product.inStock ? (
+                {product.inStock && (
                   <button
                     onClick={(e) => {
                       e.preventDefault();
@@ -75,7 +71,7 @@ class Product extends React.Component {
                           '/category/all',
                           '/cart')
                       } else if (product.attributes[0]) {
-                        return !alertIsTriggered ?
+                        return !alertIsTriggered &&
                           showAlert(product.id, alert,
                             'This product has attributes.',
                             'Please choose attributes before adding this item to cart!',
@@ -83,7 +79,6 @@ class Product extends React.Component {
                             'CONTINUE BROWSING',
                             `/product/${product.id}`,
                             '/category/all')
-                          : ''
                       } else {
                         updateCart(
                           product.id,
@@ -93,7 +88,7 @@ class Product extends React.Component {
                           product.prices,
                           product.attributes
                         );
-                        return !alertIsTriggered ?
+                        return !alertIsTriggered &&
                           showAlert(product.id, success,
                             'Success!',
                             `The ${product.brand} ${product.name} is successfully added to your cart.`,
@@ -101,14 +96,11 @@ class Product extends React.Component {
                             'GO CHECK YOUR CART',
                             '/category/all',
                             '/cart')
-                          : ''
                       }
                     }}
                   >
                     <img src={circleIcon} alt="Circle Icon" />
                   </button>
-                ) : (
-                  ""
                 )}
               </ActiveProductContainer>
             </Link>
