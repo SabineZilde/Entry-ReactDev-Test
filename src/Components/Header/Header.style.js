@@ -5,6 +5,7 @@ export const HeaderContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     margin: 0 100px;
+    background-color: #FFFFFF;
 `
 
 export const HeaderButton = styled.button`

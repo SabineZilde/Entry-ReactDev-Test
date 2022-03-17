@@ -65,3 +65,11 @@ export const AttributeButton = styled.button`
         color: #FFFFFF;
     }
 `
+
+export const CloseButton = styled.button`
+    display: flex;
+    color: red;
+    font-weight: 700;
+    float: right;
+    margin: ${props => props.margin};
+`

@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { GlobalStyles } from './GlobalStyles.style';
+import Alert from "./Components/Alert/Alert";
 import Header from './Components/Header/Header';
 import CategoryPage from "./Views/CategoryPage/CategoryPage";
 import ProductPage from './Views/ProductPage/ProductPage';
@@ -13,6 +14,7 @@ class App extends React.Component {
       <BrowserRouter>
         <MainProvider>
           <GlobalStyles />
+          {/* <Alert /> */}
           <Header />
           <Switch>
             <Route path='/category/:category' component={CategoryPage} />

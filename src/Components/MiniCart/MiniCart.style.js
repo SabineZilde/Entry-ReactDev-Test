@@ -5,14 +5,14 @@ export const MiniCartBackground = styled.div`
     position: absolute;
     background-size: cover;
     background-color: rgba(57, 55, 72, 0.22);
-    height: 900px;
+    height: 1750px;
     width: 100%;
     z-index: 1;
 `
 
 export const MiniCartContainer = styled.div`
     float: right;
-    background: #FFFFFF;
+    background: #FFF;
     width: 325px;
     margin-right: 100px;
     padding: 8px 16px 20px;

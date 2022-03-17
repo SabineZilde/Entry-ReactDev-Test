@@ -8,13 +8,13 @@ import {
   ImgContainer,
   ProductImage,
   ArrowButton,
-  Close,
   Attributes,
 } from "./CartProduct.style";
 import { FontRaleway } from "../Fonts/Fonts.style";
 import {
   AttributeButton,
   QuantityButton,
+  CloseButton
 } from "../Buttons/Buttons.style";
 import MainContext from "../../Context/MainContext";
 
@@ -29,6 +29,7 @@ class Cart extends React.Component {
       contextCurrency,
       updateProductCount,
       removeProduct,
+      getTotal,
     } = this.context;
     return (
       <>
@@ -128,13 +129,15 @@ class Cart extends React.Component {
                     &gt;
                   </ArrowButton>
                 </ImgContainer>
-                <Close
+                <CloseButton
+                  margin='-10px 5px 0 0'
                   onClick={() => {
                     removeProduct(item.id);
+                    getTotal();
                   }}
                 >
                   X
-                </Close>
+                </CloseButton>
               </CountAndImg>
             </ProductContainer>
           );

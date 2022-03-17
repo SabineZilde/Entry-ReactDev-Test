@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Alert from "../Alert/Alert";
 import {
   ActiveProductContainer,
   ProductImage,
@@ -13,19 +14,45 @@ import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
 
 class Product extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.hideAlert = this.hideAlert.bind(this);
+  }
+
+  state = {
+    AlertIsTriggered: false,
+  };
+
+  showAlert = () => {
+    this.setState({
+      AlertIsTriggered: true,
+    });
+  };
+
+  hideAlert = () => {
+    this.setState({
+      AlertIsTriggered: false,
+    });
+  };
+
   render() {
-    const { contextCategory, getProductId, contextCurrency, updateCart } = this.context;
+    const { contextCategory, contextCurrency, updateCart } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: contextCategory }}>
         {({ loading, data }) => {
           if (loading) return "Loading...";
           const { category } = data;
           return category.products.map((product) => (
-            <Link to={"/product/" + product.id} key={product.id} onClick={() => getProductId(product.id)}>
+            <Link to={"/product/" + product.id} key={product.id}>
               <ActiveProductContainer
                 onMouseEnter={this.showCart}
                 onMouseLeave={this.hideCart}
               >
+                {this.state.AlertIsTriggered ? (
+                  <Alert hideAlert={this.hideAlert} />
+                ) : ''}
+      {!this.state.AlertIsTriggered ? console.log('false') : console.log('true')}
                 <ImageContainer>
                   <ProductImage backgroundImage={product.gallery[0]} />
                   {!product.inStock ? (
@@ -61,7 +88,10 @@ class Product extends React.Component {
                   <button
                     onClick={(e) => {
                       if (product.attributes[0]) {
-                        alert("Please choose attributes!");
+                        e.preventDefault();
+                        return !this.state.AlertIsTriggered
+                          ? this.showAlert
+                          : this.hideAlert
                       } else {
                         updateCart(
                           product.id,
@@ -71,7 +101,6 @@ class Product extends React.Component {
                           product.prices,
                           product.attributes
                         );
-                        e.preventDefault();
                       }
                     }}
                   >

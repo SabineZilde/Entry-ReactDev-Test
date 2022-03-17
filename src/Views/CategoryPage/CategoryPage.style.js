@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     margin: 80px 100px 190px;
+    position: relative;
 `
 
 export const ProductContainer = styled.div`

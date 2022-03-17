@@ -59,13 +59,6 @@ export const ArrowButton = styled.button`
     margin-left: ${(props => props.left ? '15px' : '115px')};
 `
 
-export const Close = styled.button`
-    display: flex;
-    color: red;
-    font-weight: 700;
-    margin: -10px 5px 0 0;
-`
-
 export const Attributes = styled.div` 
     display: flex;
     align-items: center;
