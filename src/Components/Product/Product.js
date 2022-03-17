@@ -11,10 +11,11 @@ import circleIcon from "../../Assets/CircleIcon.svg";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
+import alert from '../../Assets/Alert.svg'
 
 class Product extends React.Component {
   render() {
-    const { contextCategory, contextCurrency, alertIsTriggered, updateCart, showAlert, hideAlert } = this.context;
+    const { contextCategory, contextCurrency, alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: contextCategory }}>
         {({ loading, data }) => {
@@ -63,7 +64,11 @@ class Product extends React.Component {
                       if (product.attributes[0]) {
                         e.preventDefault();
                         return !alertIsTriggered ?
-                          showAlert(product.id)
+                          showAlert(product.id, alert,
+                            'This product has attributes.',
+                            'Please choose attributes before adding this item to cart!',
+                            'CHOOSE ATTRIBUTES',
+                            'CONTINUE BROWSING')
                           : ''
                       } else {
                         updateCart(

@@ -9,6 +9,7 @@ export class MainProvider extends Component {
     productsInCart: [],
     total: 0,
     alertIsTriggered: false,
+    alertContent: {},
     productId: ''
   };
 
@@ -97,12 +98,21 @@ export class MainProvider extends Component {
     this.setState({ total: res.toFixed(2) });
   };
 
-  showAlert = (id) => {
+  showAlert = (id, icon, title, description, primaryButton, secondaryButton) => {
     this.setState({
       alertIsTriggered: true,
     });
     this.setState({
       productId: id
+    });
+    this.setState({
+      alertContent: {
+        icon: icon,
+        title: title,
+        description: description,
+        primaryButton: primaryButton,
+        secondaryButton: secondaryButton
+      }
     })
   };
 
@@ -113,7 +123,7 @@ export class MainProvider extends Component {
   };
 
   render() {
-    const { contextCategory, contextId, contextCurrency, productsInCart, total, alertIsTriggered, productId } = this.state;
+    const { contextCategory, contextId, contextCurrency, productsInCart, total, alertIsTriggered, alertContent, productId } = this.state;
     const {
       getCategory,
       getProductId,
@@ -134,6 +144,7 @@ export class MainProvider extends Component {
           productsInCart,
           total,
           alertIsTriggered,
+          alertContent,
           productId,
           getCategory,
           getProductId,

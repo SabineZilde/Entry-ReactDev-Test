@@ -14,7 +14,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <GlobalStyles />
-        {alertIsTriggered && <Alert hideAlert={this.hideAlert} />}
+        {alertIsTriggered && <Alert />}
         <Header />
         <Switch>
           <Route path='/category/:category' component={CategoryPage} />
