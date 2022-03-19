@@ -9,7 +9,6 @@ class Cart extends React.Component {
     if (this.context.productsInCart.length > 0) {
       this.context.getTotal(this.context.contextCurrency);
     }
-    
   };
 
   render() {
