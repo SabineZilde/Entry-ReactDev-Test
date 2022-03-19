@@ -7,15 +7,14 @@ import {
   CurrencyButton,
   CartButton,
   ArrowStyle,
-  DropdownContainer,
-  DropdownContent,
 } from "./Header.style";
 import { FontRoboto } from "../Fonts/Fonts.style";
 import MiniCart from "../MiniCart/MiniCart";
+import HandleClickOutside from "../HandleClickOutside/HandleClickOutside";
 import logo from "../../Assets/Logo.svg";
 import cart from "../../Assets/Cart.svg";
 import { Query } from "@apollo/client/react/components";
-import { LOAD_CATEGORIES, LOAD_CURRENCIES } from "../../GraphQL/Queries";
+import { LOAD_CATEGORIES } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
 
 class Header extends React.Component {
@@ -28,21 +27,34 @@ class Header extends React.Component {
   state = {
     currencyButtonIsPressed: false,
     cartIconIsPressed: false,
-    arrow: '▲'
+    arrow: '▲',
+    showInfo: false
   };
 
-  toggleCurrencyMeny = () => {
+  toggleCurrencyMenu = () => {
     if (!this.state.currencyButtonIsPressed) {
       this.setState({
         currencyButtonIsPressed: true,
-        arrow: '▼'
+        arrow: '▼',
+        showInfo: true
       });
-    } else {
+     } 
+    else {
       this.setState({
         currencyButtonIsPressed: false,
-        arrow: '▲'
+        arrow: '▲',
+        showInfo: false
       });
     }
+  }
+
+  handleOutsideClick = () => {
+    console.log('outside click')
+    this.setState({
+      showInfo: false,
+      currencyButtonIsPressed: false,
+      arrow: '▲',
+    })
   }
 
   showMiniCart = () => {
@@ -58,7 +70,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { contextCurrency, getCategory, updateCurrency, productsInCart, getTotal } = this.context;
+    const { contextCurrency, getCategory, productsInCart } = this.context;
     return (
       <div>
         <HeaderContainer>
@@ -79,39 +91,16 @@ class Header extends React.Component {
             <img src={logo} alt="logo" />
           </Link>
           <CurrencyStyle>
-            <CurrencyButton onClick={this.toggleCurrencyMeny}>
+            <CurrencyButton onClick={this.toggleCurrencyMenu}>
+              {console.log(this.state.currencyButtonIsPressed, this.state.showInfo)}
               {contextCurrency}
               <ArrowStyle>{this.state.arrow}</ArrowStyle>
               <div>
-                {this.state.currencyButtonIsPressed && (
-                  <DropdownContainer>
-                    <DropdownContent>
-                      <Query query={LOAD_CURRENCIES}>
-                        {({ loading, data }) => {
-                          if (loading) return "Loading...";
-                          const { currencies } = data;
-                          return currencies.map((currency, id) => (
-                            <button
-                              key={id}
-                              onClick={() => {
-                                updateCurrency(currency.symbol);
-                                this.setState({
-                                  currencyButtonIsPressed: false,
-                                });
-                                if (productsInCart.length > 0) {
-                                  getTotal(currency.symbol)
-                                }
-                              }}
-                            >
-                              {currency.symbol}
-                              {currency.label}
-                            </button>
-                          ));
-                        }}
-                      </Query>
-                    </DropdownContent>
-                  </DropdownContainer>
-                )}
+                <HandleClickOutside
+                  show={this.state.showInfo}
+                  onClickOutside={this.handleOutsideClick}
+                  dropdown='Currency'
+                />
               </div>
             </CurrencyButton>
             <CartButton disabled={productsInCart.length === 0 && 'disabled'}
