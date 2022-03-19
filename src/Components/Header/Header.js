@@ -6,6 +6,7 @@ import {
   CurrencyStyle,
   CurrencyButton,
   CartButton,
+  ArrowStyle,
   DropdownContainer,
   DropdownContent,
 } from "./Header.style";
@@ -25,31 +26,34 @@ class Header extends React.Component {
   }
 
   state = {
-    CurrencyButtonIsPressed: false,
-    CartIconIsPressed: false,
+    currencyButtonIsPressed: false,
+    cartIconIsPressed: false,
+    arrow: '▲'
   };
 
-  showCurrencyMenu = () => {
-    this.setState({
-      CurrencyButtonIsPressed: true,
-    });
-  };
-
-  hideCurrencyMenu = () => {
-    this.setState({
-      CurrencyButtonIsPressed: false,
-    });
-  };
+  toggleCurrencyMeny = () => {
+    if (!this.state.currencyButtonIsPressed) {
+      this.setState({
+        currencyButtonIsPressed: true,
+        arrow: '▼'
+      });
+    } else {
+      this.setState({
+        currencyButtonIsPressed: false,
+        arrow: '▲'
+      });
+    }
+  }
 
   showMiniCart = () => {
     this.setState({
-      CartIconIsPressed: true,
+      cartIconIsPressed: true,
     });
   };
 
   hideMiniCart = () => {
     this.setState({
-      CartIconIsPressed: false,
+      cartIconIsPressed: false,
     });
   };
 
@@ -75,52 +79,44 @@ class Header extends React.Component {
             <img src={logo} alt="logo" />
           </Link>
           <CurrencyStyle>
-            {contextCurrency}
-            <div>
-              {!this.state.CurrencyButtonIsPressed ? (
-                <CurrencyButton onClick={this.showCurrencyMenu}>
-                  ▲
-                </CurrencyButton>
-              ) : (
-                <CurrencyButton onClick={this.hideCurrencyMenu}>
-                  ▼
-                </CurrencyButton>
-              )}
-              {this.state.CurrencyButtonIsPressed && (
-                <DropdownContainer>
-                  <DropdownContent>
-                    <Query query={LOAD_CURRENCIES}>
-                      {({ loading, data }) => {
-                        if (loading) return "Loading...";
-                        const { currencies } = data;
-                        return currencies.map((currency, id) => (
-                          <button
-                            key={id}
-                            onClick={() => {
-                              updateCurrency(currency.symbol);
-                              
-                              
-                              this.setState({
-                                CurrencyButtonIsPressed: false,
-                              });
-                              if (productsInCart.length > 0) {
-                                getTotal(currency.symbol)
-                              }
-                            }}
-                          >
-                            {currency.symbol}
-                            {currency.label}
-                          </button>
-                        ));
-                      }}
-                    </Query>
-                  </DropdownContent>
-                </DropdownContainer>
-              )}
-            </div>
+            <CurrencyButton onClick={this.toggleCurrencyMeny}>
+              {contextCurrency}
+              <ArrowStyle>{this.state.arrow}</ArrowStyle>
+              <div>
+                {this.state.currencyButtonIsPressed && (
+                  <DropdownContainer>
+                    <DropdownContent>
+                      <Query query={LOAD_CURRENCIES}>
+                        {({ loading, data }) => {
+                          if (loading) return "Loading...";
+                          const { currencies } = data;
+                          return currencies.map((currency, id) => (
+                            <button
+                              key={id}
+                              onClick={() => {
+                                updateCurrency(currency.symbol);
+                                this.setState({
+                                  currencyButtonIsPressed: false,
+                                });
+                                if (productsInCart.length > 0) {
+                                  getTotal(currency.symbol)
+                                }
+                              }}
+                            >
+                              {currency.symbol}
+                              {currency.label}
+                            </button>
+                          ));
+                        }}
+                      </Query>
+                    </DropdownContent>
+                  </DropdownContainer>
+                )}
+              </div>
+            </CurrencyButton>
             <CartButton disabled={productsInCart.length === 0 && 'disabled'}
               onClick={
-                !this.state.CartIconIsPressed
+                !this.state.cartIconIsPressed
                   ? this.showMiniCart
                   : this.hideMiniCart
               }
@@ -134,7 +130,7 @@ class Header extends React.Component {
             </CartButton>
           </CurrencyStyle>
         </HeaderContainer>
-        {this.state.CartIconIsPressed && (
+        {this.state.cartIconIsPressed && (
           <MiniCart hideMiniCart={this.hideMiniCart} />
         )}
       </div>

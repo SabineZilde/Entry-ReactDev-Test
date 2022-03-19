@@ -33,8 +33,15 @@ export const CurrencyStyle = styled.div`
     z-index: 2;
 `
 
-export const CurrencyButton = styled.button`
-    padding: 0 25px 0 10px;
+export const CurrencyButton = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 0 25px 0 0;
+    cursor: pointer;
+`
+
+export const ArrowStyle = styled.div`
+    margin-left: 5px;
     font-size: 10px;
 `
 
@@ -61,8 +68,8 @@ export const DropdownContainer = styled.div`
     min-width: 114px;
     box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.1);
     z-index: 1;
-    margin-top: 10px;
-    margin-left: -25px;
+    margin-top: 25px;
+    margin-left: -45px;
 `
 
 export const DropdownContent = styled.div`
