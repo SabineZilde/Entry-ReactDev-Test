@@ -7,10 +7,10 @@ import {
   CurrencyButton,
   CartButton,
   ArrowStyle,
+  MiniCartBg
 } from "./Header.style";
 import { FontRoboto } from "../Fonts/Fonts.style";
-import MiniCart from "../MiniCart/MiniCart";
-import HandleClickOutside from "../HandleClickOutside/HandleClickOutside";
+import Dropdown from "../Dropdown/Dropdown";
 import logo from "../../Assets/Logo.svg";
 import cart from "../../Assets/Cart.svg";
 import { Query } from "@apollo/client/react/components";
@@ -18,16 +18,11 @@ import { LOAD_CATEGORIES } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.hideMiniCart = this.hideMiniCart.bind(this);
-  }
-
   state = {
     currencyButtonIsPressed: false,
-    cartIconIsPressed: false,
     arrow: '▲',
+    cartIconIsPressed: false,
+    display: 'none',
   };
 
   toggleCurrencyMenu = () => {
@@ -42,18 +37,20 @@ class Header extends React.Component {
         arrow: '▲',
       });
     }
-  }
-
-  showMiniCart = () => {
-    this.setState({
-      cartIconIsPressed: true,
-    });
   };
 
-  hideMiniCart = () => {
-    this.setState({
-      cartIconIsPressed: false,
-    });
+  toggleMiniCart = () => {
+    if (!this.state.cartIconIsPressed) {
+      this.setState({
+        cartIconIsPressed: true,
+        display: 'block'
+      });
+    } else {
+      this.setState({
+        cartIconIsPressed: false,
+        display: 'none'
+      });
+    }
   };
 
   render() {
@@ -83,18 +80,14 @@ class Header extends React.Component {
               <ArrowStyle>{this.state.arrow}</ArrowStyle>
             </CurrencyButton>
             <div>
-              <HandleClickOutside
+              <Dropdown
                 show={this.state.currencyButtonIsPressed}
                 onClickOutside={this.toggleCurrencyMenu}
                 dropdown='Currency'
               />
             </div>
             <CartButton disabled={productsInCart.length === 0 && 'disabled'}
-              onClick={
-                !this.state.cartIconIsPressed
-                  ? this.showMiniCart
-                  : this.hideMiniCart
-              }
+              onClick={this.toggleMiniCart}
             >
               <span style={productsInCart.length === 0 ? { display: 'none' } : { display: 'flex' }}>
                 <FontRoboto color="white" fontWeight="700" fontSize="14px">
@@ -105,9 +98,13 @@ class Header extends React.Component {
             </CartButton>
           </CurrencyStyle>
         </HeaderContainer>
-        {this.state.cartIconIsPressed && (
-          <MiniCart hideMiniCart={this.hideMiniCart} />
-        )}
+        <MiniCartBg display={this.state.display}>
+          <Dropdown
+            show={this.state.cartIconIsPressed}
+            onClickOutside={this.toggleMiniCart}
+            dropdown='MiniCart'
+          />
+        </MiniCartBg>
       </div>
     );
   }

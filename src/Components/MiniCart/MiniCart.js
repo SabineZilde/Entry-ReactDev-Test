@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   MiniCartContainer,
-  MiniCartBackground,
+  // MiniCartBackground,
   Column,
   Row,
   ProductImage,
@@ -25,7 +25,7 @@ class MiniCart extends React.Component {
     const { productsInCart, contextCurrency, updateProductCount, total } =
       this.context;
     return (
-      <MiniCartBackground>
+      // <MiniCartBackground>
         <MiniCartContainer>
           <div>
             <b>My Bag</b>, {productsInCart.length} items
@@ -113,7 +113,7 @@ class MiniCart extends React.Component {
           </Link>
           <Button primary>CHECK OUT</Button>
         </MiniCartContainer>
-      </MiniCartBackground>
+      // </MiniCartBackground>
     );
   }
 }

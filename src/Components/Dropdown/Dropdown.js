@@ -3,7 +3,7 @@ import CurrencyDropdown from '../CurrencyDropdown/CurrencyDropdown';
 import MiniCart from '../MiniCart/MiniCart';
 import MainContext from "../../Context/MainContext";
 
-class HandleClickOutside extends React.Component {
+class Dropdown extends React.Component {
   constructor(props) {
     super(props);
     this.ref = React.createRef();
@@ -36,6 +36,6 @@ class HandleClickOutside extends React.Component {
   }
 }
 
-HandleClickOutside.contextType = MainContext;
+Dropdown.contextType = MainContext;
 
-export default HandleClickOutside;
+export default Dropdown;

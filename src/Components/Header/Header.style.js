@@ -61,3 +61,13 @@ export const CartButton = styled.button`
         border-radius: 50%;
     }
 `
+
+export const MiniCartBg = styled.div`
+    display: ${props => props.display}; 
+    position: fixed;
+    background-size: cover;
+    background-color: rgba(57, 55, 72, 0.22);
+    height: 2000px;
+    width: 100%;
+    z-index: 1;
+`
