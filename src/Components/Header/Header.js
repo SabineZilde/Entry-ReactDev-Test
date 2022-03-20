@@ -41,11 +41,13 @@ class Header extends React.Component {
 
   toggleMiniCart = () => {
     if (!this.state.cartIconIsPressed) {
+      console.log('show')
       this.setState({
         cartIconIsPressed: true,
         display: 'block'
       });
     } else {
+      console.log('hide')
       this.setState({
         cartIconIsPressed: false,
         display: 'none'
@@ -98,10 +100,13 @@ class Header extends React.Component {
             </CartButton>
           </CurrencyStyle>
         </HeaderContainer>
-        <MiniCartBg display={this.state.display}>
+        <MiniCartBg
+          display={this.state.display}
+        >
           <Dropdown
             show={this.state.cartIconIsPressed}
             onClickOutside={this.toggleMiniCart}
+            toggleMiniCart={this.toggleMiniCart}
             dropdown='MiniCart'
           />
         </MiniCartBg>

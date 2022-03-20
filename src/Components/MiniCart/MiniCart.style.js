@@ -1,15 +1,5 @@
 import styled from "styled-components";
 
-
-// export const MiniCartBackground = styled.div`
-//     position: absolute;
-//     background-size: cover;
-//     background-color: rgba(57, 55, 72, 0.22);
-//     height: 2000px;
-//     width: 100%;
-//     z-index: 1;
-// `
-
 export const MiniCartContainer = styled.div`
     float: right;
     background: #FFF;

@@ -30,7 +30,7 @@ class Dropdown extends React.Component {
     return (
       <div ref={this.ref}>
         {this.props.dropdown === 'Currency' && <CurrencyDropdown />}
-        {this.props.dropdown === 'MiniCart' && <MiniCart />}
+        {this.props.dropdown === 'MiniCart' && <MiniCart toggleMiniCart={this.props.toggleMiniCart} />}
       </div>
     )
   }
