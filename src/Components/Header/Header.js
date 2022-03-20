@@ -28,7 +28,6 @@ class Header extends React.Component {
     currencyButtonIsPressed: false,
     cartIconIsPressed: false,
     arrow: '▲',
-    showInfo: false
   };
 
   toggleCurrencyMenu = () => {
@@ -36,25 +35,13 @@ class Header extends React.Component {
       this.setState({
         currencyButtonIsPressed: true,
         arrow: '▼',
-        showInfo: true
       });
-     } 
-    else {
+    } else {
       this.setState({
         currencyButtonIsPressed: false,
         arrow: '▲',
-        showInfo: false
       });
     }
-  }
-
-  handleOutsideClick = () => {
-    console.log('outside click')
-    this.setState({
-      showInfo: false,
-      currencyButtonIsPressed: false,
-      arrow: '▲',
-    })
   }
 
   showMiniCart = () => {
@@ -92,17 +79,16 @@ class Header extends React.Component {
           </Link>
           <CurrencyStyle>
             <CurrencyButton onClick={this.toggleCurrencyMenu}>
-              {console.log(this.state.currencyButtonIsPressed, this.state.showInfo)}
               {contextCurrency}
               <ArrowStyle>{this.state.arrow}</ArrowStyle>
-              <div>
-                <HandleClickOutside
-                  show={this.state.showInfo}
-                  onClickOutside={this.handleOutsideClick}
-                  dropdown='Currency'
-                />
-              </div>
             </CurrencyButton>
+            <div>
+              <HandleClickOutside
+                show={this.state.currencyButtonIsPressed}
+                onClickOutside={this.toggleCurrencyMenu}
+                dropdown='Currency'
+              />
+            </div>
             <CartButton disabled={productsInCart.length === 0 && 'disabled'}
               onClick={
                 !this.state.cartIconIsPressed

@@ -1,6 +1,7 @@
 import React from 'react';
 import CurrencyDropdown from '../CurrencyDropdown/CurrencyDropdown';
 import MiniCart from '../MiniCart/MiniCart';
+import MainContext from "../../Context/MainContext";
 
 class HandleClickOutside extends React.Component {
   constructor(props) {
@@ -28,9 +29,13 @@ class HandleClickOutside extends React.Component {
       return null;
     return (
       <div ref={this.ref}>
-        {this.props.dropdown === 'Currency' ? <CurrencyDropdown /> : <MiniCart />}
-      </div>);
+        {this.props.dropdown === 'Currency' && <CurrencyDropdown />}
+        {this.props.dropdown === 'MiniCart' && <MiniCart />}
+      </div>
+    )
   }
 }
+
+HandleClickOutside.contextType = MainContext;
 
 export default HandleClickOutside;
