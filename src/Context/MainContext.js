@@ -7,6 +7,7 @@ export class MainProvider extends Component {
     contextCategory: 'all',
     contextCurrency: "$",
     productsInCart: [],
+    totalQuantity: 0,
     total: 0,
     alertIsTriggered: false,
     alertContent: {},
@@ -21,7 +22,7 @@ export class MainProvider extends Component {
   };
 
   updateCart = (id, brand, name, gallery, prices, attributes) => {
-    const { productsInCart } = this.state;
+    const { productsInCart, totalQuantity } = this.state;
     this.setState({
       productsInCart: [
         ...productsInCart,
@@ -36,6 +37,9 @@ export class MainProvider extends Component {
         },
       ],
     });
+    this.setState({
+      totalQuantity: totalQuantity + 1,
+    })
   };
 
   updateProductCount = (id, add) => {
@@ -53,10 +57,11 @@ export class MainProvider extends Component {
       productsInCart: newState,
     });
     this.getTotal(contextCurrency);
+    this.getTotalQuantity();
   };
 
   removeProduct = (id) => {
-    const { productsInCart, contextCurrency } = this.state;
+    const { productsInCart, contextCurrency, getTotalQuantity } = this.state;
     const prodIndex = productsInCart.findIndex((product) => {
       return product.id === id;
     });
@@ -65,6 +70,7 @@ export class MainProvider extends Component {
     this.setState({
       productsInCart: newState,
     });
+
     if (productsInCart.length > 1) {
       let totalArr = [];
       newState.map((prod) => {
@@ -79,7 +85,32 @@ export class MainProvider extends Component {
         return prev + curr;
       });
       this.setState({ total: res.toFixed(2) });
+
+      let totalQuantityArr = [];
+      newState.map((prod) => {
+        return totalQuantityArr.push(prod.count)
+      });
+      const result = totalQuantityArr.reduce((prev, curr) => {
+        return prev + curr;
+      });
+      this.setState({ totalQuantity: result });
+      
+    } else {
+      this.setState({ total: 0 });
+      this.setState({ totalQuantity: 0 });
     }
+  };
+
+  getTotalQuantity = () => {
+    const { productsInCart } = this.state;
+    let totalQuantityArr = [];
+    productsInCart.map((prod) => {
+      return totalQuantityArr.push(prod.count)
+    });
+    const result = totalQuantityArr.reduce((prev, curr) => {
+      return prev + curr;
+    });
+    this.setState({ totalQuantity: result })
   };
 
   getTotal = (currency) => {
@@ -124,13 +155,14 @@ export class MainProvider extends Component {
   };
 
   render() {
-    const { contextCategory, contextCurrency, productsInCart, total, alertIsTriggered, alertContent } = this.state;
+    const { contextCategory, contextCurrency, productsInCart, totalQuantity, total, alertIsTriggered, alertContent } = this.state;
     const {
       getCategory,
       updateCurrency,
       updateCart,
       updateProductCount,
       removeProduct,
+      getTotalQuantity,
       getTotal,
       showAlert,
       hideAlert,
@@ -141,6 +173,7 @@ export class MainProvider extends Component {
           contextCategory,
           contextCurrency,
           productsInCart,
+          totalQuantity,
           total,
           alertIsTriggered,
           alertContent,
@@ -149,6 +182,7 @@ export class MainProvider extends Component {
           updateCart,
           updateProductCount,
           removeProduct,
+          getTotalQuantity,
           getTotal,
           showAlert,
           hideAlert,

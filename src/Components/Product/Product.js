@@ -16,7 +16,7 @@ import success from '../../Assets/Success.svg'
 
 class Product extends React.Component {
   render() {
-    const { contextCategory, contextCurrency, productsInCart, alertIsTriggered, updateCart, showAlert } = this.context;
+    const { contextCategory, contextCurrency, productsInCart, getTotalQuantity, alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: contextCategory }}>
         {({ loading, data }) => {

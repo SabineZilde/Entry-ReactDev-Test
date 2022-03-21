@@ -67,9 +67,9 @@ class Header extends React.Component {
       return 'flex';
     }
   };
-
+  
   render() {
-    const { contextCurrency, getCategory, productsInCart } = this.context;
+    const { contextCurrency, getCategory, productsInCart, totalQuantity, getTotalQuantity } = this.context;
     return (
       <div>
         <HeaderContainer>
@@ -101,12 +101,14 @@ class Header extends React.Component {
                 dropdown='Currency'
               />
             </div>
-            <CartButton disabled={this.disableCartButton(productsInCart.length)}
+            <CartButton
+              disabled={this.disableCartButton(productsInCart.length)}
               onClick={this.toggleMiniCart}
             >
               <TotalQuantityIcon display={this.displayQuantityIcon(productsInCart.length)}>
                 <FontRoboto color="white" fontWeight="700" fontSize="14px">
                   {productsInCart.length}
+                  {totalQuantity}
                 </FontRoboto>
               </TotalQuantityIcon>
               <img src={cart} alt="logo" />
