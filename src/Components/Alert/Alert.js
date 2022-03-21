@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontRaleway } from "../Fonts/Fonts.style";
 import { Button, CloseButton } from "../Buttons/Buttons.style";
-import { AlertContainer, AlertBckground, Icon } from "./Alert.style";
+import { AlertContainer, AlertBckground, Icon, ButtonRow } from "./Alert.style";
 import MainContext from "../../Context/MainContext";
 
 class Alert extends React.Component {
@@ -12,7 +12,6 @@ class Alert extends React.Component {
       <AlertContainer>
         <AlertBckground>
           <CloseButton onClick={hideAlert}>X</CloseButton>
-
           <Icon backgroundImg={alertContent.icon}></Icon>
           <FontRaleway margin="20px" center>
             {alertContent.title}
@@ -20,27 +19,26 @@ class Alert extends React.Component {
           <FontRaleway margin="0 20px" center>
             {alertContent.description}
           </FontRaleway>
-          <div>
-            <Link to={alertContent.primaryLink}>
-              <Button
-                primary
-                margin="50px 12px 0 0"
-                onClick={() => {
-                  hideAlert();
-                  if (alertContent.primaryButton === "YES, DELETE PRODUCT") {
-                    removeProduct(alertContent.id);
-                  }
-                }}
-              >
-                {alertContent.primaryButton}
-              </Button>
-            </Link>
+          <ButtonRow>
+            <Button
+              primary
+              margin="0 12px 0 0"
+              onClick={hideAlert}
+            >
+              {alertContent.primaryButton}
+            </Button>
             <Link to={alertContent.secondaryLink}>
-              <Button onClick={hideAlert}>
+              <Button 
+              onClick={() => {
+                hideAlert();
+                if (alertContent.secondaryButton === "YES, DELETE PRODUCT") {
+                  removeProduct(alertContent.id);
+                }
+              }}>
                 {alertContent.secondaryButton}
               </Button>
             </Link>
-          </div>
+          </ButtonRow>
         </AlertBckground>
       </AlertContainer>
     );

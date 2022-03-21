@@ -147,10 +147,9 @@ class Cart extends React.Component {
                     showAlert(item.id, alert,
                       'Are you sure?',
                       'This action will remove the product from your cart.',
+                      'RETURN TO CART',
                       'YES, DELETE PRODUCT',
-                      'CONTINUE BROWSING',
-                      '/cart',
-                      '/category/all')
+                      '/cart')
                   }}
                 >
                   X

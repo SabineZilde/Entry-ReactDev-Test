@@ -26,3 +26,9 @@ export const Icon = styled.div`
         `url(${props.backgroundImg})`
     };
 `
+
+export const ButtonRow = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+`

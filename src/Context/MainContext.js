@@ -94,7 +94,7 @@ export class MainProvider extends Component {
         return prev + curr;
       });
       this.setState({ totalQuantity: result });
-      
+
     } else {
       this.setState({ total: 0 });
       this.setState({ totalQuantity: 0 });
@@ -130,7 +130,7 @@ export class MainProvider extends Component {
     this.setState({ total: res.toFixed(2) });
   };
 
-  showAlert = (id, icon, title, description, primaryButton, secondaryButton, primaryLink, secondaryLink) => {
+  showAlert = (id, icon, title, description, primaryButton, secondaryButton, secondaryLink) => {
     this.setState({
       alertIsTriggered: true,
     });
@@ -142,7 +142,6 @@ export class MainProvider extends Component {
         description: description,
         primaryButton: primaryButton,
         secondaryButton: secondaryButton,
-        primaryLink: primaryLink,
         secondaryLink: secondaryLink
       }
     })

@@ -16,7 +16,7 @@ import success from '../../Assets/Success.svg'
 
 class Product extends React.Component {
   render() {
-    const { contextCategory, contextCurrency, productsInCart, getTotalQuantity, alertIsTriggered, updateCart, showAlert } = this.context;
+    const { contextCategory, contextCurrency, productsInCart, alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: contextCategory }}>
         {({ loading, data }) => {
@@ -67,18 +67,16 @@ class Product extends React.Component {
                           'Duplicate!',
                           `${product.brand} ${product.name} is already in your cart!`,
                           'CONTINUE BROWSING',
-                          'GO CHECK YOUR CART',
-                          '/category/all',
+                          'VIEW BAG',
                           '/cart')
                       } else if (product.attributes[0]) {
                         return !alertIsTriggered &&
                           showAlert(product.id, alert,
                             'This product has attributes.',
                             'Please choose attributes before adding this item to cart!',
-                            'CHOOSE ATTRIBUTES',
                             'CONTINUE BROWSING',
-                            `/product/${product.id}`,
-                            '/category/all')
+                            'CHOOSE ATTRIBUTES',
+                            `/product/${product.id}`)
                       } else {
                         updateCart(
                           product.id,
@@ -94,7 +92,6 @@ class Product extends React.Component {
                             `The ${product.brand} ${product.name} is successfully added to your cart.`,
                             'CONTINUE BROWSING',
                             'GO CHECK YOUR CART',
-                            '/category/all',
                             '/cart')
                       }
                     }}

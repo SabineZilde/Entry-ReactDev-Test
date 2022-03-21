@@ -67,9 +67,9 @@ class Header extends React.Component {
       return 'flex';
     }
   };
-  
+
   render() {
-    const { contextCurrency, getCategory, productsInCart, totalQuantity, getTotalQuantity } = this.context;
+    const { contextCurrency, getCategory, productsInCart, totalQuantity } = this.context;
     return (
       <div>
         <HeaderContainer>
@@ -79,7 +79,11 @@ class Header extends React.Component {
                 if (loading) return "Loading...";
                 const { categories } = data;
                 return categories.map((category, id) => (
-                  <NavLink to={"/category/" + category.name} key={id} onClick={() => getCategory(category.name)}>
+                  <NavLink
+                    to={"/category/" + category.name}
+                    key={id}
+                    onClick={() => getCategory(category.name)
+                    }>
                     <HeaderButton>{category.name}</HeaderButton>
                   </NavLink>
                 ));
@@ -107,7 +111,6 @@ class Header extends React.Component {
             >
               <TotalQuantityIcon display={this.displayQuantityIcon(productsInCart.length)}>
                 <FontRoboto color="white" fontWeight="700" fontSize="14px">
-                  {productsInCart.length}
                   {totalQuantity}
                 </FontRoboto>
               </TotalQuantityIcon>

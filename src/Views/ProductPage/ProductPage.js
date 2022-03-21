@@ -161,8 +161,7 @@ class ProductPage extends React.Component {
                           'Duplicate!',
                           `${product.brand} ${product.name} is already in your cart!`,
                           'CONTINUE BROWSING',
-                          'GO CHECK YOUR CART',
-                          '/category/all',
+                          'VIEW BAG',
                           '/cart')
                       } else if (this.state.chosenAttributes.length < product.attributes.length) {
                         showAlert(product.id, alert,
@@ -170,8 +169,7 @@ class ProductPage extends React.Component {
                           'Please choose attributes before adding this item to cart!',
                           'CHOOSE ATTRIBUTES',
                           'CONTINUE BROWSING',
-                          `/product/${product.id}`,
-                          "/category/all")
+                          `/category/all`)
                       } else {
                         updateCart(
                           product.id,
@@ -186,8 +184,7 @@ class ProductPage extends React.Component {
                             'Success!',
                             `The ${product.brand} ${product.name} is successfully added to your cart.`,
                             'CONTINUE BROWSING',
-                            'GO CHECK YOUR CART',
-                            '/category/all',
+                            'VIEW BAG',
                             '/cart')
                       }
                     }}
