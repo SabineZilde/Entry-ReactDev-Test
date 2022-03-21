@@ -48,8 +48,10 @@ export const ArrowStyle = styled.div`
 export const CartButton = styled.button`
     display: flex;
     position: relative;
+`
 
-    & span {
+export const TotalQuantityIcon = styled.span`
+        display: ${props => props.display};
         align-items: center;
         justify-content: center;
         position: absolute;
@@ -59,7 +61,6 @@ export const CartButton = styled.button`
         width: 20px;
         height: 20px;
         border-radius: 50%;
-    }
 `
 
 export const MiniCartBg = styled.div`

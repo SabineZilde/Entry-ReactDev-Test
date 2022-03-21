@@ -6,6 +6,7 @@ import {
   CurrencyStyle,
   CurrencyButton,
   CartButton,
+  TotalQuantityIcon,
   ArrowStyle,
   MiniCartBg
 } from "./Header.style";
@@ -41,17 +42,29 @@ class Header extends React.Component {
 
   toggleMiniCart = () => {
     if (!this.state.cartIconIsPressed) {
-      console.log('show')
       this.setState({
         cartIconIsPressed: true,
         display: 'block'
       });
     } else {
-      console.log('hide')
       this.setState({
         cartIconIsPressed: false,
         display: 'none'
       });
+    }
+  };
+
+  disableCartButton = (productsInCartLength) => {
+    if (productsInCartLength === 0) {
+      return 'disabled';
+    }
+  };
+
+  displayQuantityIcon = (productsInCartLength) => {
+    if (productsInCartLength === 0) {
+      return 'none';
+    } else {
+      return 'flex';
     }
   };
 
@@ -88,21 +101,19 @@ class Header extends React.Component {
                 dropdown='Currency'
               />
             </div>
-            <CartButton disabled={productsInCart.length === 0 && 'disabled'}
+            <CartButton disabled={this.disableCartButton(productsInCart.length)}
               onClick={this.toggleMiniCart}
             >
-              <span style={productsInCart.length === 0 ? { display: 'none' } : { display: 'flex' }}>
+              <TotalQuantityIcon display={this.displayQuantityIcon(productsInCart.length)}>
                 <FontRoboto color="white" fontWeight="700" fontSize="14px">
                   {productsInCart.length}
                 </FontRoboto>
-              </span>
+              </TotalQuantityIcon>
               <img src={cart} alt="logo" />
             </CartButton>
           </CurrencyStyle>
         </HeaderContainer>
-        <MiniCartBg
-          display={this.state.display}
-        >
+        <MiniCartBg display={this.state.display}>
           <Dropdown
             show={this.state.cartIconIsPressed}
             onClickOutside={this.toggleMiniCart}
