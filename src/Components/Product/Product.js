@@ -91,7 +91,7 @@ class Product extends React.Component {
                             'Success!',
                             `The ${product.brand} ${product.name} is successfully added to your cart.`,
                             'CONTINUE BROWSING',
-                            'GO CHECK YOUR CART',
+                            'VIEW BAG',
                             '/cart')
                       }
                     }}

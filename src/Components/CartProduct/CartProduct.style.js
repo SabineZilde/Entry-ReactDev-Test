@@ -32,10 +32,8 @@ export const ImgContainer = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    &:hover {
-        button {
-            display: block;
-        }
+    & button {
+        display: block;
     }
 `
 

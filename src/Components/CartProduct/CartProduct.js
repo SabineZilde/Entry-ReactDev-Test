@@ -93,7 +93,6 @@ class Cart extends React.Component {
                   </QuantityButton>
                 </Column>
                 <ImgContainer>
-                  {item.gallery.length > 1 && (
                     <ArrowButton left
                       onClick={() => {
                         this.setState({
@@ -112,7 +111,6 @@ class Cart extends React.Component {
                     >
                       &lt;
                     </ArrowButton>
-                  )}
                   <ProductImage
                     key={item.id + item.gallery[this.state.imgNumber]}
                     backgroundImage={this.state.itemId === item.id ?
@@ -120,7 +118,6 @@ class Cart extends React.Component {
                       item.gallery[0]
                     }
                   />
-                  {item.gallery.length > 1 && (
                     <ArrowButton
                       onClick={() => {
                         this.setState({
@@ -139,7 +136,6 @@ class Cart extends React.Component {
                     >
                       &gt;
                     </ArrowButton>
-                  )}
                 </ImgContainer>
                 <CloseButton
                   margin='-10px 5px 0 0'

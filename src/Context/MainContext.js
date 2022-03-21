@@ -61,7 +61,7 @@ export class MainProvider extends Component {
   };
 
   removeProduct = (id) => {
-    const { productsInCart, contextCurrency, getTotalQuantity } = this.state;
+    const { productsInCart, contextCurrency } = this.state;
     const prodIndex = productsInCart.findIndex((product) => {
       return product.id === id;
     });
