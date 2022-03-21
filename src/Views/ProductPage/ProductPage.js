@@ -7,6 +7,8 @@ import {
   ProductDetailColumn,
   DescriptionRow,
   Attributes,
+  Input,
+  Label
 } from "./ProductPage.style";
 import { FontRaleway, FontRoboto } from "../../Components/Fonts/Fonts.style";
 import { Query } from "@apollo/client/react/components";
@@ -109,22 +111,24 @@ class ProductPage extends React.Component {
                       {attribute.items.map((item) => {
                         return (
                           <Attributes key={item.id}>
-                            <input
+                            <Input
                               type="radio"
                               id={`${attribute.name} ${item.id}`}
                               name={attribute.name}
                               value={item.value}
+                              checkedColor={attribute.name !== 'Color' && '#1D1F22'}
+                              checkedBorder={attribute.name === 'Color' && '3px solid #A6A6A6'}
                               onClick={() =>
                                 this.saveAttributes(attribute.name, item.value)
                               }
                             />
-                            <label
+                            <Label
                               htmlFor={`${attribute.name} ${item.id}`}
-                              style={{ backgroundColor: item.value }}
+                              bgColor={attribute.name === 'Color' && item.value}
                             >
                               {attribute.name !== "Color" && item.value}
 
-                            </label>
+                            </Label>
                           </Attributes>
                         );
                       })}

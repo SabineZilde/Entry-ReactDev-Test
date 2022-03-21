@@ -18,6 +18,12 @@ export const Row = styled.div`
     justify-content: space-between;
 `
 
+export const AttributeRow = styled.div`
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+`
+
 export const Column = styled.div`
     display: flex;
     flex-direction: column;

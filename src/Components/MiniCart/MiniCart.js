@@ -4,6 +4,7 @@ import {
   MiniCartContainer,
   Column,
   Row,
+  AttributeRow,
   ProductImage,
 } from "./MiniCart.style.js";
 import {
@@ -49,10 +50,8 @@ class MiniCart extends React.Component {
                 })}
                 {item.attributes.map((atr) => {
                   return (
-                    <FontRaleway
-                      fontSize="12px"
+                    <AttributeRow
                       key={atr.value + atr.name}
-                      style={{ display: "flex", alignItems: "center" }}
                     >
                       {atr.name}:&nbsp;
                       {atr.name === "Color" ? (
@@ -66,7 +65,7 @@ class MiniCart extends React.Component {
                           {atr.value}
                         </FontRaleway>
                       )}
-                    </FontRaleway>
+                    </AttributeRow>
                   );
                 })}
               </Column>

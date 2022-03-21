@@ -49,26 +49,27 @@ export const DescriptionRow = styled.div`
 export const Attributes = styled.div`
     display: inline-flex;
     overflow: hidden;
+`
 
-    & label {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #1D1F22;
-        color: #292929;
-        height: 45px;
-        width: 63px;
-        margin: 0 10px 10px 0;
-        cursor: pointer; 
-    }
+export const Label = styled.label`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #1D1F22;
+    color: #292929;
+    height: 45px;
+    width: 63px;
+    margin: 0 10px 10px 0;
+    cursor: pointer; 
+    background-color: ${props => props.bgColor};
+`
 
-    & input {
-        display: none;
-    }
+export const Input = styled.input`
+    display: none;
      
-    & input:checked + label{
-        background-color: #1D1F22;
+    &:checked + ${Label} {
+        background-color: ${props => props.checkedColor};
         color: #FFFFFF;
-        border: 3px solid #A6A6A6;
+        border: ${props => props.checkedBorder};
      }
 `
