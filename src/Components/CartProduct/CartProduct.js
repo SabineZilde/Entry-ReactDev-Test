@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   ProductContainer,
@@ -14,24 +13,20 @@ import { FontRaleway } from "../Fonts/Fonts.style";
 import {
   AttributeButton,
   QuantityButton,
-  CloseButton
+  CloseButton,
 } from "../Buttons/Buttons.style";
 import MainContext from "../../Context/MainContext";
-import alert from '../../Assets/Alert.svg'
+import alert from "../../Assets/Alert.svg";
 
 class Cart extends React.Component {
   state = {
-    itemId: '',
+    itemId: "",
     imgNumber: 0,
   };
 
   render() {
-    const {
-      productsInCart,
-      contextCurrency,
-      updateProductCount,
-      showAlert,
-    } = this.context;
+    const { productsInCart, contextCurrency, updateProductCount, showAlert } =
+      this.context;
     return (
       <>
         {productsInCart.map((item) => {
@@ -43,15 +38,17 @@ class Cart extends React.Component {
                 </FontRaleway>
                 <FontRaleway fontSize="30px">{item.name}</FontRaleway>
                 {item.prices.map((price) => {
-                  return price.currency.symbol === contextCurrency && (
-                    <FontRaleway
-                      fontSize="24px"
-                      fontWeight="700"
-                      key={price.amount}
-                    >
-                      {price.currency.symbol}
-                      {(price.amount * item.count).toFixed(2)}
-                    </FontRaleway>
+                  return (
+                    price.currency.symbol === contextCurrency && (
+                      <FontRaleway
+                        fontSize="24px"
+                        fontWeight="700"
+                        key={price.amount}
+                      >
+                        {price.currency.symbol}
+                        {(price.amount * item.count).toFixed(2)}
+                      </FontRaleway>
+                    )
                   );
                 })}
                 {item.attributes.map((atr) => {
@@ -93,59 +90,68 @@ class Cart extends React.Component {
                   </QuantityButton>
                 </Column>
                 <ImgContainer>
-                    <ArrowButton left
-                      onClick={() => {
+                  <ArrowButton
+                    left
+                    onClick={() => {
+                      this.setState({
+                        itemId: item.id,
+                      });
+                      if (item.gallery.length === 1) {
                         this.setState({
-                          itemId: item.id
-                        })
-                        if (this.state.imgNumber === 0) {
-                          this.setState({
-                            imgNumber: item.gallery.length - 1,
-                          });
-                        } else {
-                          this.setState({
-                            imgNumber: this.state.imgNumber - 1,
-                          });
-                        }
-                      }}
-                    >
-                      &lt;
-                    </ArrowButton>
+                          imgNumber: 0,
+                        });
+                      } else if (this.state.imgNumber === 0) {
+                        this.setState({
+                          imgNumber: item.gallery.length - 1,
+                        });
+                      } else {
+                        this.setState({
+                          imgNumber: this.state.imgNumber - 1,
+                        });
+                      }
+                    }}
+                  >
+                    &lt;
+                  </ArrowButton>
                   <ProductImage
                     key={item.id + item.gallery[this.state.imgNumber]}
-                    backgroundImage={this.state.itemId === item.id ?
-                      item.gallery[this.state.imgNumber] :
-                      item.gallery[0]
+                    backgroundImage={
+                      this.state.itemId === item.id
+                        ? item.gallery[this.state.imgNumber]
+                        : item.gallery[0]
                     }
                   />
-                    <ArrowButton
-                      onClick={() => {
+                  <ArrowButton
+                    onClick={() => {
+                      this.setState({
+                        itemId: item.id,
+                      });
+                      if (this.state.imgNumber < item.gallery.length - 1) {
                         this.setState({
-                          itemId: item.id
-                        })
-                        if (this.state.imgNumber < item.gallery.length - 1) {
-                          this.setState({
-                            imgNumber: this.state.imgNumber + 1,
-                          });
-                        } else {
-                          this.setState({
-                            imgNumber: 0,
-                          });
-                        }
-                      }}
-                    >
-                      &gt;
-                    </ArrowButton>
+                          imgNumber: this.state.imgNumber + 1,
+                        });
+                      } else {
+                        this.setState({
+                          imgNumber: 0,
+                        });
+                      }
+                    }}
+                  >
+                    &gt;
+                  </ArrowButton>
                 </ImgContainer>
                 <CloseButton
-                  margin='-10px 5px 0 0'
+                  margin="-10px 5px 0 0"
                   onClick={() => {
-                    showAlert(item.id, alert,
-                      'Are you sure?',
-                      'This action will remove the product from your cart.',
-                      'RETURN TO CART',
-                      'YES, DELETE PRODUCT',
-                      '/cart')
+                    showAlert(
+                      item.id,
+                      alert,
+                      "Are you sure?",
+                      "This action will remove the product from your cart.",
+                      "RETURN TO CART",
+                      "YES, DELETE PRODUCT",
+                      "/cart"
+                    );
                   }}
                 >
                   X
@@ -155,7 +161,7 @@ class Cart extends React.Component {
           );
         })}
       </>
-    )
+    );
   }
 }
 
