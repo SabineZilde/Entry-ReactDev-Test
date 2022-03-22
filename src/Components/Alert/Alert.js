@@ -6,8 +6,13 @@ import { AlertContainer, AlertBckground, Icon, ButtonRow } from "./Alert.style";
 import MainContext from "../../Context/MainContext";
 
 class Alert extends React.Component {
+  handleRemoveProduct = (button, id) => {
+    if (button === "YES, DELETE PRODUCT") {
+      this.context.removeProduct(id);
+    }
+  }
   render() {
-    const { alertContent, hideAlert, removeProduct } = this.context;
+    const { alertContent, hideAlert } = this.context;
     return (
       <AlertContainer>
         <AlertBckground>
@@ -31,9 +36,7 @@ class Alert extends React.Component {
               <Button 
               onClick={() => {
                 hideAlert();
-                if (alertContent.secondaryButton === "YES, DELETE PRODUCT") {
-                  removeProduct(alertContent.id);
-                }
+                this.handleRemoveProduct(alertContent.secondaryButton, alertContent.id)
               }}>
                 {alertContent.secondaryButton}
               </Button>
