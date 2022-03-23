@@ -5,6 +5,10 @@ import Product from "../../Components/Product/Product";
 import MainContext from "../../Context/MainContext";
 
 class CategoryPage extends React.Component {
+  componentDidMount = () => {
+    this.context.setScrollHeight(document.documentElement.scrollHeight);
+  };
+
   render() {
     const { contextCategory } = this.context;
     return (

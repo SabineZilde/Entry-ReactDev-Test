@@ -69,7 +69,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { contextCurrency, getCategory, productsInCart, totalQuantity } = this.context;
+    const { contextCurrency, getCategory, productsInCart, totalQuantity, scrollHeight } = this.context;
     return (
       <div>
         <HeaderContainer>
@@ -82,8 +82,9 @@ class Header extends React.Component {
                   <NavLink
                     to={"/category/" + category.name}
                     key={id}
-                    onClick={() => getCategory(category.name)
-                    }>
+                    onClick={() => {
+                      getCategory(category.name);
+                    }}>
                     <HeaderButton>{category.name}</HeaderButton>
                   </NavLink>
                 ));
@@ -118,7 +119,7 @@ class Header extends React.Component {
             </CartButton>
           </CurrencyStyle>
         </HeaderContainer>
-        <MiniCartBg display={this.state.display}>
+        <MiniCartBg display={this.state.display} height={scrollHeight}>
           <Dropdown
             show={this.state.cartIconIsPressed}
             onClickOutside={this.toggleMiniCart}

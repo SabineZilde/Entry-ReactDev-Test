@@ -65,10 +65,10 @@ export const TotalQuantityIcon = styled.span`
 
 export const MiniCartBg = styled.div`
     display: ${props => props.display}; 
-    position: fixed;
+    position: absolute;
     background-size: cover;
     background-color: rgba(57, 55, 72, 0.22);
-    height: 2000px;
+    height: ${props => props.height};
     width: 100%;
     z-index: 1;
 `

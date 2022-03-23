@@ -11,6 +11,7 @@ export class MainProvider extends Component {
     total: 0,
     alertIsTriggered: false,
     alertContent: {},
+    scrollHeight: ''
   };
 
   getCategory = (category) => {
@@ -153,8 +154,13 @@ export class MainProvider extends Component {
     });
   };
 
+
+  setScrollHeight = (height) => {
+    this.setState({ scrollHeight: `${height}px` })
+  }
+
   render() {
-    const { contextCategory, contextCurrency, productsInCart, totalQuantity, total, alertIsTriggered, alertContent } = this.state;
+    const { contextCategory, contextCurrency, productsInCart, totalQuantity, total, alertIsTriggered, alertContent, scrollHeight } = this.state;
     const {
       getCategory,
       updateCurrency,
@@ -165,6 +171,7 @@ export class MainProvider extends Component {
       getTotal,
       showAlert,
       hideAlert,
+      setScrollHeight,
     } = this;
     return (
       <MainContext.Provider
@@ -176,6 +183,7 @@ export class MainProvider extends Component {
           total,
           alertIsTriggered,
           alertContent,
+          scrollHeight,
           getCategory,
           updateCurrency,
           updateCart,
@@ -185,6 +193,7 @@ export class MainProvider extends Component {
           getTotal,
           showAlert,
           hideAlert,
+          setScrollHeight
         }}
       >
         {this.props.children}

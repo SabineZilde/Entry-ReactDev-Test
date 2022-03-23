@@ -26,6 +26,7 @@ class ProductPage extends React.Component {
   };
 
   componentDidMount() {
+    this.context.setScrollHeight(document.documentElement.scrollHeight);
     let id = this.props.match.params.id;
     this.setState({
       id: id,
