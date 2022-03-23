@@ -90,7 +90,7 @@ class Cart extends React.Component {
                         key={price.amount}
                       >
                         {price.currency.symbol}
-                        {(price.amount * item.count).toFixed(2)}
+                        {price.amount}
                       </FontRaleway>
                     )
                   );

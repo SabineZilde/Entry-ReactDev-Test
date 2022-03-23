@@ -42,7 +42,7 @@ class MiniCart extends React.Component {
                     return (
                       <FontRaleway fontWeight="500" key={price.amount}>
                         {price.currency.symbol}
-                        {(price.amount.toFixed(2) * item.count).toFixed(2)}
+                        {price.amount}
                       </FontRaleway>
                     );
                   }
