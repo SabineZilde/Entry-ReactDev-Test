@@ -16,7 +16,6 @@ import {
   CloseButton,
 } from "../Buttons/Buttons.style";
 import MainContext from "../../Context/MainContext";
-import alert from "../../Assets/Alert.svg";
 
 class Cart extends React.Component {
   state = {
@@ -157,15 +156,7 @@ class Cart extends React.Component {
                 <CloseButton
                   margin="-10px 5px 0 0"
                   onClick={() => {
-                    showAlert(
-                      item.id,
-                      alert,
-                      "Are you sure?",
-                      "This action will remove the product from your cart.",
-                      "RETURN TO CART",
-                      "YES, DELETE PRODUCT",
-                      "/cart"
-                    );
+                    showAlert('delete', item.id)
                   }}
                 >
                   X

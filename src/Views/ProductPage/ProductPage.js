@@ -15,8 +15,6 @@ import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 import parse from "html-react-parser";
 import MainContext from "../../Context/MainContext";
-import alert from '../../Assets/Alert.svg';
-import success from '../../Assets/Success.svg';
 
 class ProductPage extends React.Component {
   state = {
@@ -69,7 +67,7 @@ class ProductPage extends React.Component {
   };
 
   render() {
-    const { contextCurrency, productsInCart, alertIsTriggered, updateCart, showAlert } = this.context;
+    const { contextCurrency, alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
@@ -158,23 +156,19 @@ class ProductPage extends React.Component {
                   <ButtonLarge
                     primary
                     onClick={() => {
-                      const check = productsInCart.every((prod) => {
-                        return prod.id !== product.id;
-                      });
-                      if (!check) {
-                        showAlert(product.id, alert,
-                          'Duplicate!',
-                          `${product.brand} ${product.name} is already in your cart!`,
-                          'CONTINUE BROWSING',
-                          'VIEW BAG',
-                          '/cart')
-                      } else if (this.state.chosenAttributes.length < product.attributes.length) {
-                        showAlert(product.id, alert,
-                          'This product has attributes.',
-                          'Please choose attributes before adding this item to cart!',
-                          'CHOOSE ATTRIBUTES',
-                          'CONTINUE BROWSING',
-                          `/category/all`)
+                      // const check = productsInCart.every((prod) => {
+                      //   return prod.id !== product.id;
+                      // });
+                      // if (!check) {
+                      //   showAlert(product.id, alert,
+                      //     'Duplicate!',
+                      //     `${product.brand} ${product.name} is already in your cart!`,
+                      //     'CONTINUE BROWSING',
+                      //     'VIEW BAG',
+                      //     '/cart')
+                      // } else 
+                      if (this.state.chosenAttributes.length < product.attributes.length) {
+                        showAlert('attributes', product.id)
                       } else {
                         updateCart(
                           product.id,
@@ -185,12 +179,7 @@ class ProductPage extends React.Component {
                           this.state.chosenAttributes
                         );
                         return !alertIsTriggered &&
-                          showAlert(product.id, success,
-                            'Success!',
-                            `The ${product.brand} ${product.name} is successfully added to your cart.`,
-                            'CONTINUE BROWSING',
-                            'VIEW BAG',
-                            '/cart')
+                          showAlert('success', product.id, product.brand, product.name)
                       }
                     }}
                   >

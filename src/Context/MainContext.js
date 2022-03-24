@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import alertIcon from '../Assets/Alert.svg';
+import successIcon from '../Assets/Success.svg';
 
 const MainContext = React.createContext();
 
@@ -131,21 +133,60 @@ export class MainProvider extends Component {
     this.setState({ total: res.toFixed(2) });
   };
 
-  showAlert = (id, icon, title, description, primaryButton, secondaryButton, secondaryLink) => {
+  showAlert = (alertType, id, brand, name) => {
     this.setState({
       alertIsTriggered: true,
     });
-    this.setState({
-      alertContent: {
-        id: id,
-        icon: icon,
-        title: title,
-        description: description,
-        primaryButton: primaryButton,
-        secondaryButton: secondaryButton,
-        secondaryLink: secondaryLink
-      }
-    })
+    if (alertType === 'success') {
+      this.setState({
+        alertContent: {
+          id: id,
+          icon: successIcon,
+          title: 'Success!',
+          description: `The ${brand} ${name} is successfully added to your cart.`,
+          primaryButton: 'CONTINUE BROWSING',
+          secondaryButton: 'VIEW BAG',
+          secondaryLink: '/cart'
+        }
+      })
+    }
+    if (alertType === 'attributes') {
+      this.setState({
+        alertContent: {
+          id: id,
+          icon: alertIcon,
+          title: 'This product has attributes.',
+          description: 'Please choose attributes before adding this item to cart!',
+          primaryButton: '',
+          secondaryButton: 'CHOOSE ATTRIBUTES',
+          secondaryLink: `/product/${id}`
+        }
+      })
+    }
+    if (alertType === 'delete') {
+      this.setState({
+        alertContent: {
+          id: id,
+          icon: alertIcon,
+          title: "Are you sure?",
+          description: "This action will remove the product from your cart.",
+          primaryButton: "RETURN TO CART",
+          secondaryButton: "YES, DELETE PRODUCT",
+          secondaryLink: '/cart'
+        }
+      })
+    }
+    // this.setState({
+    //   alertContent: {
+    //     id: id,
+    //     icon: icon,
+    //     title: title,
+    //     description: description,
+    //     primaryButton: primaryButton,
+    //     secondaryButton: secondaryButton,
+    //     secondaryLink: secondaryLink
+    //   }
+    // })
   };
 
   hideAlert = () => {

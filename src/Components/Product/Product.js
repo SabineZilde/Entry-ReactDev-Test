@@ -11,12 +11,10 @@ import circleIcon from "../../Assets/CircleIcon.svg";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
-import alert from '../../Assets/Alert.svg'
-import success from '../../Assets/Success.svg'
 
 class Product extends React.Component {
   render() {
-    const { contextCategory, contextCurrency, productsInCart, alertIsTriggered, updateCart, showAlert } = this.context;
+    const { contextCategory, contextCurrency, alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: contextCategory }}>
         {({ loading, data }) => {
@@ -59,24 +57,20 @@ class Product extends React.Component {
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      const check = productsInCart.every((prod) => {
-                        return prod.id !== product.id;
-                      });
-                      if (!check) {
-                        showAlert(product.id, alert,
-                          'Duplicate!',
-                          `${product.brand} ${product.name} is already in your cart!`,
-                          'CONTINUE BROWSING',
-                          'VIEW BAG',
-                          '/cart')
-                      } else if (product.attributes[0]) {
+                      // const check = productsInCart.every((prod) => {
+                      //   return prod.id !== product.id;
+                      // });
+                      // if (!check) {
+                      //   showAlert(product.id, alert,
+                      //     'Duplicate!',
+                      //     `${product.brand} ${product.name} is already in your cart!`,
+                      //     'CONTINUE BROWSING',
+                      //     'VIEW BAG',
+                      //     '/cart')
+                      // } else 
+                      if (product.attributes[0]) {
                         return !alertIsTriggered &&
-                          showAlert(product.id, alert,
-                            'This product has attributes.',
-                            'Please choose attributes before adding this item to cart!',
-                            'CONTINUE BROWSING',
-                            'CHOOSE ATTRIBUTES',
-                            `/product/${product.id}`)
+                          showAlert('attributes', product.id)
                       } else {
                         updateCart(
                           product.id,
@@ -87,12 +81,7 @@ class Product extends React.Component {
                           product.attributes
                         );
                         return !alertIsTriggered &&
-                          showAlert(product.id, success,
-                            'Success!',
-                            `The ${product.brand} ${product.name} is successfully added to your cart.`,
-                            'CONTINUE BROWSING',
-                            'VIEW BAG',
-                            '/cart')
+                          showAlert('success', product.id, product.brand, product.name)
                       }
                     }}
                   >

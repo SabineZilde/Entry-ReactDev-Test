@@ -25,19 +25,21 @@ class Alert extends React.Component {
             {alertContent.description}
           </FontRaleway>
           <ButtonRow>
-            <Button
-              primary
-              margin="0 12px 0 0"
-              onClick={hideAlert}
-            >
-              {alertContent.primaryButton}
-            </Button>
+            {alertContent.primaryButton !== '' && (
+              <Button
+                primary
+                margin="0 12px 0 0"
+                onClick={hideAlert}
+              >
+                {alertContent.primaryButton}
+              </Button>
+            )}
             <Link to={alertContent.secondaryLink}>
-              <Button 
-              onClick={() => {
-                hideAlert();
-                this.handleRemoveProduct(alertContent.secondaryButton, alertContent.id)
-              }}>
+              <Button
+                onClick={() => {
+                  hideAlert();
+                  this.handleRemoveProduct(alertContent.secondaryButton, alertContent.id)
+                }}>
                 {alertContent.secondaryButton}
               </Button>
             </Link>
