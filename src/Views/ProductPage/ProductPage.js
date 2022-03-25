@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ButtonLarge } from "../../Components/Buttons/Buttons.style";
 import {
   Row,
@@ -157,17 +158,6 @@ class ProductPage extends React.Component {
                   <ButtonLarge
                     primary
                     onClick={() => {
-                      // const check = productsInCart.every((prod) => {
-                      //   return prod.id !== product.id;
-                      // });
-                      // if (!check) {
-                      //   showAlert(product.id, alert,
-                      //     'Duplicate!',
-                      //     `${product.brand} ${product.name} is already in your cart!`,
-                      //     'CONTINUE BROWSING',
-                      //     'VIEW BAG',
-                      //     '/cart')
-                      // } else 
                       if (this.state.chosenAttributes.length < product.attributes.length) {
                         showAlert('attributes', product.id)
                       } else {

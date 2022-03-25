@@ -11,6 +11,7 @@ import {
   Button,
   AttributeButton,
   QuantityButton,
+  CloseButton
 } from "../Buttons/Buttons.style";
 import { FontRaleway } from "../../Components/Fonts/Fonts.style";
 import MainContext from "../../Context/MainContext";
@@ -23,7 +24,7 @@ class MiniCart extends React.Component {
   };
 
   render() {
-    const { productsInCart, contextCurrency, updateProductCount, total } =
+    const { productsInCart, contextCurrency, updateProductCount, total, showAlert } =
       this.context;
     return (
       <MiniCartContainer>
@@ -94,6 +95,14 @@ class MiniCart extends React.Component {
               <Column colWidth="105px">
                 <ProductImage backgroundImage={item.gallery[0]} />
               </Column>
+              <CloseButton
+                  margin="-10px 5px 0 0"
+                  onClick={() => {
+                    showAlert("delete", item.id);
+                  }}
+                >
+                  X
+                </CloseButton>
             </Row>
           );
         })}

@@ -57,17 +57,6 @@ class Product extends React.Component {
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      // const check = productsInCart.every((prod) => {
-                      //   return prod.id !== product.id;
-                      // });
-                      // if (!check) {
-                      //   showAlert(product.id, alert,
-                      //     'Duplicate!',
-                      //     `${product.brand} ${product.name} is already in your cart!`,
-                      //     'CONTINUE BROWSING',
-                      //     'VIEW BAG',
-                      //     '/cart')
-                      // } else 
                       if (product.attributes[0]) {
                         return !alertIsTriggered &&
                           showAlert('attributes', product.id)

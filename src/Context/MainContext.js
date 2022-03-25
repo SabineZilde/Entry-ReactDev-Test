@@ -30,7 +30,6 @@ export class MainProvider extends Component {
       return atr['value'].toString();
     })
     const extendedId = id + attributeString;
-    console.log(extendedId)
 
     const checkId = productsInCart.every((prod) => {
       return prod.id !== extendedId;
@@ -212,7 +211,6 @@ export class MainProvider extends Component {
   }
 
   render() {
-    console.log(this.state.productsInCart)
     const { contextCategory, contextCurrency, productsInCart, totalQuantity, total, alertIsTriggered, alertContent, scrollHeight } = this.state;
     const {
       getCategory,

@@ -70,8 +70,6 @@ class Cart extends React.Component {
   render() {
     const { productsInCart, contextCurrency, updateProductCount, showAlert } =
       this.context;
-    console.log(productsInCart)
-
     return (
       <>
         {productsInCart.map((item) => {
@@ -158,7 +156,7 @@ class Cart extends React.Component {
                 <CloseButton
                   margin="-10px 5px 0 0"
                   onClick={() => {
-                    showAlert('delete', item.id)
+                    showAlert("delete", item.id);
                   }}
                 >
                   X
