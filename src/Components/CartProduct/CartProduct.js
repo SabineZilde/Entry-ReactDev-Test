@@ -70,6 +70,8 @@ class Cart extends React.Component {
   render() {
     const { productsInCart, contextCurrency, updateProductCount, showAlert } =
       this.context;
+    console.log(productsInCart)
+
     return (
       <>
         {productsInCart.map((item) => {

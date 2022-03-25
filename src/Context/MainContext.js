@@ -26,20 +26,42 @@ export class MainProvider extends Component {
 
   updateCart = (id, brand, name, gallery, prices, attributes) => {
     const { productsInCart, totalQuantity } = this.state;
-    this.setState({
-      productsInCart: [
-        ...productsInCart,
-        {
-          id: id,
-          brand: brand,
-          name: name,
-          gallery: gallery,
-          count: 1,
-          prices: prices,
-          attributes: attributes,
-        },
-      ],
+    const attributeString = attributes.map(atr => {
+      return atr['value'].toString();
+    })
+    const extendedId = id + attributeString;
+    console.log(extendedId)
+
+    const checkId = productsInCart.every((prod) => {
+      return prod.id !== extendedId;
     });
+
+    if (!checkId) {
+      const prodIndex = productsInCart.findIndex((product) => {
+        return product.id === extendedId;
+      });
+      const newState = [...productsInCart];
+      newState[prodIndex].count += 1;
+
+      this.setState({
+        productsInCart: newState,
+      });
+    } else {
+      this.setState({
+        productsInCart: [
+          ...productsInCart,
+          {
+            id: extendedId,
+            brand: brand,
+            name: name,
+            gallery: gallery,
+            count: 1,
+            prices: prices,
+            attributes: attributes,
+          },
+        ],
+      });
+    };
     this.setState({
       totalQuantity: totalQuantity + 1,
     })
@@ -176,17 +198,6 @@ export class MainProvider extends Component {
         }
       })
     }
-    // this.setState({
-    //   alertContent: {
-    //     id: id,
-    //     icon: icon,
-    //     title: title,
-    //     description: description,
-    //     primaryButton: primaryButton,
-    //     secondaryButton: secondaryButton,
-    //     secondaryLink: secondaryLink
-    //   }
-    // })
   };
 
   hideAlert = () => {
@@ -201,6 +212,7 @@ export class MainProvider extends Component {
   }
 
   render() {
+    console.log(this.state.productsInCart)
     const { contextCategory, contextCurrency, productsInCart, totalQuantity, total, alertIsTriggered, alertContent, scrollHeight } = this.state;
     const {
       getCategory,

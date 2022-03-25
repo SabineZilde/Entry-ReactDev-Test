@@ -21,6 +21,7 @@ class ProductPage extends React.Component {
     id: null,
     largeImg: null,
     chosenAttributes: [],
+    extendedId: ''
   };
 
   componentDidMount() {
@@ -117,9 +118,9 @@ class ProductPage extends React.Component {
                               value={item.value}
                               checkedColor={attribute.name !== 'Color' && '#1D1F22'}
                               checkedBorder={attribute.name === 'Color' && '3px solid #A6A6A6'}
-                              onClick={() =>
+                              onClick={() => {
                                 this.saveAttributes(attribute.name, item.value)
-                              }
+                              }}
                             />
                             <Label
                               htmlFor={`${attribute.name} ${item.id}`}
