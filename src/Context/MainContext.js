@@ -211,6 +211,7 @@ export class MainProvider extends Component {
   }
 
   render() {
+    console.log(this.state.productsInCart)
     const { contextCategory, contextCurrency, productsInCart, totalQuantity, total, alertIsTriggered, alertContent, scrollHeight } = this.state;
     const {
       getCategory,

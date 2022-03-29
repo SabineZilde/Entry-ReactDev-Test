@@ -11,6 +11,22 @@ class Alert extends React.Component {
       this.context.removeProduct(id);
     }
   }
+
+  togglePrimaryButton = (button) => {
+    const { hideAlert, alertContent } = this.context;
+    if (button !== '') {
+      return (
+        <Button
+          primary
+          margin="0 12px 0 0"
+          onClick={hideAlert}
+        >
+          {alertContent.primaryButton}
+        </Button>
+      )
+    }
+  }
+
   render() {
     const { alertContent, hideAlert } = this.context;
     return (
@@ -25,15 +41,7 @@ class Alert extends React.Component {
             {alertContent.description}
           </FontRaleway>
           <ButtonRow>
-            {alertContent.primaryButton !== '' && (
-              <Button
-                primary
-                margin="0 12px 0 0"
-                onClick={hideAlert}
-              >
-                {alertContent.primaryButton}
-              </Button>
-            )}
+            {this.togglePrimaryButton(alertContent.primaryButton)}
             <Link to={alertContent.secondaryLink}>
               <Button
                 onClick={() => {
