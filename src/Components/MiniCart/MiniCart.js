@@ -96,12 +96,12 @@ class MiniCart extends React.Component {
                 <ProductImage backgroundImage={item.gallery[0]} />
               </Column>
               <CloseButton
-                  margin="-10px 5px 0 0"
+                  margin="-6px 0 0 -10px"
                   onClick={() => {
                     showAlert("delete", item.id);
                   }}
                 >
-                  X
+                  x
                 </CloseButton>
             </Row>
           );

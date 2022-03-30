@@ -23,7 +23,7 @@ class ProductPage extends React.Component {
     largeImg: null,
     chosenAttributes: [],
     extendedId: '',
-    // checked: false
+    checked: false
   };
 
   componentDidMount() {
@@ -75,16 +75,17 @@ class ProductPage extends React.Component {
     })
   };
 
-  // toggleChecked = () => {
-  //   const { checked } = this.state;
-  //   if (checked === false) {
-  //     this.setState({ checked: true })
-  //   } else {
-  //     this.setState({ checked: false })
-  //   }
-  // };
+  handleChecked = () => {
+      this.setState({ checked: true })
+  };
+
+  handleUncheched = () => {
+    this.setState({ checked: false })
+    // document.getElementByName('input').checked = false;
+  };
 
   render() {
+    console.log(this.state.checked)
     const { contextCurrency, alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
@@ -130,6 +131,7 @@ class ProductPage extends React.Component {
                           <Attributes key={item.id}>
                             <Input
                               // defaultChecked={this.state.checked}
+                              checked={this.state.checked}
                               type="radio"
                               id={`${attribute.name} ${item.id}`}
                               name={attribute.name}
@@ -137,7 +139,7 @@ class ProductPage extends React.Component {
                               checkedColor={attribute.name !== 'Color' && '#1D1F22'}
                               checkedBorder={attribute.name === 'Color' && '3px solid #A6A6A6'}
                               onClick={() => {
-                                // this.toggleChecked();
+                                this.handleChecked();
                                 this.saveAttributes(attribute.name, item.value)
                               }}
                             />
@@ -189,6 +191,7 @@ class ProductPage extends React.Component {
                         );
                         this.clearAttributes();
                         // window.location.reload()
+                        this.handleUncheched();
                         return !alertIsTriggered &&
                           showAlert('success', product.id, product.brand, product.name)
                       }
