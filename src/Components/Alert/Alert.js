@@ -19,7 +19,10 @@ class Alert extends React.Component {
         <Button
           primary
           margin="0 12px 0 0"
-          onClick={hideAlert}
+          onClick={() => {
+            hideAlert();
+            window.location.reload();
+          }}
         >
           {alertContent.primaryButton}
         </Button>

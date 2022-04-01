@@ -72,4 +72,5 @@ export const CloseButton = styled.button`
     font-weight: 700;
     float: right;
     margin: ${props => props.margin};
+    z-index: ${props => props.zIndex};
 `

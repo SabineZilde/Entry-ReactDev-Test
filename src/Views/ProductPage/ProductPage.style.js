@@ -62,6 +62,9 @@ export const Label = styled.label`
     margin: 0 10px 10px 0;
     cursor: pointer; 
     background-color: ${props => props.bgColor};
+    /* background-color: ${props => props.checked && props.checkedColor};
+    color: ${props => props.checked ? '#FFFFFF' : '#292929'};
+    border: ${props => props.checked && props.checkedBorder}; */
 `
 
 export const Input = styled.input`

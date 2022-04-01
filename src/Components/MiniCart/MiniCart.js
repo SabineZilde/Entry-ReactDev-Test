@@ -97,6 +97,7 @@ class MiniCart extends React.Component {
               </Column>
               <CloseButton
                   margin="-6px 0 0 -10px"
+                  zIndex='1'
                   onClick={() => {
                     showAlert("delete", item.id);
                   }}

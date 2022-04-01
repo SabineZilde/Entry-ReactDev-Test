@@ -210,6 +210,27 @@ export class MainProvider extends Component {
     this.setState({ scrollHeight: `${height}px` })
   }
 
+  componentDidUpdate() {
+    localStorage.setItem('dataProductsInCart', JSON.stringify(this.state.productsInCart))
+    localStorage.setItem('dataTotal', JSON.stringify(this.state.total))
+    localStorage.setItem('dataTotalQ', JSON.stringify(this.state.totalQuantity))
+  };
+
+  componentDidMount() {
+    const dataProductsInCart = JSON.parse(localStorage.getItem('dataProductsInCart'));
+    if (dataProductsInCart !== null) {
+      this.setState({productsInCart: dataProductsInCart})
+    };
+    const dataTotal = JSON.parse(localStorage.getItem('dataTotal'));
+    if (dataTotal !== null) {
+      this.setState({total: dataTotal})
+    };
+    const dataTotalQ = JSON.parse(localStorage.getItem('dataTotalQ'));
+    if (dataTotalQ !== null) {
+      this.setState({totalQuantity: dataTotalQ})
+    };
+  };
+
   render() {
     console.log(this.state.productsInCart)
     const { contextCategory, contextCurrency, productsInCart, totalQuantity, total, alertIsTriggered, alertContent, scrollHeight } = this.state;
