@@ -5,19 +5,26 @@ import Product from "../../Components/Product/Product";
 import MainContext from "../../Context/MainContext";
 
 class CategoryPage extends React.Component {
-  componentDidMount = () => {
+  state = {
+    category: ''
+  };
+
+  componentDidMount() {
     this.context.setScrollHeight(document.documentElement.scrollHeight);
+    this.setState({
+      category: this.props.match.params.category
+    })
   };
 
   render() {
-    const { contextCategory } = this.context;
+    const { category } = this.state;
     return (
       <Container>
         <div>
-          <FontRaleway fontSize='42px' capitalize>{contextCategory}</FontRaleway>
+          <FontRaleway fontSize='42px' capitalize>{category}</FontRaleway>
         </div>
         <ProductContainer>
-          <Product />
+          <Product category={category} />
         </ProductContainer>
       </Container>
     );

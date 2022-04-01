@@ -79,14 +79,14 @@ class Header extends React.Component {
                 if (loading) return "Loading...";
                 const { categories } = data;
                 return categories.map((category, id) => (
-                  <NavLink
-                    to={"/category/" + category.name}
+                  <a
+                    href={"/category/" + category.name}
                     key={id}
                     onClick={() => {
                       getCategory(category.name);
                     }}>
                     <HeaderButton>{category.name}</HeaderButton>
-                  </NavLink>
+                  </a>
                 ));
               }}
             </Query>

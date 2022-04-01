@@ -18,11 +18,10 @@ import MainContext from "../../Context/MainContext";
 
 class ProductPage extends React.Component {
   state = {
-    id: 'apple-imac-2021',
+    id: '',
     largeImg: null,
     chosenAttributes: [],
     extendedId: '',
-    checked: false
   };
 
   componentDidMount() {
@@ -68,25 +67,8 @@ class ProductPage extends React.Component {
     }
   };
 
-  clearAttributes = () => {
-    this.setState({
-      chosenAttributes: []
-    })
-  };
-
-  handleChecked = (name, id) => {
-    this.setState({ checked: `${name} ${id}` })
-    // this.setState({ checked: true })
-  };
-
-  handleUncheched = () => {
-    this.setState({ checked: false })
-    // console.log(document.getElementByName('input'))
-    // document.getElementByName('input').checked = false;
-  };
-
   render() {
-    console.log(this.state.checked)
+    console.log(this.state.id)
     const { contextCurrency, alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
@@ -131,25 +113,17 @@ class ProductPage extends React.Component {
                           return (
                             <Attributes key={item.id}>
                               <Input
-                                // checked={item.id && this.state.checked}
-                                // checked
                                 type="radio"
                                 id={`${attribute.name} ${item.id}`}
                                 name={attribute.name}
                                 value={item.value}
                                 checkedColor={attribute.name !== 'Color' && '#1D1F22'}
                                 checkedBorder={attribute.name === 'Color' && '3px solid #A6A6A6'}
-
-                                // onChange={() => this.handleChecked(attribute.name, item.id)}
                                 onClick={() => {
-                                  // this.handleChecked()
                                   this.saveAttributes(attribute.name, item.value)
                                 }}
                               />
                               <Label
-                                // checked={this.state.checked === `${attribute.name} ${item.id}`}
-                                // checkedColor={attribute.name !== 'Color' && '#1D1F22'}
-                                // checkedBorder={attribute.name === 'Color' ? '3px solid #A6A6A6' : ''}
                                 htmlFor={`${attribute.name} ${item.id}`}
                                 bgColor={attribute.name === 'Color' && item.value}
                               >
@@ -194,8 +168,6 @@ class ProductPage extends React.Component {
                             product.prices,
                             this.state.chosenAttributes
                           );
-                          this.clearAttributes();
-                          this.handleUncheched();
                           return !alertIsTriggered &&
                             showAlert('success', product.id, product.brand, product.name)
                         }
