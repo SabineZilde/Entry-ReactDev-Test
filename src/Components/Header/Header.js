@@ -91,9 +91,9 @@ class Header extends React.Component {
               }}
             </Query>
           </div>
-          <Link to="/category/all">
+          <a href="/category/all">
             <img src={logo} alt="logo" />
-          </Link>
+          </a>
           <CurrencyStyle>
             <CurrencyButton onClick={this.toggleCurrencyMenu}>
               {contextCurrency}
