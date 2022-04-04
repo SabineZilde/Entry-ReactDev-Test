@@ -10,7 +10,6 @@ class CategoryPage extends React.Component {
   };
 
   componentDidMount() {
-    this.context.setScrollHeight(document.documentElement.scrollHeight);
     this.setState({
       category: this.props.match.params.category
     })

@@ -25,7 +25,6 @@ class ProductPage extends React.Component {
   };
 
   componentDidMount() {
-    this.context.setScrollHeight(document.documentElement.scrollHeight);
     let id = this.props.match.params.id;
     this.setState({
       id: id,
@@ -68,7 +67,6 @@ class ProductPage extends React.Component {
   };
 
   render() {
-    console.log(this.state.id)
     const { contextCurrency, alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>

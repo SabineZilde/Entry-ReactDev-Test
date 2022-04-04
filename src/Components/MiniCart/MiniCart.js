@@ -18,6 +18,7 @@ import MainContext from "../../Context/MainContext";
 
 class MiniCart extends React.Component {
   componentDidMount = () => {    
+    this.context.setScrollHeight(document.documentElement.scrollHeight);
     if (this.context.productsInCart.length > 0) {
       this.context.getTotal(this.context.contextCurrency);
     }
