@@ -9,7 +9,7 @@ class Alert extends React.Component {
   handleRemoveProduct = (button, id) => {
     if (button === "YES, DELETE PRODUCT") {
       this.context.removeProduct(id);
-    }
+    };
   }
 
   togglePrimaryButton = (button) => {
@@ -28,6 +28,13 @@ class Alert extends React.Component {
         </Button>
       )
     }
+  };
+
+  handleSecondaryLink = (link) => {
+    console.log(link)
+    if (link !== '') {
+      return link;
+    }
   }
 
   render() {
@@ -45,7 +52,7 @@ class Alert extends React.Component {
           </FontRaleway>
           <ButtonRow>
             {this.togglePrimaryButton(alertContent.primaryButton)}
-            <Link to={alertContent.secondaryLink}>
+            <Link to={() => this.handleSecondaryLink(alertContent.secondaryLink)}>
               <Button
                 onClick={() => {
                   hideAlert();

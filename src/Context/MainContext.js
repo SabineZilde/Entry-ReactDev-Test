@@ -193,6 +193,7 @@ export class MainProvider extends Component {
           description: "This action will remove the product from your cart.",
           primaryButton: "",
           secondaryButton: "YES, DELETE PRODUCT",
+          secondaryLink: ''
         }
       })
     }
@@ -231,7 +232,6 @@ export class MainProvider extends Component {
   };
 
   render() {
-    console.log(this.state.scrollHeight)
     const { contextCategory, contextCurrency, productsInCart, totalQuantity, total, alertIsTriggered, alertContent, scrollHeight } = this.state;
     const {
       getCategory,
