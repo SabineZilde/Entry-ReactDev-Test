@@ -191,9 +191,8 @@ export class MainProvider extends Component {
           icon: alertIcon,
           title: "Are you sure?",
           description: "This action will remove the product from your cart.",
-          primaryButton: "RETURN TO CART",
+          primaryButton: "",
           secondaryButton: "YES, DELETE PRODUCT",
-          secondaryLink: '/cart'
         }
       })
     }
