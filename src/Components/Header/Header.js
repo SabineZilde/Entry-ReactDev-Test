@@ -9,7 +9,7 @@ import {
   ArrowStyle,
   MiniCartBg
 } from "./Header.style";
-import { FontRoboto } from "../Fonts/Fonts.style";
+import { FontRoboto } from "../Fonts.style";
 import Dropdown from "../Dropdown/Dropdown";
 import logo from "../../Assets/Logo.svg";
 import cart from "../../Assets/Cart.svg";

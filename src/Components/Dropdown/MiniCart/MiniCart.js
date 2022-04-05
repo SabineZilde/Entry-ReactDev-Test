@@ -12,9 +12,9 @@ import {
   AttributeButton,
   QuantityButton,
   CloseButton
-} from "../Buttons/Buttons.style";
-import { FontRaleway } from "../../Components/Fonts/Fonts.style";
-import MainContext from "../../Context/MainContext";
+} from "../../Buttons.style";
+import { FontRaleway } from "../../Fonts.style";
+import MainContext from "../../../Context/MainContext";
 
 class MiniCart extends React.Component {
   componentDidMount = () => {    

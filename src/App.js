@@ -9,12 +9,18 @@ import Cart from "./Views/Cart/Cart";
 import MainContext from "./Context/MainContext";
 
 class App extends React.Component {
+
+  handleAlert = () => {
+    if (this.context.alertIsTriggered) {
+      return <Alert />;
+    }; 
+  };
+
   render() {
-    const { alertIsTriggered } = this.context;
     return (
       <BrowserRouter>
         <GlobalStyles />
-        {alertIsTriggered && <Alert />}
+        {this.handleAlert()}
         <Header />
         <Switch>
           <Route path='/category/:category' component={CategoryPage} />

@@ -4,10 +4,13 @@ import {
   DropdownContent,
 } from "./CurrencyDropdown.style";
 import { Query } from "@apollo/client/react/components";
-import { LOAD_CURRENCIES } from "../../GraphQL/Queries";
-import MainContext from "../../Context/MainContext";
+import { LOAD_CURRENCIES } from "../../../GraphQL/Queries";
+import MainContext from "../../../Context/MainContext";
 
 class CurrencyDropdown extends React.Component {
+
+  
+
   render() {
     const { updateCurrency, productsInCart, getTotal } = this.context;
     return (

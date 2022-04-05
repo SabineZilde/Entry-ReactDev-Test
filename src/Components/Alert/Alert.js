@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FontRaleway } from "../Fonts/Fonts.style";
-import { Button, CloseButton } from "../Buttons/Buttons.style";
+import { FontRaleway } from "../Fonts.style";
+import { Button, CloseButton } from "../Buttons.style";
 import { AlertContainer, AlertBckground, Icon, ButtonRow } from "./Alert.style";
 import MainContext from "../../Context/MainContext";
 

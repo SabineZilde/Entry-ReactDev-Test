@@ -1,6 +1,6 @@
 import React from 'react';
-import CurrencyDropdown from '../CurrencyDropdown/CurrencyDropdown';
-import MiniCart from '../MiniCart/MiniCart';
+import CurrencyDropdown from './CurrencyDropdown/CurrencyDropdown';
+import MiniCart from './MiniCart/MiniCart';
 import MainContext from "../../Context/MainContext";
 
 class Dropdown extends React.Component {
@@ -23,6 +23,7 @@ class Dropdown extends React.Component {
   componentWillUnmount() {
     document.removeEventListener('click', this.handleClickOutside, true);
   };
+
 
   render() {
     if (!this.props.show)

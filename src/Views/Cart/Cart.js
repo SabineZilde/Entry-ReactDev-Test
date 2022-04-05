@@ -1,7 +1,7 @@
 import React from "react";
 import CartProduct from "../../Components/CartProduct/CartProduct";
 import { CartContainer, Total } from "./Cart.style";
-import { FontRaleway } from "../../Components/Fonts/Fonts.style";
+import { FontRaleway } from "../../Components/Fonts.style";
 import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {

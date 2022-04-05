@@ -6,7 +6,7 @@ import {
   ImageContainer,
   OutOfStockLayer,
 } from "./Product.style";
-import { FontRaleway } from "../../Components/Fonts/Fonts.style";
+import { FontRaleway } from "../Fonts.style";
 import circleIcon from "../../Assets/CircleIcon.svg";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCTS } from "../../GraphQL/Queries";

@@ -9,12 +9,12 @@ import {
   ArrowButton,
   Attributes,
 } from "./CartProduct.style";
-import { FontRaleway } from "../Fonts/Fonts.style";
+import { FontRaleway } from "../Fonts.style";
 import {
   AttributeButton,
   QuantityButton,
   CloseButton,
-} from "../Buttons/Buttons.style";
+} from "../Buttons.style";
 import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {

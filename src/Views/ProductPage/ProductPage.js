@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonLarge } from "../../Components/Buttons/Buttons.style";
+import { ButtonLarge } from "../../Components/Buttons.style";
 import {
   Row,
   ThumbnailColumn,
@@ -10,7 +10,7 @@ import {
   Input,
   Label
 } from "./ProductPage.style";
-import { FontRaleway, FontRoboto } from "../../Components/Fonts/Fonts.style";
+import { FontRaleway, FontRoboto } from "../../Components/Fonts.style";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 import parse from "html-react-parser";
