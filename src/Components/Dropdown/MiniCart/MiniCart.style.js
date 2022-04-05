@@ -11,11 +11,9 @@ export const MiniCartContainer = styled.div`
 export const Row = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     margin: 23px 0;
     padding-bottom: 18px;
-
-    font-weight: ${props => props.total ? '700' : ''};
-    justify-content: space-between;
 `
 
 export const AttributeRow = styled.div`

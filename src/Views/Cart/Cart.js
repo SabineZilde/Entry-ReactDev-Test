@@ -6,13 +6,6 @@ import { FontRaleway } from "../../Components/Fonts.style";
 import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {
-  componentDidMount = () => {
-    const { productsInCart, contextCurrency, getTotal } = this.context;
-    if (productsInCart.length > 0) {
-      return getTotal(contextCurrency);
-    }
-  };
-
   handleCartContent = () => {
     const { productsInCart } = this.context;
     if (productsInCart.length === 0) {
@@ -21,7 +14,7 @@ class Cart extends React.Component {
       return (
         <>
           <CartProduct />
-          <Total />
+          <Total for='cart' />
         </>
       )
     }

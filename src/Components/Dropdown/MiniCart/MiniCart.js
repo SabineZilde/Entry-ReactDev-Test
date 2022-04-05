@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Total from "../../Total/Total.js";
 import {
   MiniCartContainer,
   Column,
@@ -17,15 +18,12 @@ import { FontRaleway } from "../../Fonts.style";
 import MainContext from "../../../Context/MainContext";
 
 class MiniCart extends React.Component {
-  componentDidMount = () => {    
+  componentDidMount() {
     this.context.setScrollHeight(document.documentElement.scrollHeight);
-    if (this.context.productsInCart.length > 0) {
-      this.context.getTotal(this.context.contextCurrency);
-    }
   };
 
   render() {
-    const { productsInCart, contextCurrency, updateProductCount, total, showAlert } =
+    const { productsInCart, contextCurrency, updateProductCount, showAlert } =
       this.context;
     return (
       <MiniCartContainer>
@@ -97,24 +95,18 @@ class MiniCart extends React.Component {
                 <ProductImage backgroundImage={item.gallery[0]} />
               </Column>
               <CloseButton
-                  margin="-6px 0 0 -10px"
-                  zIndex='1'
-                  onClick={() => {
-                    showAlert("delete", item.id);
-                  }}
-                >
-                  x
-                </CloseButton>
+                margin="-6px 0 0 -10px"
+                zIndex='1'
+                onClick={() => {
+                  showAlert("delete", item.id);
+                }}
+              >
+                x
+              </CloseButton>
             </Row>
           );
         })}
-        <Row total>
-          <div>Total</div>
-          <div>
-            {contextCurrency}
-            {total}
-          </div>
-        </Row>
+        <Total for='miniCart' />
         <Link to="/cart">
           <Button margin="0 12px 0 0" onClick={this.props.toggleMiniCart}>
             VIEW BAG
