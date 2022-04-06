@@ -15,6 +15,7 @@ import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 import parse from "html-react-parser";
 import MainContext from "../../Context/MainContext";
+import { Loader } from "../../Components/Loader.style";
 
 class ProductPage extends React.Component {
   state = {
@@ -71,7 +72,7 @@ class ProductPage extends React.Component {
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
-          if (loading) return "Loading...";
+          if (loading) return <Loader />;
           const { product } = data;
           return (
             <Row>

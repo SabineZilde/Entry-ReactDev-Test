@@ -11,6 +11,7 @@ import circleIcon from "../../Assets/CircleIcon.svg";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
+import { Loader } from "../Loader.style";
 
 class Product extends React.Component {
   render() {
@@ -18,7 +19,7 @@ class Product extends React.Component {
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: this.props.category }}>
         {({ loading, data }) => {
-          if (loading) return "Loading...";
+          if (loading) return <Loader />;
           const { category } = data;
           return category.products.map((product) => (
             <Link to={"/product/" + product.id} key={product.id}>

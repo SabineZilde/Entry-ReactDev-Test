@@ -16,6 +16,7 @@ import cart from "../../Assets/Cart.svg";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_CATEGORIES } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
+import { Loader } from "../Loader.style";
 
 class Header extends React.Component {
   state = {
@@ -75,7 +76,7 @@ class Header extends React.Component {
           <div>
             <Query query={LOAD_CATEGORIES}>
               {({ loading, data }) => {
-                if (loading) return "Loading...";
+                if (loading) return <Loader />;
                 const { categories } = data;
                 return categories.map((category, id) => (
                   <a

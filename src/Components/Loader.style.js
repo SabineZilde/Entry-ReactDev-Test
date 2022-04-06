@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 
 export const Loader = styled.div`
-    margin: auto;
+    margin: 20px auto;
     border: 4px solid #EAF0F6;
     border-radius: 50%;
     border-top: 4px solid #5ECE7B;

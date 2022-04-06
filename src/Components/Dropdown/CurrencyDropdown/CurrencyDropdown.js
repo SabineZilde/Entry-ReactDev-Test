@@ -18,7 +18,7 @@ class CurrencyDropdown extends React.Component {
       <DropdownContainer>
         <DropdownContent>
           <Query query={LOAD_CURRENCIES}>
-            {( loading, data ) => {
+            {({ loading, data }) => {
               if (loading) return <Loader />;
               const { currencies } = data;
               return currencies.map((currency, id) => (
