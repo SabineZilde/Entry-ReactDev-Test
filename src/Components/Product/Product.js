@@ -12,10 +12,11 @@ import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
 import { Loader } from "../Loader.style";
+import Price from "../Price";
 
 class Product extends React.Component {
   render() {
-    const { contextCurrency, alertIsTriggered, updateCart, showAlert } = this.context;
+    const { alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCTS} variables={{ title: this.props.category }}>
         {({ loading, data }) => {
@@ -41,19 +42,7 @@ class Product extends React.Component {
                 >
                   {product.brand} {product.name}
                 </FontRaleway>
-                {product.prices.map((price) => {
-                  return price.currency.symbol === contextCurrency && (
-                    <FontRaleway
-                      fontSize="18px"
-                      fontWeight="500"
-                      fontColor={!product.inStock && "#8D8F9A"}
-                      key={price.amount}
-                    >
-                      {price.currency.symbol}
-                      {price.amount.toFixed(2)}
-                    </FontRaleway>
-                  );
-                })}
+                <Price item={product} size='middle' inStock={product.inStock} />
                 {product.inStock && (
                   <button
                     onClick={(e) => {

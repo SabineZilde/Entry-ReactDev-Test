@@ -16,6 +16,7 @@ import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 import parse from "html-react-parser";
 import MainContext from "../../Context/MainContext";
 import { Loader } from "../../Components/Loader.style";
+import Price from "../../Components/Price";
 
 class ProductPage extends React.Component {
   state = {
@@ -68,7 +69,7 @@ class ProductPage extends React.Component {
   };
 
   render() {
-    const { contextCurrency, alertIsTriggered, updateCart, showAlert } = this.context;
+    const { alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
@@ -143,14 +144,7 @@ class ProductPage extends React.Component {
                   >
                     PRICE:
                   </FontRoboto>
-                  {product.prices.map((price, id) => {
-                    return price.currency.symbol === contextCurrency && (
-                      <FontRaleway fontSize="24px" fontWeight="700" key={id}>
-                        {price.currency.symbol}
-                        {price.amount.toFixed(2)}
-                      </FontRaleway>
-                    );
-                  })}
+                  <Price item={product} size='large' />
                 </div>
                 {product.inStock ? (
                     <ButtonLarge

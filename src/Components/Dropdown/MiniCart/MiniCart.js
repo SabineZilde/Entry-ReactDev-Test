@@ -24,7 +24,7 @@ class MiniCart extends React.Component {
   };
 
   render() {
-    const { productsInCart, contextCurrency, updateProductCount, showAlert } =
+    const { productsInCart, updateProductCount, showAlert } =
       this.context;
     return (
       <MiniCartContainer>

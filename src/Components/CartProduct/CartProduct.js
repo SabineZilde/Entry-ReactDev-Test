@@ -69,7 +69,7 @@ class Cart extends React.Component {
   };
 
   render() {
-    const { productsInCart, contextCurrency, updateProductCount, showAlert } =
+    const { productsInCart, updateProductCount, showAlert } =
       this.context;
     return (
       <>
@@ -81,21 +81,7 @@ class Cart extends React.Component {
                   {item.brand}
                 </FontRaleway>
                 <FontRaleway fontSize="30px">{item.name}</FontRaleway>
-                {/* {item.prices.map((price) => {
-                  return (
-                    price.currency.symbol === contextCurrency && (
-                      <FontRaleway
-                        fontSize="24px"
-                        fontWeight="700"
-                        key={price.amount}
-                      >
-                        {price.currency.symbol}
-                        {price.amount}
-                      </FontRaleway>
-                    )
-                  );
-                })} */}
-                <Price item={item} for='cart' />
+                <Price item={item} size='large' />
                 {item.attributes.map((atr) => {
                   return (
                     <Attributes key={atr.value + atr.name}>
