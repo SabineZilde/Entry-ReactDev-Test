@@ -26,7 +26,7 @@ class Total extends React.Component {
         if (this.props.for === 'cart') {
             return 'TOTAL: '
         }
-    }
+    };
 
     render() {
         const { contextCurrency, total } = this.context;

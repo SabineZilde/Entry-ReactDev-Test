@@ -6,6 +6,7 @@ import {
 import { Query } from "@apollo/client/react/components";
 import { LOAD_CURRENCIES } from "../../../GraphQL/Queries";
 import MainContext from "../../../Context/MainContext";
+import { Loader } from "../../Loader.style";
 
 class CurrencyDropdown extends React.Component {
 
@@ -17,8 +18,8 @@ class CurrencyDropdown extends React.Component {
       <DropdownContainer>
         <DropdownContent>
           <Query query={LOAD_CURRENCIES}>
-            {({ loading, data }) => {
-              if (loading) return "Loading...";
+            {( loading, data ) => {
+              if (loading) return <Loader />;
               const { currencies } = data;
               return currencies.map((currency, id) => (
                 <button
