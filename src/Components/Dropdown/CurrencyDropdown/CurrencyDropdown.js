@@ -3,40 +3,52 @@ import {
   DropdownContainer,
   DropdownContent,
 } from "./CurrencyDropdown.style";
-import { Query } from "@apollo/client/react/components";
 import { LOAD_CURRENCIES } from "../../../GraphQL/Queries";
 import MainContext from "../../../Context/MainContext";
 import { Loader } from "../../Loader.style";
+import { client } from "../../..";
 
 class CurrencyDropdown extends React.Component {
+  state = {
+    loading: true,
+    currencies: []
+  }
 
-  
+  componentDidMount = async () => {
+    const response = await client.query({
+      query: LOAD_CURRENCIES
+    })
+    this.setState({
+      loading: response.loading,
+      currencies: response.data.currencies
+    })
+  };
+
+  handleLoadedCurrency = () => {
+    const { loading, currencies } = this.state;
+    const { updateCurrency, productsInCart, getTotal } = this.context;
+    if (loading) return <Loader />;
+    return currencies.map((currency, id) => (
+      <button
+        key={id}
+        onClick={() => {
+          updateCurrency(currency.symbol);
+          if (productsInCart.length > 0) {
+            getTotal(currency.symbol)
+          }
+        }}
+      >
+        {currency.symbol}
+        {currency.label}
+      </button>
+    ))
+  };
 
   render() {
-    const { updateCurrency, productsInCart, getTotal } = this.context;
     return (
       <DropdownContainer>
         <DropdownContent>
-          <Query query={LOAD_CURRENCIES}>
-            {({ loading, data }) => {
-              if (loading) return <Loader />;
-              const { currencies } = data;
-              return currencies.map((currency, id) => (
-                <button
-                  key={id}
-                  onClick={() => {
-                    updateCurrency(currency.symbol);
-                    if (productsInCart.length > 0) {
-                      getTotal(currency.symbol)
-                    }
-                  }}
-                >
-                  {currency.symbol}
-                  {currency.label}
-                </button>
-              ));
-            }}
-          </Query>
+          {this.handleLoadedCurrency()}
         </DropdownContent>
       </DropdownContainer>
     )
