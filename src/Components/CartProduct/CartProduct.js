@@ -16,6 +16,7 @@ import {
   CloseButton,
 } from "../Buttons.style";
 import MainContext from "../../Context/MainContext";
+import Price from "../Price";
 
 class Cart extends React.Component {
   state = {
@@ -80,7 +81,7 @@ class Cart extends React.Component {
                   {item.brand}
                 </FontRaleway>
                 <FontRaleway fontSize="30px">{item.name}</FontRaleway>
-                {item.prices.map((price) => {
+                {/* {item.prices.map((price) => {
                   return (
                     price.currency.symbol === contextCurrency && (
                       <FontRaleway
@@ -93,7 +94,8 @@ class Cart extends React.Component {
                       </FontRaleway>
                     )
                   );
-                })}
+                })} */}
+                <Price item={item} for='cart' />
                 {item.attributes.map((atr) => {
                   return (
                     <Attributes key={atr.value + atr.name}>

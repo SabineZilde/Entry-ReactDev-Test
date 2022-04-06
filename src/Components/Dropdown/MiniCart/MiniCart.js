@@ -16,6 +16,7 @@ import {
 } from "../../Buttons.style";
 import { FontRaleway } from "../../Fonts.style";
 import MainContext from "../../../Context/MainContext";
+import Price from "../../Price.js";
 
 class MiniCart extends React.Component {
   componentDidMount() {
@@ -38,17 +39,7 @@ class MiniCart extends React.Component {
                   {item.brand}
                   {item.name}
                 </FontRaleway>
-                {item.prices.map((price) => {
-                  if (price.currency.symbol === contextCurrency) {
-                    return (
-                      <FontRaleway fontWeight="500" key={price.amount}>
-                        {price.currency.symbol}
-                        {price.amount}
-                      </FontRaleway>
-                    );
-                  }
-                  return "";
-                })}
+                <Price item={item} />
                 {item.attributes.map((atr) => {
                   return (
                     <AttributeRow
