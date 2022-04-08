@@ -4,15 +4,16 @@ import {
   ProductDetailColumn,
   DescriptionRow,
 } from "./ProductPage.style";
-import { FontRaleway, FontRoboto } from "../../Components/CommonStyles/Fonts.style";
+import { FontRoboto } from "../../Components/CommonStyles/Fonts.style";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
-import parse from "html-react-parser";
 import { Loader } from "../../Components/CommonStyles/Loader.style";
 import Price from "../../Components/CommonComponents/Price";
 import Attributes from "../../Components/ProductPage/Attributes";
 import AddToCart from "../../Components/ProductPage/AddToCart";
 import Gallery from "../../Components/ProductPage/Gallery";
+import ProductName from "../../Components/CommonComponents/ProductName";
+import parse from "html-react-parser";
 
 class ProductPage extends React.Component {
   state = {
@@ -37,12 +38,7 @@ class ProductPage extends React.Component {
               <Gallery gallery={product.gallery} />
               <ProductDetailColumn>
                 <div>
-                  <FontRaleway fontSize="30px" fontWeight="600">
-                    {product.brand}
-                  </FontRaleway>
-                  <FontRaleway fontSize="30px" margin="5px 0 20px">
-                    {product.name}
-                  </FontRaleway>
+                  <ProductName product={product} />
                 </div>
                 <div>
                   <Attributes product={product} />
