@@ -1,8 +1,6 @@
 import React from "react";
 import {
   Row,
-  ThumbnailColumn,
-  LargeImgColumn,
   ProductDetailColumn,
   DescriptionRow,
 } from "./ProductPage.style";
@@ -14,11 +12,11 @@ import { Loader } from "../../Components/Loader.style";
 import Price from "../../Components/Price";
 import Attributes from "../../Components/ProductPage/Attributes";
 import AddToCart from "../../Components/ProductPage/AddToCart";
+import Gallery from "../../Components/ProductPage/Gallery";
 
 class ProductPage extends React.Component {
   state = {
     id: '',
-    largeImg: null,
   };
 
   componentDidMount() {
@@ -28,12 +26,6 @@ class ProductPage extends React.Component {
     });
   }
 
-  changeLargeImg = (img) => {
-    this.setState({
-      largeImg: img,
-    });
-  };
-
   render() {
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
@@ -42,17 +34,7 @@ class ProductPage extends React.Component {
           const { product } = data;
           return (
             <Row>
-              <ThumbnailColumn>
-                {product.gallery.map((image, id) => (
-                  <button key={id} onClick={() => this.changeLargeImg(image)}>
-                    <img src={image} alt="Product" />
-                  </button>
-                ))}
-              </ThumbnailColumn>
-              <LargeImgColumn backgroundImg={this.state.largeImg === null
-                ? product.gallery[0]
-                : this.state.largeImg}>
-              </LargeImgColumn>
+              <Gallery gallery={product.gallery} />
               <ProductDetailColumn>
                 <div>
                   <FontRaleway fontSize="30px" fontWeight="600">
