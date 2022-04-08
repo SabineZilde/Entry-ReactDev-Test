@@ -31,7 +31,6 @@ class Alert extends React.Component {
   };
 
   handleSecondaryLink = (link) => {
-    console.log(link)
     if (link !== '') {
       return link;
     }

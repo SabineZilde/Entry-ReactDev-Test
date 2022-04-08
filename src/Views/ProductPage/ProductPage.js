@@ -6,9 +6,6 @@ import {
   LargeImgColumn,
   ProductDetailColumn,
   DescriptionRow,
-  Attributes,
-  Input,
-  Label
 } from "./ProductPage.style";
 import { FontRaleway, FontRoboto } from "../../Components/Fonts.style";
 import { Query } from "@apollo/client/react/components";
@@ -17,13 +14,12 @@ import parse from "html-react-parser";
 import MainContext from "../../Context/MainContext";
 import { Loader } from "../../Components/Loader.style";
 import Price from "../../Components/Price";
+import Attributes from "../../Components/ProductPage/Attributes";
 
 class ProductPage extends React.Component {
   state = {
     id: '',
     largeImg: null,
-    chosenAttributes: [],
-    extendedId: '',
   };
 
   componentDidMount() {
@@ -39,37 +35,8 @@ class ProductPage extends React.Component {
     });
   };
 
-  saveAttributes = (name, value) => {
-    const { chosenAttributes } = this.state;
-
-    if (chosenAttributes.length === 0) {
-      this.setState({
-        chosenAttributes: [{ name: name, value: value }],
-      });
-    } else {
-      const existingAtr = chosenAttributes.find(findAtr);
-      function findAtr(chosenAtr) {
-        return chosenAtr.name === name;
-      }
-      const attrIndex = chosenAttributes.findIndex((attr) => {
-        return attr.name === name;
-      });
-      if (existingAtr) {
-        const newState = [...chosenAttributes];
-        newState[attrIndex].value = value;
-        return this.setState({
-          chosenAttributes: newState,
-        });
-      } else {
-        this.setState({
-          chosenAttributes: [...chosenAttributes, { name: name, value: value }],
-        });
-      }
-    }
-  };
-
   render() {
-    const { alertIsTriggered, updateCart, showAlert } = this.context;
+    const { chosenAttributes, alertIsTriggered, updateCart, showAlert } = this.context;
     return (
       <Query query={LOAD_PRODUCT} variables={{ id: this.state.id }}>
         {({ loading, data }) => {
@@ -98,42 +65,7 @@ class ProductPage extends React.Component {
                   </FontRaleway>
                 </div>
                 <div>
-                  {product.attributes.map((attribute, id) => (
-                    <div key={id}>
-                      <FontRoboto
-                        condensed
-                        fontSize="18px"
-                        fontWeight="700"
-                        margin="10px 0"
-                        capitalize
-                      >
-                        {attribute.name}:
-                      </FontRoboto>
-                        {attribute.items.map((item) => {
-                          return (
-                            <Attributes key={item.id}>
-                              <Input
-                                type="radio"
-                                id={`${attribute.name} ${item.id}`}
-                                name={attribute.name}
-                                value={item.value}
-                                checkedColor={attribute.name !== 'Color' && '#1D1F22'}
-                                checkedBorder={attribute.name === 'Color' && '3px solid #A6A6A6'}
-                                onClick={() => {
-                                  this.saveAttributes(attribute.name, item.value)
-                                }}
-                              />
-                              <Label
-                                htmlFor={`${attribute.name} ${item.id}`}
-                                bgColor={attribute.name === 'Color' && item.value}
-                              >
-                                {attribute.name !== "Color" && item.value}
-                              </Label>
-                            </Attributes>
-                          );
-                        })}
-                    </div>
-                  ))}
+                  <Attributes product={product} />
                 </div>
                 <div>
                   <FontRoboto
@@ -147,27 +79,27 @@ class ProductPage extends React.Component {
                   <Price item={product} size='large' />
                 </div>
                 {product.inStock ? (
-                    <ButtonLarge
-                      primary
-                      onClick={() => {
-                        if (this.state.chosenAttributes.length < product.attributes.length) {
-                          showAlert('attributes', product.id)
-                        } else {
-                          updateCart(
-                            product.id,
-                            product.brand,
-                            product.name,
-                            product.gallery,
-                            product.prices,
-                            this.state.chosenAttributes
-                          );
-                          return !alertIsTriggered &&
-                            showAlert('success', product.id, product.brand, product.name)
-                        }
-                      }}
-                    >
-                      ADD TO CART
-                    </ButtonLarge>
+                  <ButtonLarge
+                    primary
+                    onClick={() => {
+                      if (chosenAttributes.length < product.attributes.length) {
+                        showAlert('attributes', product.id)
+                      } else {
+                        updateCart(
+                          product.id,
+                          product.brand,
+                          product.name,
+                          product.gallery,
+                          product.prices,
+                          chosenAttributes
+                        );
+                        return !alertIsTriggered &&
+                          showAlert('success', product.id, product.brand, product.name)
+                      }
+                    }}
+                  >
+                    ADD TO CART
+                  </ButtonLarge>
                 ) : (
                   <FontRaleway fontColor="red" fontWeight="700" margin="30px 0">
                     OUT OF STOCK!

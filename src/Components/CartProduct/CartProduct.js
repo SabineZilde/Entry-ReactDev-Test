@@ -7,7 +7,7 @@ import {
   ImgContainer,
   ProductImage,
   ArrowButton,
-  Attributes,
+  AttributesDiv,
 } from "./CartProduct.style";
 import { FontRaleway } from "../Fonts.style";
 import {
@@ -69,8 +69,7 @@ class Cart extends React.Component {
   };
 
   render() {
-    const { productsInCart, updateProductCount, showAlert } =
-      this.context;
+    const { productsInCart, updateProductCount, showAlert } = this.context;
     return (
       <>
         {productsInCart.map((item) => {
@@ -84,7 +83,7 @@ class Cart extends React.Component {
                 <Price item={item} size='large' />
                 {item.attributes.map((atr) => {
                   return (
-                    <Attributes key={atr.value + atr.name}>
+                    <AttributesDiv key={atr.value + atr.name}>
                       {atr.name}:&nbsp;
                       {atr.name === "Color" ? (
                         <AttributeButton
@@ -94,7 +93,7 @@ class Cart extends React.Component {
                       ) : (
                         <b>{atr.value}</b>
                       )}
-                    </Attributes>
+                    </AttributesDiv>
                   );
                 })}
               </ProductDescription>

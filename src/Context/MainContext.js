@@ -8,6 +8,7 @@ export class MainProvider extends Component {
   state = {
     contextCategory: 'all',
     contextCurrency: "$",
+    chosenAttributes: [],
     productsInCart: [],
     totalQuantity: 0,
     total: 0,
@@ -22,6 +23,34 @@ export class MainProvider extends Component {
 
   updateCurrency = (symbol) => {
     this.setState({ contextCurrency: symbol });
+  };
+
+  saveAttributes = (name, value) => {
+    const { chosenAttributes } = this.state;
+    if (chosenAttributes.length === 0) {
+      this.setState({
+        chosenAttributes: [{ name: name, value: value }],
+      });
+    } else {
+      const existingAtr = chosenAttributes.find(findAtr);
+      function findAtr(chosenAtr) {
+        return chosenAtr.name === name;
+      }
+      const attrIndex = chosenAttributes.findIndex((attr) => {
+        return attr.name === name;
+      });
+      if (existingAtr) {
+        const newState = [...chosenAttributes];
+        newState[attrIndex].value = value;
+        return this.setState({
+          chosenAttributes: newState,
+        });
+      } else {
+        this.setState({
+          chosenAttributes: [...chosenAttributes, { name: name, value: value }],
+        });
+      }
+    }
   };
 
   updateCart = (id, brand, name, gallery, prices, attributes) => {
@@ -205,7 +234,6 @@ export class MainProvider extends Component {
     });
   };
 
-
   setScrollHeight = (height) => {
     this.setState({ scrollHeight: `${height}px` })
   }
@@ -232,10 +260,11 @@ export class MainProvider extends Component {
   };
 
   render() {
-    const { contextCategory, contextCurrency, productsInCart, totalQuantity, total, alertIsTriggered, alertContent, scrollHeight } = this.state;
+    const { contextCategory, contextCurrency, chosenAttributes, productsInCart, totalQuantity, total, alertIsTriggered, alertContent, scrollHeight } = this.state;
     const {
       getCategory,
       updateCurrency,
+      saveAttributes,
       updateCart,
       updateProductCount,
       removeProduct,
@@ -250,6 +279,7 @@ export class MainProvider extends Component {
         value={{
           contextCategory,
           contextCurrency,
+          chosenAttributes,
           productsInCart,
           totalQuantity,
           total,
@@ -258,6 +288,7 @@ export class MainProvider extends Component {
           scrollHeight,
           getCategory,
           updateCurrency,
+          saveAttributes,
           updateCart,
           updateProductCount,
           removeProduct,
