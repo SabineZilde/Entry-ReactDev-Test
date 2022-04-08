@@ -44,15 +44,7 @@ class ProductPage extends React.Component {
                   <Attributes product={product} />
                 </div>
                 <div>
-                  <FontRoboto
-                    condensed
-                    fontSize="18px"
-                    fontWeight="700"
-                    margin="20px 0 0"
-                  >
-                    PRICE:
-                  </FontRoboto>
-                  <Price item={product} size='large' />
+                  <Price item={product} size='large' page='productPage' />
                 </div>
                 <AddToCart product={product} />
                 <DescriptionRow>

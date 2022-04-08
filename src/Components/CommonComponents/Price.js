@@ -1,5 +1,5 @@
 import React from "react";
-import { FontRaleway } from "../CommonStyles/Fonts.style";
+import { FontRaleway, FontRoboto } from "../CommonStyles/Fonts.style";
 import MainContext from "../../Context/MainContext";
 
 class Price extends React.Component {
@@ -10,20 +10,37 @@ class Price extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.size === 'large') {
+    const { size, inStock } = this.props;
+    if (size === 'large') {
       this.setState({
         fontSize: '24px',
         fontWeight: '700'
       })
-    } else if (this.props.size === 'middle') {
+    } else if (size === 'middle') {
       this.setState({
         fontSize: '18px',
       });
-      if (!this.props.inStock) {
+      if (!inStock) {
         this.setState({ fontColor: '#8D8F9A' })
       };
     };
   };
+
+  handlePriceTitle = () => {
+    const { size, page } = this.props;
+    if (size === 'large' && page === 'productPage') {
+      return (
+        <FontRoboto
+          condensed
+          fontSize="18px"
+          fontWeight="700"
+          margin="20px 0 0"
+        >
+          PRICE:
+        </FontRoboto>
+      )
+    }
+  }
 
   handlePrice = () => {
     const { contextCurrency } = this.context;
@@ -46,7 +63,12 @@ class Price extends React.Component {
   };
 
   render() {
-    return this.handlePrice();
+    return (
+      <>
+        {this.handlePriceTitle()}
+        {this.handlePrice()}
+      </>
+    )
   }
 }
 
