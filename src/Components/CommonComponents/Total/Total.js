@@ -1,6 +1,6 @@
 import React from "react";
 import { TotalDiv } from "./Total.style";
-import MainContext from "../../Context/MainContext";
+import MainContext from "../../../Context/MainContext";
 
 class Total extends React.Component {
     componentDidMount() {

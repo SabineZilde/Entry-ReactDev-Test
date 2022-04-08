@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FontRaleway } from "../Fonts.style";
-import { Button, CloseButton } from "../Buttons.style";
+import { FontRaleway } from "../../CommonStyles/Fonts.style";
+import { Button, CloseButton } from "../../CommonStyles/Buttons.style";
 import { AlertContainer, AlertBckground, Icon, ButtonRow } from "./Alert.style";
-import MainContext from "../../Context/MainContext";
+import MainContext from "../../../Context/MainContext";
 
 class Alert extends React.Component {
   handleRemoveProduct = (button, id) => {

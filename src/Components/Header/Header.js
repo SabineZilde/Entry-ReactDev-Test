@@ -9,14 +9,14 @@ import {
   ArrowStyle,
   MiniCartBg
 } from "./Header.style";
-import { FontRoboto } from "../Fonts.style";
+import { FontRoboto } from "../CommonStyles/Fonts.style";
 import Dropdown from "../Dropdown/Dropdown";
 import logo from "../../Assets/Logo.svg";
 import cart from "../../Assets/Cart.svg";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_CATEGORIES } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
-import { Loader } from "../Loader.style";
+import { Loader } from "../CommonStyles/Loader.style";
 
 class Header extends React.Component {
   state = {

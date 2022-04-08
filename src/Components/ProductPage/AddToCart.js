@@ -1,6 +1,6 @@
 import React from "react";
-import { FontRaleway } from "../../Components/Fonts.style";
-import { ButtonLarge } from "../Buttons.style";
+import { FontRaleway } from "../CommonStyles/Fonts.style";
+import { ButtonLarge } from "../CommonStyles//Buttons.style";
 import MainContext from "../../Context/MainContext";
 
 class AddToCart extends React.Component {

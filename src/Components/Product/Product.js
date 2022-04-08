@@ -6,13 +6,13 @@ import {
   ImageContainer,
   OutOfStockLayer,
 } from "./Product.style";
-import { FontRaleway } from "../Fonts.style";
+import { FontRaleway } from "../CommonStyles/Fonts.style";
 import circleIcon from "../../Assets/CircleIcon.svg";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCTS } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
-import { Loader } from "../Loader.style";
-import Price from "../Price";
+import { Loader } from "../CommonStyles/Loader.style";
+import Price from "../CommonComponents/Price";
 
 class Product extends React.Component {
   render() {

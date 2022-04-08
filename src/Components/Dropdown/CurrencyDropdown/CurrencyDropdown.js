@@ -5,7 +5,7 @@ import {
 } from "./CurrencyDropdown.style";
 import { LOAD_CURRENCIES } from "../../../GraphQL/Queries";
 import MainContext from "../../../Context/MainContext";
-import { Loader } from "../../Loader.style";
+import { Loader } from "../../CommonStyles/Loader.style";
 import { client } from "../../..";
 
 class CurrencyDropdown extends React.Component {

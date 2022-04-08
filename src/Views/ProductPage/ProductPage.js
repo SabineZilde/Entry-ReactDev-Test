@@ -4,12 +4,12 @@ import {
   ProductDetailColumn,
   DescriptionRow,
 } from "./ProductPage.style";
-import { FontRaleway, FontRoboto } from "../../Components/Fonts.style";
+import { FontRaleway, FontRoboto } from "../../Components/CommonStyles/Fonts.style";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCT } from "../../GraphQL/Queries";
 import parse from "html-react-parser";
-import { Loader } from "../../Components/Loader.style";
-import Price from "../../Components/Price";
+import { Loader } from "../../Components/CommonStyles/Loader.style";
+import Price from "../../Components/CommonComponents/Price";
 import Attributes from "../../Components/ProductPage/Attributes";
 import AddToCart from "../../Components/ProductPage/AddToCart";
 import Gallery from "../../Components/ProductPage/Gallery";

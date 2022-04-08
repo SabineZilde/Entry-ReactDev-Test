@@ -1,6 +1,6 @@
 import React from "react";
-import { FontRaleway } from "./Fonts.style";
-import MainContext from "../Context/MainContext";
+import { FontRaleway } from "../CommonStyles/Fonts.style";
+import MainContext from "../../Context/MainContext";
 
 class Price extends React.Component {
   state = {

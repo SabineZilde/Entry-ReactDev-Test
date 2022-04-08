@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Total from "../../Total/Total.js";
+import Total from "../../CommonComponents/Total/Total.js";
 import {
   MiniCartContainer,
   Column,
@@ -13,10 +13,10 @@ import {
   AttributeButton,
   QuantityButton,
   CloseButton
-} from "../../Buttons.style";
-import { FontRaleway } from "../../Fonts.style";
+} from "../../CommonStyles/Buttons.style";
+import { FontRaleway } from "../../CommonStyles/Fonts.style";
 import MainContext from "../../../Context/MainContext";
-import Price from "../../Price.js";
+import Price from "../../CommonComponents/Price.js";
 
 class MiniCart extends React.Component {
   componentDidMount() {
