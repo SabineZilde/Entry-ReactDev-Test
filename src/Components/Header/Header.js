@@ -2,7 +2,7 @@ import React from "react";
 import {
   HeaderContainer,
   HeaderButton,
-  CurrencyStyle,
+  CurrencyAndCart,
   CurrencyButton,
   CartButton,
   TotalQuantityIcon,
@@ -13,17 +13,45 @@ import { FontRoboto } from "../CommonStyles/Fonts.style";
 import Dropdown from "../Dropdown/Dropdown";
 import logo from "../../Assets/Logo.svg";
 import cart from "../../Assets/Cart.svg";
-import { Query } from "@apollo/client/react/components";
 import { LOAD_CATEGORIES } from "../../GraphQL/Queries";
 import MainContext from "../../Context/MainContext";
 import { Loader } from "../CommonStyles/Loader.style";
+import { client } from '../../';
 
 class Header extends React.Component {
   state = {
+    loading: true,
+    categories: [],
     currencyButtonIsPressed: false,
     arrow: '▲',
     cartIconIsPressed: false,
     display: 'none',
+  };
+
+  componentDidMount = async () => {
+    const response = await client.query({
+      query: LOAD_CATEGORIES,
+    });
+    this.setState({
+      loading: response.loading,
+      categories: response.data.categories
+    });
+  };
+
+  handleCategories = () => {
+    const { categories } = this.state;
+    const { getCategory } = this.context;
+    return categories.map((category, id) => (
+      <a
+        href={"/category/" + category.name}
+        key={id}
+        onClick={() => {
+          getCategory(category.name);
+        }}>
+        <HeaderButton>{category.name}</HeaderButton>
+      </a>
+    ));
+
   };
 
   toggleCurrencyMenu = () => {
@@ -37,7 +65,7 @@ class Header extends React.Component {
         currencyButtonIsPressed: false,
         arrow: '▲',
       });
-    }
+    };
   };
 
   toggleMiniCart = () => {
@@ -51,13 +79,13 @@ class Header extends React.Component {
         cartIconIsPressed: false,
         display: 'none'
       });
-    }
+    };
   };
 
   disableCartButton = (productsInCartLength) => {
     if (productsInCartLength === 0) {
       return 'disabled';
-    }
+    };
   };
 
   displayQuantityIcon = (productsInCartLength) => {
@@ -65,36 +93,22 @@ class Header extends React.Component {
       return 'none';
     } else {
       return 'flex';
-    }
+    };
   };
 
   render() {
-    const { contextCurrency, getCategory, productsInCart, totalQuantity, scrollHeight } = this.context;
+    const { contextCurrency, productsInCart, totalQuantity, scrollHeight } = this.context;
+    if (this.state.loading) return <Loader />;
     return (
       <div>
         <HeaderContainer>
           <div>
-            <Query query={LOAD_CATEGORIES}>
-              {({ loading, data }) => {
-                if (loading) return <Loader />;
-                const { categories } = data;
-                return categories.map((category, id) => (
-                  <a
-                    href={"/category/" + category.name}
-                    key={id}
-                    onClick={() => {
-                      getCategory(category.name);
-                    }}>
-                    <HeaderButton>{category.name}</HeaderButton>
-                  </a>
-                ));
-              }}
-            </Query>
+            {this.handleCategories()}
           </div>
           <a href="/category/all">
             <img src={logo} alt="logo" />
           </a>
-          <CurrencyStyle>
+          <CurrencyAndCart>
             <CurrencyButton onClick={this.toggleCurrencyMenu}>
               {contextCurrency}
               <ArrowStyle>{this.state.arrow}</ArrowStyle>
@@ -117,7 +131,7 @@ class Header extends React.Component {
               </TotalQuantityIcon>
               <img src={cart} alt="logo" />
             </CartButton>
-          </CurrencyStyle>
+          </CurrencyAndCart>
         </HeaderContainer>
         <MiniCartBg display={this.state.display} height={scrollHeight}>
           <Dropdown

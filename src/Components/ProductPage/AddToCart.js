@@ -40,8 +40,8 @@ class AddToCart extends React.Component {
   };
   render() {
     return this.handleButton();
-  }
-}
+  };
+};
 
 AddToCart.contextType = MainContext;
 

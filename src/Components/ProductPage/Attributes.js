@@ -44,11 +44,12 @@ class Attributes extends React.Component {
         })}
       </div>
     ))
-  }
+  };
+
   render() {
     return this.handleAttributes();
-  }
-}
+  };
+};
 
 Attributes.contextType = MainContext;
 

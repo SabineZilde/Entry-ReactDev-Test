@@ -25,7 +25,7 @@ export const HeaderButton = styled.button`
     }
 `
 
-export const CurrencyStyle = styled.div`
+export const CurrencyAndCart = styled.div`
     display: flex;
     align-items: center;
     font-size: 18px;
