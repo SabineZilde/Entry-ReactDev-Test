@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, ProductContainer } from "./CategoryPage.style";
 import { FontRaleway } from "../../Components/CommonStyles/Fonts.style";
-import Product from "../../Components/Product/Product";
+import Product from "../../Components/CategoryPage/Product/Product";
 import MainContext from "../../Context/MainContext";
 
 class CategoryPage extends React.Component {

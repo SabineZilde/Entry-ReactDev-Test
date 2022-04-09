@@ -7,7 +7,7 @@ class Price extends React.Component {
     fontSize: '',
     fontWeight: '500',
     fontColor: ''
-  }
+  };
 
   componentDidMount() {
     const { size, inStock } = this.props;
@@ -38,9 +38,9 @@ class Price extends React.Component {
         >
           PRICE:
         </FontRoboto>
-      )
-    }
-  }
+      );
+    };
+  };
 
   handlePrice = () => {
     const { contextCurrency } = this.context;
@@ -59,7 +59,7 @@ class Price extends React.Component {
         );
       }
       return '';
-    })
+    });
   };
 
   render() {
@@ -68,9 +68,9 @@ class Price extends React.Component {
         {this.handlePriceTitle()}
         {this.handlePrice()}
       </>
-    )
-  }
-}
+    );
+  };
+};
 
 Price.contextType = MainContext;
 

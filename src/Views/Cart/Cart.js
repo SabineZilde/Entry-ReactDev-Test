@@ -1,5 +1,5 @@
 import React from "react";
-import CartProduct from "../../Components/CartProduct/CartProduct";
+import CartProduct from "../../Components/Cart/CartProduct/CartProduct";
 import Total from '../../Components/CommonComponents/Total/Total';
 import { CartContainer } from "./Cart.style";
 import { FontRaleway } from "../../Components/CommonStyles/Fonts.style";
