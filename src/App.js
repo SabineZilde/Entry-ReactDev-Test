@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { GlobalStyles } from './GlobalStyles.style';
+import { GlobalStyles } from './Components/CommonStyles/GlobalStyles.style';
 import Alert from "./Components/CommonComponents/Alert/Alert";
 import Header from './Components/Header/Header';
 import CategoryPage from "./Views/CategoryPage/CategoryPage";
