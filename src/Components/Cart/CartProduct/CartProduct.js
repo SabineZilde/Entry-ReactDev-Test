@@ -17,6 +17,7 @@ import {
 } from "../../CommonStyles/Buttons.style";
 import MainContext from "../../../Context/MainContext";
 import Price from "../../CommonComponents/Price";
+import ProductName from "../../CommonComponents/ProductName";
 
 class Cart extends React.Component {
   state = {
@@ -76,10 +77,7 @@ class Cart extends React.Component {
           return (
             <ProductContainer key={item.id}>
               <ProductDescription>
-                <FontRaleway fontSize="30px" fontWeight="600">
-                  {item.brand}
-                </FontRaleway>
-                <FontRaleway fontSize="30px">{item.name}</FontRaleway>
+                <ProductName product={item} />
                 <Price item={item} size='large' />
                 {item.attributes.map((atr) => {
                   return (

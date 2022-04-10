@@ -42,7 +42,7 @@ class ProductPage extends React.Component {
         <Gallery gallery={product.gallery} />
         <ProductDetailColumn>
           <div>
-            <ProductName product={product} />
+            <ProductName product={product} for='productPage' />
           </div>
           <div>
             <Attributes product={product} />
