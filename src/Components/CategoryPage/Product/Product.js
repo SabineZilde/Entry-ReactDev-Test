@@ -6,13 +6,13 @@ import {
   ImageContainer,
   OutOfStockLayer,
 } from "./Product.style";
-import { FontRaleway } from "../../CommonStyles/Fonts.style";
 import circleIcon from "../../../Assets/CircleIcon.svg";
 import { Query } from "@apollo/client/react/components";
 import { LOAD_PRODUCTS } from "../../../GraphQL/Queries";
 import MainContext from "../../../Context/MainContext";
 import { Loader } from "../../CommonStyles/Loader.style";
 import Price from "../../CommonComponents/Price";
+import ProductName from "../../CommonComponents/ProductName";
 
 class Product extends React.Component {
   render() {
@@ -34,14 +34,7 @@ class Product extends React.Component {
                     <OutOfStockLayer>OUT OF STOCK</OutOfStockLayer>
                   }
                 </ImageContainer>
-                <FontRaleway
-                  fontSize="18px"
-                  fontWeight="300"
-                  margin="0 0 5px 0"
-                  fontColor={!product.inStock && "#8D8F9A"}
-                >
-                  {product.brand} {product.name}
-                </FontRaleway>
+                <ProductName product={product} page='categoryPage' />
                 <Price item={product} size='middle' inStock={product.inStock} />
                 {product.inStock && (
                   <button

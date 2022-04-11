@@ -3,22 +3,54 @@ import { FontRaleway } from "../CommonStyles/Fonts.style";
 
 class ProductName extends React.Component {
   state = {
-    margin: ''
+    size: '30px',
+    weight: '600',
+    nameMargin: '',
+    brandMargin: '',
+    fontColor: ''
   };
 
   componentDidMount() {
-    this.props.for === 'productPage' && this.setState({margin: "5px 0 20px"})
+    const { page, product } = this.props;
+    page === 'productPage' && this.setState({ nameMargin: "5px 0 20px" });
+    product.inStock === false && this.setState({ fontColor: '#8D8F9A' });
+    page === 'categoryPage' && this.setState({
+      size: '18px',
+      weight: '300',
+      brandMargin: "0 0 5px 0"
+    })
+  };
+
+  nameInOneLine = (name) => {
+    if (this.props.page === 'categoryPage') {
+      return name;
+    };
+  };
+
+  handleSecondLine = (name) => {
+    if (this.props.page !== 'categoryPage') {
+      return (
+        <FontRaleway fontSize="30px" margin={this.state.nameMargin}>
+          {name}
+        </FontRaleway>
+      )
+    }
   }
+
   render() {
     const { product } = this.props;
+    const { size, weight, fontColor, brandMargin } = this.state;
     return (
       <>
-        <FontRaleway fontSize="30px" fontWeight="600">
-          {product.brand}
+        <FontRaleway
+          fontSize={size}
+          fontWeight={weight}
+          fontColor={fontColor}
+          margin={brandMargin}
+        >
+          {product.brand} {this.nameInOneLine(product.name)}
         </FontRaleway>
-        <FontRaleway fontSize="30px" margin={this.state.margin}>
-          {product.name}
-        </FontRaleway>
+        {this.handleSecondLine(product.name)}
       </>
     );
   }

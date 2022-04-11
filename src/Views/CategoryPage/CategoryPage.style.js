@@ -34,15 +34,3 @@ export const Image = styled.div`
     padding: 18px 0 24px;
 
 `
-
-export const ProductName = styled.div`
-    padding: 0 16px 5px;
-    font-size: 18px;
-    font-weight: 300;
-`
-
-export const ProductPrice = styled.div`
-    padding: 0 16px;
-    font-size: 18px;
-    font-weight: 500;
-`
