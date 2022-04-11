@@ -18,6 +18,7 @@ import { FontRaleway } from "../../CommonStyles/Fonts.style";
 import MainContext from "../../../Context/MainContext";
 import Price from "../../CommonComponents/Price.js";
 import ProductName from "../../CommonComponents/ProductName.js";
+import ChosenAttributes from '../../CommonComponents/ChosenAttributes/ChosenAttributes.js';
 
 class MiniCart extends React.Component {
   componentDidMount() {
@@ -38,26 +39,7 @@ class MiniCart extends React.Component {
               <Column colWidth="146px">
                 <ProductName product={item} page='miniCart' line='oneLiner' />
                 <Price item={item} />
-                {item.attributes.map((atr) => {
-                  return (
-                    <AttributeRow
-                      key={atr.value + atr.name}
-                    >
-                      {atr.name}:&nbsp;
-                      {atr.name === "Color" ? (
-                        <AttributeButton
-                          mini
-                          margin="0 0 0 2px"
-                          color={atr.value}
-                        ></AttributeButton>
-                      ) : (
-                        <FontRaleway fontSize="12px" fontWeight="500">
-                          {atr.value}
-                        </FontRaleway>
-                      )}
-                    </AttributeRow>
-                  );
-                })}
+                <ChosenAttributes attributes={item.attributes} />
               </Column>
               <Column middle>
                 <QuantityButton

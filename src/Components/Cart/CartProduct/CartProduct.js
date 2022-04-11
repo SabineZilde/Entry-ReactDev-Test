@@ -7,17 +7,16 @@ import {
   ImgContainer,
   ProductImage,
   ArrowButton,
-  AttributesDiv,
 } from "./CartProduct.style";
 import { FontRaleway } from "../../CommonStyles/Fonts.style";
 import {
-  AttributeButton,
   QuantityButton,
   CloseButton,
 } from "../../CommonStyles/Buttons.style";
 import MainContext from "../../../Context/MainContext";
 import Price from "../../CommonComponents/Price";
 import ProductName from "../../CommonComponents/ProductName";
+import ChosenAttributes from "../../CommonComponents/ChosenAttributes/ChosenAttributes";
 
 class Cart extends React.Component {
   state = {
@@ -79,21 +78,7 @@ class Cart extends React.Component {
               <ProductDescription>
                 <ProductName product={item} />
                 <Price item={item} size='large' />
-                {item.attributes.map((atr) => {
-                  return (
-                    <AttributesDiv key={atr.value + atr.name}>
-                      {atr.name}:&nbsp;
-                      {atr.name === "Color" ? (
-                        <AttributeButton
-                          margin="5px 0 0 5px"
-                          color={atr.value}
-                        ></AttributeButton>
-                      ) : (
-                        <b>{atr.value}</b>
-                      )}
-                    </AttributesDiv>
-                  );
-                })}
+                <ChosenAttributes attributes={item.attributes} page='cart' />
               </ProductDescription>
               <CountAndImg>
                 <Column>

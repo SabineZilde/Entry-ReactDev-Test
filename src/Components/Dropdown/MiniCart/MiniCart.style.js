@@ -16,12 +16,6 @@ export const Row = styled.div`
     padding-bottom: 18px;
 `
 
-export const AttributeRow = styled.div`
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-`
-
 export const Column = styled.div`
     display: flex;
     flex-direction: column;

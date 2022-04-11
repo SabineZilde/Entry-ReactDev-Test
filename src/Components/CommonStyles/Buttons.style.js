@@ -44,28 +44,6 @@ export const QuantityButton = styled.button`
   }
 `
 
-export const AttributeButton = styled.button`
-    border: 1px solid #1D1F22;
-    color: #292929;
-    background: ${props => props.color ? props.color : 'none'};
-    
-    height: ${props => props.mini ? '24px' : '45px'};
-    width: ${props => props.mini ? '24px' : '63px'};
-    font-size: ${props => props.mini ? '14px' : '16px'};
-
-    margin: ${props => props.margin};
-
-    &:hover {
-        background: ${props => props.color ? '' : '#A6A6A6'};
-    }
-
-    &:focus {
-        background: ${props => props.color ? '' : '#1D1F22'};
-        outline: ${props => props.color ? '3px solid #A6A6A6' : ''};
-        color: #FFFFFF;
-    }
-`
-
 export const CloseButton = styled.button`
     display: flex;
     color: red;
