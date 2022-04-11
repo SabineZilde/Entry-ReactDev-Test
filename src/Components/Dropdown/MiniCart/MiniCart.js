@@ -17,6 +17,7 @@ import {
 import { FontRaleway } from "../../CommonStyles/Fonts.style";
 import MainContext from "../../../Context/MainContext";
 import Price from "../../CommonComponents/Price.js";
+import ProductName from "../../CommonComponents/ProductName.js";
 
 class MiniCart extends React.Component {
   componentDidMount() {
@@ -35,10 +36,7 @@ class MiniCart extends React.Component {
           return (
             <Row key={item.id}>
               <Column colWidth="146px">
-                <FontRaleway fontWeight="300">
-                  {item.brand}
-                  {item.name}
-                </FontRaleway>
+                <ProductName product={item} page='miniCart' line='oneLiner' />
                 <Price item={item} />
                 {item.attributes.map((atr) => {
                   return (

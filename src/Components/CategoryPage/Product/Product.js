@@ -34,7 +34,7 @@ class Product extends React.Component {
                     <OutOfStockLayer>OUT OF STOCK</OutOfStockLayer>
                   }
                 </ImageContainer>
-                <ProductName product={product} page='categoryPage' />
+                <ProductName product={product} page='categoryPage' line='oneLiner' />
                 <Price item={product} size='middle' inStock={product.inStock} />
                 {product.inStock && (
                   <button
