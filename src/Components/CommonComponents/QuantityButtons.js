@@ -10,10 +10,20 @@ class QuantityButtons extends React.Component {
     };
 
     componentDidMount() {
-        this.props.page === 'miniCart' && this.setState({
-            size: '16px',
-            mini: true
-        });
+        this.props.page === 'miniCart'
+            && this.setState({
+                size: '16px',
+                mini: true
+            });
+    };
+
+    handleMinus = (count, id) => {
+        const { updateProductCount } = this.context;
+        if (count <= 1) {
+            return;
+        } else {
+            updateProductCount(id);
+        };
     };
 
     render() {
@@ -33,13 +43,7 @@ class QuantityButtons extends React.Component {
                 </FontRaleway>
                 <QuantityButton
                     mini={mini}
-                    onClick={() => {
-                        if (item.count <= 1) {
-                            return;
-                        } else {
-                            updateProductCount(item.id);
-                        }
-                    }}
+                    onClick={() => this.handleMinus(item.count, item.id)}
                 >
                     -
                 </QuantityButton>
