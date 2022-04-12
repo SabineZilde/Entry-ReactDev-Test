@@ -56,8 +56,3 @@ export const ArrowButton = styled.button`
     background-color: transparent;
     margin-left: ${(props => props.left ? '15px' : '115px')};
 `
-
-export const AttributesDiv = styled.div` 
-    display: flex;
-    align-items: center;
-`

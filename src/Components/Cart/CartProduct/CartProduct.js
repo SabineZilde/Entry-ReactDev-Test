@@ -8,15 +8,14 @@ import {
   ProductImage,
   ArrowButton,
 } from "./CartProduct.style";
-import { FontRaleway } from "../../CommonStyles/Fonts.style";
 import {
-  QuantityButton,
   CloseButton,
 } from "../../CommonStyles/Buttons.style";
 import MainContext from "../../../Context/MainContext";
 import Price from "../../CommonComponents/Price";
 import ProductName from "../../CommonComponents/ProductName";
 import ChosenAttributes from "../../CommonComponents/ChosenAttributes/ChosenAttributes";
+import QuantityButtons from '../../CommonComponents/QuantityButtons';
 
 class Cart extends React.Component {
   state = {
@@ -69,7 +68,7 @@ class Cart extends React.Component {
   };
 
   render() {
-    const { productsInCart, updateProductCount, showAlert } = this.context;
+    const { productsInCart, showAlert } = this.context;
     return (
       <>
         {productsInCart.map((item) => {
@@ -82,25 +81,7 @@ class Cart extends React.Component {
               </ProductDescription>
               <CountAndImg>
                 <Column>
-                  <QuantityButton
-                    onClick={() => updateProductCount(item.id, item.id)}
-                  >
-                    +
-                  </QuantityButton>
-                  <FontRaleway fontSize="24px" fontWeight="500">
-                    {item.count}
-                  </FontRaleway>
-                  <QuantityButton
-                    onClick={() => {
-                      if (item.count <= 1) {
-                        return;
-                      } else {
-                        updateProductCount(item.id);
-                      }
-                    }}
-                  >
-                    -
-                  </QuantityButton>
+                <QuantityButtons item={item} />
                 </Column>
                 <ImgContainer>
                   <ArrowButton

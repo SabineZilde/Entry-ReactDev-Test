@@ -5,20 +5,17 @@ import {
   MiniCartContainer,
   Column,
   Row,
-  AttributeRow,
   ProductImage,
 } from "./MiniCart.style.js";
 import {
   Button,
-  AttributeButton,
-  QuantityButton,
   CloseButton
 } from "../../CommonStyles/Buttons.style";
-import { FontRaleway } from "../../CommonStyles/Fonts.style";
 import MainContext from "../../../Context/MainContext";
 import Price from "../../CommonComponents/Price.js";
 import ProductName from "../../CommonComponents/ProductName.js";
 import ChosenAttributes from '../../CommonComponents/ChosenAttributes/ChosenAttributes.js';
+import QuantityButtons from "../../CommonComponents/QuantityButtons.js";
 
 class MiniCart extends React.Component {
   componentDidMount() {
@@ -26,7 +23,7 @@ class MiniCart extends React.Component {
   };
 
   render() {
-    const { productsInCart, updateProductCount, showAlert } =
+    const { productsInCart, showAlert } =
       this.context;
     return (
       <MiniCartContainer>
@@ -42,25 +39,7 @@ class MiniCart extends React.Component {
                 <ChosenAttributes attributes={item.attributes} />
               </Column>
               <Column middle>
-                <QuantityButton
-                  mini
-                  onClick={() => updateProductCount(item.id, item.id)}
-                >
-                  +
-                </QuantityButton>
-                <FontRaleway fontWeight="500">{item.count}</FontRaleway>
-                <QuantityButton
-                  mini
-                  onClick={() => {
-                    if (item.count <= 1) {
-                      return;
-                    } else {
-                      updateProductCount(item.id);
-                    }
-                  }}
-                >
-                  -
-                </QuantityButton>
+                <QuantityButtons item={item} page='miniCart' />
               </Column>
               <Column colWidth="105px">
                 <ProductImage backgroundImage={item.gallery[0]} />
