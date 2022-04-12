@@ -22,40 +22,44 @@ class MiniCart extends React.Component {
     this.context.setScrollHeight(document.documentElement.scrollHeight);
   };
 
+  handleProductsInCart = () => {
+    const { productsInCart, showAlert } = this.context;
+    productsInCart.map((item) => {
+      return (
+        <Row key={item.id}>
+          <Column colWidth="146px">
+            <ProductName product={item} page='miniCart' line='oneLiner' />
+            <Price item={item} />
+            <ChosenAttributes attributes={item.attributes} />
+          </Column>
+          <Column middle>
+            <QuantityButtons item={item} page='miniCart' />
+          </Column>
+          <Column colWidth="105px">
+            <ProductImage backgroundImage={item.gallery[0]} />
+          </Column>
+          <CloseButton
+            margin="-6px 0 0 -10px"
+            zIndex='1'
+            onClick={() => {
+              showAlert("delete", item.id);
+            }}
+          >
+            x
+          </CloseButton>
+        </Row>
+      );
+    })
+  };
+
   render() {
-    const { productsInCart, showAlert } =
-      this.context;
+    const { productsInCart } = this.context;
     return (
       <MiniCartContainer>
         <div>
           <b>My Bag</b>, {productsInCart.length} items
         </div>
-        {productsInCart.map((item) => {
-          return (
-            <Row key={item.id}>
-              <Column colWidth="146px">
-                <ProductName product={item} page='miniCart' line='oneLiner' />
-                <Price item={item} />
-                <ChosenAttributes attributes={item.attributes} />
-              </Column>
-              <Column middle>
-                <QuantityButtons item={item} page='miniCart' />
-              </Column>
-              <Column colWidth="105px">
-                <ProductImage backgroundImage={item.gallery[0]} />
-              </Column>
-              <CloseButton
-                margin="-6px 0 0 -10px"
-                zIndex='1'
-                onClick={() => {
-                  showAlert("delete", item.id);
-                }}
-              >
-                x
-              </CloseButton>
-            </Row>
-          );
-        })}
+        {this.handleProductsInCart()}
         <Total for='miniCart' />
         <Link to="/cart">
           <Button margin="0 12px 0 0" onClick={this.props.toggleMiniCart}>
@@ -65,8 +69,8 @@ class MiniCart extends React.Component {
         <Button primary>CHECK OUT</Button>
       </MiniCartContainer>
     );
-  }
-}
+  };
+};
 
 MiniCart.contextType = MainContext;
 
