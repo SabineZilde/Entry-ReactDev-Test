@@ -24,7 +24,7 @@ class MiniCart extends React.Component {
 
   handleProductsInCart = () => {
     const { productsInCart, showAlert } = this.context;
-    productsInCart.map((item) => {
+    return productsInCart.map((item) => {
       return (
         <Row key={item.id}>
           <Column colWidth="146px">
