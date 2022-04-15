@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontRaleway } from "../../CommonStyles/Fonts.style";
-import { Button, CloseButton } from "../../CommonStyles/Buttons.style";
+import { Button } from "../../CommonStyles/Buttons.style";
 import { AlertContainer, AlertBckground, Icon, ButtonRow } from "./Alert.style";
 import MainContext from "../../../Context/MainContext";
+import Close from '../../CommonComponents/Close.js';
 
 class Alert extends React.Component {
   handleRemoveProduct = (button, id) => {
@@ -41,7 +42,7 @@ class Alert extends React.Component {
     return (
       <AlertContainer>
         <AlertBckground>
-          <CloseButton onClick={hideAlert}>X</CloseButton>
+          <Close page='alert' />
           <Icon backgroundImg={alertContent.icon}></Icon>
           <FontRaleway margin="20px" center>
             {alertContent.title}

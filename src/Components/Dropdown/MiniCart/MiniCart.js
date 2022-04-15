@@ -7,15 +7,13 @@ import {
   Row,
   ProductImage,
 } from "./MiniCart.style.js";
-import {
-  Button,
-  CloseButton
-} from "../../CommonStyles/Buttons.style";
+import { Button } from "../../CommonStyles/Buttons.style";
 import MainContext from "../../../Context/MainContext";
 import Price from "../../CommonComponents/Price.js";
 import ProductName from "../../CommonComponents/ProductName.js";
 import ChosenAttributes from '../../CommonComponents/ChosenAttributes/ChosenAttributes.js';
 import QuantityButtons from "../../CommonComponents/QuantityButtons.js";
+import Close from "../../CommonComponents/Close.js";
 
 class MiniCart extends React.Component {
   componentDidMount() {
@@ -23,7 +21,7 @@ class MiniCart extends React.Component {
   };
 
   handleProductsInCart = () => {
-    const { productsInCart, showAlert } = this.context;
+    const { productsInCart } = this.context;
     return productsInCart.map((item) => {
       return (
         <Row key={item.id}>
@@ -38,18 +36,10 @@ class MiniCart extends React.Component {
           <Column colWidth="105px">
             <ProductImage backgroundImage={item.gallery[0]} />
           </Column>
-          <CloseButton
-            margin="-6px 0 0 -10px"
-            zIndex='1'
-            onClick={() => {
-              showAlert("delete", item.id);
-            }}
-          >
-            x
-          </CloseButton>
+          <Close id={item.id} page='miniCart' />
         </Row>
       );
-    })
+    });
   };
 
   render() {

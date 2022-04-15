@@ -5,15 +5,13 @@ import {
   CountAndImg,
   Column,
 } from "./CartProduct.style";
-import {
-  CloseButton,
-} from "../../CommonStyles/Buttons.style";
 import MainContext from "../../../Context/MainContext";
 import Price from "../../CommonComponents/Price";
 import ProductName from "../../CommonComponents/ProductName";
 import ChosenAttributes from "../../CommonComponents/ChosenAttributes/ChosenAttributes";
 import QuantityButtons from '../../CommonComponents/QuantityButtons';
 import CartImage from "../CartImage/CartImage";
+import Close from "../../CommonComponents/Close";
 
 class Cart extends React.Component {
   state = {
@@ -21,7 +19,7 @@ class Cart extends React.Component {
   };
 
   render() {
-    const { productsInCart, showAlert } = this.context;
+    const { productsInCart } = this.context;
     return (
       <>
         {productsInCart.map((item) => {
@@ -37,22 +35,15 @@ class Cart extends React.Component {
                   <QuantityButtons item={item} />
                 </Column>
                 <CartImage item={item} />
-                <CloseButton
-                  margin="-10px 5px 0 0"
-                  onClick={() => {
-                    showAlert("delete", item.id);
-                  }}
-                >
-                  X
-                </CloseButton>
+                <Close id={item.id} page='cart'/>
               </CountAndImg>
             </ProductContainer>
           );
         })}
       </>
     );
-  }
-}
+  };
+};
 
 Cart.contextType = MainContext;
 
