@@ -1,19 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Total from "../../CommonComponents/Total/Total.js";
-import {
-  MiniCartContainer,
-  Column,
-  Row,
-  ProductImage,
-} from "./MiniCart.style.js";
+import {  MiniCartContainer,} from "./MiniCart.style.js";
 import { Button } from "../../CommonStyles/Buttons.style";
 import MainContext from "../../../Context/MainContext";
-import Price from "../../CommonComponents/Price.js";
-import ProductName from "../../CommonComponents/ProductName.js";
-import ChosenAttributes from '../../CommonComponents/ChosenAttributes/ChosenAttributes.js';
-import QuantityButtons from "../../CommonComponents/QuantityButtons.js";
-import Close from "../../CommonComponents/Close.js";
+import MiniCartProduct from "./MiniCartProduct.js";
 
 class MiniCart extends React.Component {
   componentDidMount() {
@@ -23,22 +14,7 @@ class MiniCart extends React.Component {
   handleProductsInCart = () => {
     const { productsInCart } = this.context;
     return productsInCart.map((item) => {
-      return (
-        <Row key={item.id}>
-          <Column colWidth="146px">
-            <ProductName product={item} page='miniCart' line='oneLiner' />
-            <Price item={item} />
-            <ChosenAttributes attributes={item.attributes} />
-          </Column>
-          <Column middle>
-            <QuantityButtons item={item} page='miniCart' />
-          </Column>
-          <Column colWidth="105px">
-            <ProductImage backgroundImage={item.gallery[0]} />
-          </Column>
-          <Close id={item.id} page='miniCart' />
-        </Row>
-      );
+      return <MiniCartProduct item={item} key={item.id} />
     });
   };
 
