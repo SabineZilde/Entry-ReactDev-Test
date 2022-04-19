@@ -6,6 +6,13 @@ import { FontRaleway } from "../../Components/CommonStyles/Fonts.style";
 import MainContext from "../../Context/MainContext";
 
 class Cart extends React.Component {
+  handleEachProduct = () => {
+    const { productsInCart } = this.context;
+    return productsInCart.map(item => {
+      return <CartProduct item={item} key={item.id} />
+    });
+  };
+
   handleCartContent = () => {
     const { productsInCart } = this.context;
     if (productsInCart.length === 0) {
@@ -13,7 +20,7 @@ class Cart extends React.Component {
     } else {
       return (
         <>
-          <CartProduct />
+          {this.handleEachProduct()}
           <Total page='cart' />
         </>
       );
