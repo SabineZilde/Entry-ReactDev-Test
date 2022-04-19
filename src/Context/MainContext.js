@@ -302,7 +302,7 @@ export class MainProvider extends Component {
         {this.props.children}
       </MainContext.Provider>
     );
-  }
-}
+  };
+};
 
 export default MainContext;

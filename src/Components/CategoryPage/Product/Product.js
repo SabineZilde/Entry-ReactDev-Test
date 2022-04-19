@@ -21,10 +21,7 @@ class Product extends React.Component {
     const { product } = this.props;
     return (
       <Link to={"/product/" + product.id}>
-        <ActiveProductContainer
-          onMouseEnter={this.showCart}
-          onMouseLeave={this.hideCart}
-        >
+        <ActiveProductContainer>
           <ImageContainer>
             <ProductImage backgroundImage={product.gallery[0]} />
             {this.handleOutOfStockTitle()}

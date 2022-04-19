@@ -1,7 +1,7 @@
 import React from "react";
 import { AttributesDiv, Input, Label } from "./Attributes.style";
-import { FontRoboto } from "../CommonStyles/Fonts.style";
-import MainContext from "../../Context/MainContext";
+import { FontRoboto } from "../../CommonStyles/Fonts.style";
+import MainContext from "../../../Context/MainContext";
 
 class Attributes extends React.Component {
   handleAttributes = () => {

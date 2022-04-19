@@ -1,6 +1,6 @@
 import React from "react";
 import { ThumbnailColumn, LargeImgColumn } from "./Gallery.style";
-import MainContext from "../../Context/MainContext";
+import MainContext from "../../../Context/MainContext";
 
 class Gallery extends React.Component {
   state = {
