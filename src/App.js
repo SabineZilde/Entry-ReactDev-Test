@@ -29,8 +29,8 @@ class App extends React.Component {
         </Switch>
       </BrowserRouter>
     );
-  }
-}
+  };
+};
 
 App.contextType = MainContext;
 

@@ -37,9 +37,9 @@ class ProductName extends React.Component {
         <FontRaleway fontSize="30px" margin={this.state.nameMargin}>
           {name}
         </FontRaleway>
-      )
-    }
-  }
+      );
+    };
+  };
 
   render() {
     const { product } = this.props;
@@ -57,7 +57,7 @@ class ProductName extends React.Component {
         {this.handleSecondLine(product.name)}
       </>
     );
-  }
-}
+  };
+};
 
 export default ProductName;

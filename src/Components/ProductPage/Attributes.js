@@ -43,7 +43,7 @@ class Attributes extends React.Component {
           );
         })}
       </div>
-    ))
+    ));
   };
 
   render() {

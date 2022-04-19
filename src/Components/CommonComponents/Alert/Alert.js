@@ -11,7 +11,7 @@ class Alert extends React.Component {
     if (button === "YES, DELETE PRODUCT") {
       this.context.removeProduct(id);
     };
-  }
+  };
 
   togglePrimaryButton = (button) => {
     const { hideAlert, alertContent } = this.context;
@@ -27,15 +27,15 @@ class Alert extends React.Component {
         >
           {alertContent.primaryButton}
         </Button>
-      )
-    }
+      );
+    };
   };
 
   handleSecondaryLink = (link) => {
     if (link !== '') {
       return link;
-    }
-  }
+    };
+  };
 
   render() {
     const { alertContent, hideAlert } = this.context;
@@ -65,8 +65,8 @@ class Alert extends React.Component {
         </AlertBckground>
       </AlertContainer>
     );
-  }
-}
+  };
+};
 
 Alert.contextType = MainContext;
 

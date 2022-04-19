@@ -8,17 +8,17 @@ class Dropdown extends React.Component {
     super(props);
     this.ref = React.createRef();
     this.handleClickOutside = this.handleClickOutside.bind(this);
-  }
+  };
 
   handleClickOutside(event) {
     if (this.ref.current && !this.ref.current.contains(event.target)) {
       this.props.onClickOutside && this.props.onClickOutside();
-    }
+    };
   };
 
   componentDidMount() {
     document.addEventListener('click', this.handleClickOutside, true);
-  }
+  };
 
   componentWillUnmount() {
     document.removeEventListener('click', this.handleClickOutside, true);
@@ -33,9 +33,9 @@ class Dropdown extends React.Component {
         {this.props.dropdown === 'Currency' && <CurrencyDropdown />}
         {this.props.dropdown === 'MiniCart' && <MiniCart toggleMiniCart={this.props.toggleMiniCart} />}
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 Dropdown.contextType = MainContext;
 

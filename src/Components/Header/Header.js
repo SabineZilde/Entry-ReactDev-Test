@@ -51,7 +51,6 @@ class Header extends React.Component {
         <HeaderButton>{category.name}</HeaderButton>
       </a>
     ));
-
   };
 
   toggleCurrencyMenu = () => {
@@ -143,8 +142,8 @@ class Header extends React.Component {
         </MiniCartBg>
       </div>
     );
-  }
-}
+  };
+};
 
 Header.contextType = MainContext;
 

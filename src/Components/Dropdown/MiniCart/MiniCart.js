@@ -26,7 +26,7 @@ class MiniCart extends React.Component {
           <b>My Bag</b>, {productsInCart.length} items
         </div>
         {this.handleProductsInCart()}
-        <Total for='miniCart' />
+        <Total page='miniCart' />
         <Link to="/cart">
           <Button margin="0 12px 0 0" onClick={this.props.toggleMiniCart}>
             VIEW BAG

@@ -14,10 +14,10 @@ class Cart extends React.Component {
       return (
         <>
           <CartProduct />
-          <Total for='cart' />
+          <Total page='cart' />
         </>
-      )
-    }
+      );
+    };
   };
 
   render() {
@@ -29,8 +29,8 @@ class Cart extends React.Component {
         {this.handleCartContent()}
       </CartContainer>
     );
-  }
-}
+  };
+};
 
 Cart.contextType = MainContext;
 

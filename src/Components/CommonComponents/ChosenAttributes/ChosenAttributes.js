@@ -16,8 +16,8 @@ class ChosenAttributes extends React.Component {
       weight: '700',
       margin: '3px 0 0 5px',
       mini: false
-    })
-  }
+    });
+  };
 
   handleAttributes = () => {
     return this.props.attributes.map((atr) => {
@@ -43,11 +43,12 @@ class ChosenAttributes extends React.Component {
           )}
         </AttributeRow>
       );
-    })
-  }
+    });
+  };
+
   render() {
     return this.handleAttributes();
-  }
-}
+  };
+};
 
 export default ChosenAttributes;

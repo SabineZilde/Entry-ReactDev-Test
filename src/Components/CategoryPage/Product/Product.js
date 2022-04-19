@@ -7,67 +7,61 @@ import {
   OutOfStockLayer,
 } from "./Product.style";
 import circleIcon from "../../../Assets/CircleIcon.svg";
-import { Query } from "@apollo/client/react/components";
-import { LOAD_PRODUCTS } from "../../../GraphQL/Queries";
 import MainContext from "../../../Context/MainContext";
-import { Loader } from "../../CommonStyles/Loader.style";
 import Price from "../../CommonComponents/Price";
 import ProductName from "../../CommonComponents/ProductName";
 
 class Product extends React.Component {
+  handleOutOfStockTitle = () => {
+    if (!this.props.product.inStock) {
+      return <OutOfStockLayer>OUT OF STOCK</OutOfStockLayer>;
+    };
+  };
+
   render() {
+    const { product } = this.props;
     const { alertIsTriggered, updateCart, showAlert } = this.context;
-    return (
-      <Query query={LOAD_PRODUCTS} variables={{ title: this.props.category }}>
-        {({ loading, data }) => {
-          if (loading) return <Loader />;
-          const { category } = data;
-          return category.products.map((product) => (
-            <Link to={"/product/" + product.id} key={product.id}>
-              <ActiveProductContainer
-                onMouseEnter={this.showCart}
-                onMouseLeave={this.hideCart}
-              >
-                <ImageContainer>
-                  <ProductImage backgroundImage={product.gallery[0]} />
-                  {!product.inStock &&
-                    <OutOfStockLayer>OUT OF STOCK</OutOfStockLayer>
+      return (
+        <Link to={"/product/" + product.id}>
+          <ActiveProductContainer
+            onMouseEnter={this.showCart}
+            onMouseLeave={this.hideCart}
+          >
+            <ImageContainer>
+              <ProductImage backgroundImage={product.gallery[0]} />
+              {this.handleOutOfStockTitle()}
+            </ImageContainer>
+            <ProductName product={product} page='categoryPage' line='oneLiner' />
+            <Price item={product} size='middle' inStock={product.inStock} />
+            {product.inStock && (
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (product.attributes[0]) {
+                    return !alertIsTriggered &&
+                      showAlert('attributes', product.id)
+                  } else {
+                    updateCart(
+                      product.id,
+                      product.brand,
+                      product.name,
+                      product.gallery,
+                      product.prices,
+                      product.attributes
+                    );
+                    return !alertIsTriggered &&
+                      showAlert('success', product.id, product.brand, product.name)
                   }
-                </ImageContainer>
-                <ProductName product={product} page='categoryPage' line='oneLiner' />
-                <Price item={product} size='middle' inStock={product.inStock} />
-                {product.inStock && (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (product.attributes[0]) {
-                        return !alertIsTriggered &&
-                          showAlert('attributes', product.id)
-                      } else {
-                        updateCart(
-                          product.id,
-                          product.brand,
-                          product.name,
-                          product.gallery,
-                          product.prices,
-                          product.attributes
-                        );
-                        return !alertIsTriggered &&
-                          showAlert('success', product.id, product.brand, product.name)
-                      }
-                    }}
-                  >
-                    <img src={circleIcon} alt="Circle Icon" />
-                  </button>
-                )}
-              </ActiveProductContainer>
-            </Link>
-          ));
-        }}
-      </Query>
-    );
-  }
-}
+                }}
+              >
+                <img src={circleIcon} alt="Circle Icon" />
+              </button>
+            )}
+          </ActiveProductContainer>
+        </Link>
+      );
+  };
+};
 
 Product.contextType = MainContext;
 

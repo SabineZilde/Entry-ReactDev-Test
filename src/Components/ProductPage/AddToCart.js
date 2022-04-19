@@ -27,7 +27,7 @@ class AddToCart extends React.Component {
               !alertIsTriggered &&
               showAlert("success", product.id, product.brand, product.name)
             );
-          }
+          };
         }}
       >
         ADD TO CART
@@ -38,6 +38,7 @@ class AddToCart extends React.Component {
       </FontRaleway>
     );
   };
+
   render() {
     return this.handleButton();
   };

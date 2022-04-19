@@ -12,7 +12,7 @@ class CurrencyDropdown extends React.Component {
   state = {
     loading: true,
     currencies: []
-  }
+  };
 
   componentDidMount = async () => {
     const response = await client.query({
@@ -21,7 +21,7 @@ class CurrencyDropdown extends React.Component {
     this.setState({
       loading: response.loading,
       currencies: response.data.currencies
-    })
+    });
   };
 
   handleLoadedCurrency = () => {
@@ -35,13 +35,13 @@ class CurrencyDropdown extends React.Component {
           updateCurrency(currency.symbol);
           if (productsInCart.length > 0) {
             getTotal(currency.symbol)
-          }
+          };
         }}
       >
         {currency.symbol}
         {currency.label}
       </button>
-    ))
+    ));
   };
 
   render() {
@@ -51,9 +51,9 @@ class CurrencyDropdown extends React.Component {
           {this.handleLoadedCurrency()}
         </DropdownContent>
       </DropdownContainer>
-    )
-  }
-}
+    );
+  };
+};
 
 CurrencyDropdown.contextType = MainContext;
 
