@@ -24,16 +24,20 @@ class Dropdown extends React.Component {
     document.removeEventListener('click', this.handleClickOutside, true);
   };
 
-
-  render() {
-    if (!this.props.show)
+  handleDropdown = () => {
+    const { show, dropdown, toggleMiniCart } = this.props;
+    if (!show)
       return null;
     return (
       <div ref={this.ref}>
-        {this.props.dropdown === 'Currency' && <CurrencyDropdown />}
-        {this.props.dropdown === 'MiniCart' && <MiniCart toggleMiniCart={this.props.toggleMiniCart} />}
+        {dropdown === 'Currency' && <CurrencyDropdown />}
+        {dropdown === 'MiniCart' && <MiniCart toggleMiniCart={toggleMiniCart} />}
       </div>
     );
+  }
+
+  render() {
+    return this.handleDropdown();
   };
 };
 
