@@ -28,7 +28,6 @@ export const ImageContainer = styled.div`
 
 `
 
-
 export const ProductImage = styled.div`
     height: 338px;
     width: 354px;
