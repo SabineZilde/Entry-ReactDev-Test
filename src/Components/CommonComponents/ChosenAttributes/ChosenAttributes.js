@@ -1,6 +1,5 @@
 import React from "react";
-import { FontRaleway } from '../../CommonStyles/Fonts.style';
-import { AttributeRow, AttributeItem } from './ChosenAttributes.style';
+import ChAttribute from "./ChAttribute";
 
 class ChosenAttributes extends React.Component {
   state = {
@@ -21,28 +20,11 @@ class ChosenAttributes extends React.Component {
 
   handleAttributes = () => {
     return this.props.attributes.map((atr) => {
-      return (
-        <AttributeRow
-          key={atr.value + atr.name}
-          fontSize={this.state.size}
-        >
-          {atr.name}:&nbsp;
-          {atr.name === "Color" ? (
-            <AttributeItem
-              mini={this.state.mini}
-              margin={this.state.margin}
-              color={atr.value}
-            ></AttributeItem>
-          ) : (
-            <FontRaleway
-              fontSize={this.state.size}
-              fontWeight={this.state.weight}
-            >
-              {atr.value}
-            </FontRaleway>
-          )}
-        </AttributeRow>
-      );
+      return <ChAttribute
+        atr={atr}
+        state={this.state}
+        key={atr.value + atr.name}
+      />
     });
   };
 
